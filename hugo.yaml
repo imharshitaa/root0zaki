@@ -6,9 +6,12 @@ theme: PolyRhythmic
 # Add custom parameters for theme
 params:
   logo: "/images/logo.png"            # 1. Logo path (put file in static/images/logo.png)
-  homeURL: "/"                        # 2. Make site title/logo clickable → homepage
-  disableThemeToggle: true            # 3. Removes the weird "palette" icon
+  homeURL: "/"                        # 2. Make site title/logo clickable → homepage           
   googlefonts: true                   # 4. Ensures fonts load correctly
+  disableThemeToggle: true
+  customCSS:
+    - "css/custom.css"
+
 
 menu:
   main:
