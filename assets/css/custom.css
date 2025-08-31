@@ -1,0 +1,4 @@
+body {
+  font-family: Rubik, Arial, sans-serif; /* matches theme's intended font with fallback */
+  line-height: 1.6;
+}
