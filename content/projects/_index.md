@@ -1,5 +1,9 @@
-+++
-date = '2025-08-31T22:44:27+05:30'
-draft = true
-title = 'Projects'
-+++
+---
+title: "Projects"
+---
+
+Here are some of my featured projects:
+
+- 🔐 **Pentesting Toolkit** – scripts for common attack vectors
+- 📊 **Network Monitor** – security dashboard using Python
+- 🛠️ **CTF Writeups** – solutions to HackTheBox challenges
