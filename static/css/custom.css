@@ -1,0 +1,18 @@
+/* Center the entire main content */
+.main, .content, .container, .page, .wrapper {
+  display: flex;
+  justify-content: center;   /* Horizontal center */
+  align-items: center;       /* Vertical center */
+  flex-direction: column;
+  min-height: 80vh;          /* Push to vertical center */
+  text-align: center;        /* Align text inside */
+}
+
+/* Optional: Center the navigation too */
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
