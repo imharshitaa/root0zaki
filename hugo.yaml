@@ -1,28 +1,34 @@
 baseURL: "https://imharshitaa.github.io/root0zaki/"
 languageCode: "en-us"
 title: "root0zaki"
-theme: hugo-xterm
+theme: "hugo-xterm"
 
-# Add custom parameters for theme
-params:
-  logo: "/images/logo.png"            # 1. Logo path (put file in static/images/logo.png)
-  homeURL: "/"                        # 2. Make site title/logo clickable → homepage           
-  googlefonts: true                   # 4. Ensures fonts load correctly
-
+# Menu setup
 menu:
   main:
     - name: "About"
-      pageRef: "/about"
+      url: "/about/"
       weight: 10
     - name: "Projects"
-      pageRef: "/projects"
+      url: "/projects/"
       weight: 20
     - name: "Research"
-      pageRef: "/research"
+      url: "/research/"
       weight: 30
     - name: "Docs"
-      pageRef: "/docs"
+      url: "/docs/"
       weight: 40
     - name: "Pentesting"
-      pageRef: "/pentesting"
+      url: "/pentesting/"
       weight: 50
+
+# Optional: Params supported by hugo-xterm theme
+params:
+  # Terminal prompt settings
+  prompt: "root0zaki@github:~$"
+  title: "root0zaki"
+  subtitle: "Portfolio & Research Hub"
+  themeColor: "green"   # can try: green, blue, red
+
+  # Footer
+  footer: "© 2025 root0zaki. Built with Hugo Xterm theme."
