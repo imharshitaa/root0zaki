@@ -7,7 +7,7 @@ title: "root0zaki"
 /* Try common wrappers used by Xterm and many Hugo themes */
 /* The !important ensures our rules win */
 main, .main, .content, .container, .page, .wrapper, body > div {
-  max-width: 900px !important;
+  max-width: 1100px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
