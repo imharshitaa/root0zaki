@@ -29,7 +29,12 @@ params:
   title: "root0zaki"
   subtitle: "Portfolio & Research Hub"
   themeColor: "green"   # can try: green, blue, red
+  centered: true
+  favicon: "static/images/llogo.png"
   customCSS: ["css/custom.css"]
+  custom_js: []
+  custom_css: ["/css/custom.css"]
+
 
   # Footer
   footer: "© 2025 root0zaki. Built with Hugo Xterm theme."
