@@ -33,6 +33,7 @@ params:
   favicon: "static/images/llogo.png"
   custom_js: []
   customCSS: ["css/custom.css"]
+  layout: "centered"
 
 
   # Footer
