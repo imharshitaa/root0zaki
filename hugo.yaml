@@ -29,6 +29,7 @@ params:
   title: "root0zaki"
   subtitle: "Portfolio & Research Hub"
   themeColor: "green"   # can try: green, blue, red
+  customCSS: ["css/custom.css"]
 
   # Footer
   footer: "© 2025 root0zaki. Built with Hugo Xterm theme."
