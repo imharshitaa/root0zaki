@@ -31,9 +31,8 @@ params:
   themeColor: "green"   # can try: green, blue, red
   centered: true
   favicon: "static/images/llogo.png"
-  customCSS: ["css/custom.css"]
   custom_js: []
-  custom_css: ["/css/custom.css"]
+  customCSS: ["css/custom.css"]
 
 
   # Footer
