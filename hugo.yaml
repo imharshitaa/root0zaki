@@ -1,17 +1,13 @@
 baseURL: "https://imharshitaa.github.io/root0zaki/"
-languageCode: en-us
+languageCode: "en-us"
 title: "root0zaki"
-theme: PolyRhythmic
+theme: hugo-xterm
 
 # Add custom parameters for theme
 params:
   logo: "/images/logo.png"            # 1. Logo path (put file in static/images/logo.png)
   homeURL: "/"                        # 2. Make site title/logo clickable → homepage           
   googlefonts: true                   # 4. Ensures fonts load correctly
-  disableThemeToggle: true
-  customCSS:
-    - "css/custom.css"
-
 
 menu:
   main:
