@@ -1,5 +1,0 @@
-+++
-date = '2025-08-31T22:44:28+05:30'
-draft = true
-title = 'First Note'
-+++
