@@ -39,8 +39,9 @@ const config = {
   themeConfig: {
     navbar: {
       title: 'root0zaki',
+      logo: { alt: 'root0zaki Logo', src: 'img/logo.svg' },
       items: [
-        { to: '/', label: 'Home', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'tutorialSidebar', position: 'left', label: 'Docs' },
         { href: 'https://github.com/imharshitaa', label: 'GitHub', position: 'right' },
       ],
     },
