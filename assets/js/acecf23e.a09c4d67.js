@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkroot_0_zaki=self.webpackChunkroot_0_zaki||[]).push([[1903],{1912:o=>{o.exports=JSON.parse('{"blogBasePath":"/root0zaki/blog","blogTitle":"Blog","authorsListPath":"/root0zaki/blog/authors"}')}}]);

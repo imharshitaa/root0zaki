@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkroot_0_zaki=self.webpackChunkroot_0_zaki||[]).push([[216],{4457:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/root0zaki/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
