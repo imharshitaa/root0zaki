@@ -1,4 +1,3 @@
-// docusaurus.config.js
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'root0zaki',
@@ -11,6 +10,7 @@ const config = {
   organizationName: 'imharshitaa',
   projectName: 'root0zaki',
 
+  // Ignore broken links for now
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
@@ -23,14 +23,30 @@ const config = {
     [
       'classic',
       {
-        docs: false, // disable docs
-        blog: false, // disable blog
+        docs: false,
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
       },
     ],
   ],
-};
 
+  themeConfig: {
+    navbar: {
+      title: 'root0zaki',
+      items: [
+        { to: '/', label: 'Home', position: 'left' },
+        { href: 'https://github.com/imharshitaa', label: 'GitHub', position: 'right' },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        { title: 'More', items: [{ label: 'GitHub', href: 'https://github.com/imharshitaa' }] },
+      ],
+    },
+  },
+};
 export default config;
+
