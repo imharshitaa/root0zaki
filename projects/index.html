@@ -1,0 +1,39 @@
+<!-- Inside projects/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+<style>
+body { background-color: black; color: white; font-family: Arial, sans-serif; padding: 30px; }
+h1 { color: green; }
+a { color: yellow; text-decoration: none; }
+.box { border: 2px solid yellow; padding: 20px; margin: 15px 0; border-radius: 10px; }
+</style>
+</head>
+<body>
+<h1>Projects</h1>
+<div id="content"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+// List of markdown files in posts folder
+const posts = ["posts/project1.md", "posts/project2.md"];
+
+const contentDiv = document.getElementById("content");
+
+posts.forEach(mdFile => {
+    fetch(mdFile)
+        .then(res => res.text())
+        .then(md => {
+            const html = marked(md);
+            const box = document.createElement("div");
+            box.className = "box";
+            box.innerHTML = html;
+            contentDiv.appendChild(box);
+        });
+});
+</script>
+</body>
+</html>
