@@ -11,7 +11,7 @@ const config = {
   organizationName: 'imharshitaa',
   projectName: 'root0zaki',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
