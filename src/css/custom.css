@@ -1,6 +1,12 @@
-/* custom.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+presets: [
+  [
+    'classic',
+    {
+      docs: false,
+      blog: false,
+      theme: {
+        customCss: require.resolve('./src/css/custom.css'),
+      },
+    },
+  ],
+],
