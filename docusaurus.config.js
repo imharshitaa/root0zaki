@@ -20,17 +20,21 @@ const config = {
   },
 
   presets: [
-    [
-      'classic',
-      {
-        docs: false,
-        blog: false,
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
+  [
+    'classic',
+    {
+      docs: {
+        sidebarPath: require.resolve('./sidebars.js'), // enable sidebar
+        editUrl: 'https://github.com/imharshitaa/root0zaki/edit/main/', 
       },
-    ],
+      blog: false,
+      theme: {
+        customCss: require.resolve('./src/css/custom.css'),
+      },
+    },
   ],
+],
+
 
   themeConfig: {
     navbar: {
