@@ -1,5 +1,0 @@
-aaaaaaaaa
-bbbbbbbbb
-ooooooooo
-uuuuuuuuu
-ttttttttt
