@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Viewer - Root0zaki</title>
+<style>
+body {
+    background-color: black;
+    color: green;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+}
+h1, h2, h3, h4 {
+    color: red;
+}
+p, li {
+    line-height: 1.6;
+}
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    border: 3px solid yellow;
+    border-radius: 10px;
+}
+a {
+    color: yellow;
+}
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: yellow;
+    text-decoration: none;
+    border: 2px solid yellow;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+.back-link:hover {
+    background-color: green;
+    color: black;
+}
+</style>
+</head>
+<body>
+<div id="content">Loading...</div>
+<a class="back-link" href="project_index.html">⬅ Back to Projects</a>
+
+<!-- Load Showdown (Markdown → HTML converter) -->
+<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+<script>
+  // Get ?file=project1.md from the URL
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get("file");
+
+  if (file) {
+    fetch(file)
+      .then(res => res.text())
+      .then(md => {
+        const converter = new showdown.Converter();
+        document.getElementById("content").innerHTML = converter.makeHtml(md);
+      })
+      .catch(() => {
+        document.getElementById("content").innerHTML = "<p style='color:red'>Error loading file.</p>";
+      });
+  } else {
+    document.getElementById("content").innerHTML = "<p style='color:red'>No project selected.</p>";
+  }
+</script>
+</body>
+</html>
