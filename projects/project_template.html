@@ -17,12 +17,12 @@
       padding: 30px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center the content horizontally */
+      align-items: center; /* center horizontally */
     }
     #content {
       max-width: 800px; /* keeps text in a clean column */
       width: 100%;
-      text-align: left; /* ensures left alignment */
+      text-align: left; /* left alignment */
     }
     h1, h2, h3, h4 {
       color: red; /* headings in red */
@@ -53,13 +53,28 @@
     .back-link:hover {
       background-color: #39FF14; /* neon green hover */
       color: black;
+      box-shadow: 0 0 15px #39FF14;
+    }
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 16px;
+      color: lightblue;
+      font-family: 'Hack', monospace;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div id="content">Loading...</div>
 
-  <a class="back-link" href="project_index.html">⬅ Back to Projects</a>
+  <!-- Corrected link to projects index -->
+  <a class="back-link" href="index.html">⬅ Back to Projects</a>
+
+  <!-- Footer -->
+  <div class="footer">
+    imharshitaa @ owner
+  </div>
 
   <!-- Load Showdown (Markdown → HTML converter) -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
