@@ -1,82 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects - Root0zaki</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-    }
-    h1 {
-      margin-top: 50px;
-      color: green;
-    }
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 100px;
-      gap: 40px;
-    }
-    .button {
-      width: 200px;
-      height: 200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: #111;
-      border: 3px solid yellow;
-      border-radius: 20px;
-      color: white;
-      font-size: 24px;
-      text-decoration: none;
-      transition: transform 0.2s, background-color 0.2s;
-    }
-    .button:hover {
-      transform: scale(1.1);
-      background-color: green;
-      color: black;
-    }
-    .button-icon {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Viewer - Root0zaki</title>
+<style>
+body {
+    background-color: black;
+    color: #90ee90; /* light green coder vibes */
+    font-family: Arial, sans-serif;
+    padding: 30px;
+}
+.owner-signature {
+    color: blue;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+h1, h2, h3, h4 {
+    color: red;
+}
+p, li {
+    line-height: 1.6;
+}
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 40px; /* shift text slightly right */
+}
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    border: 3px solid yellow;
+    border-radius: 10px;
+}
+a {
+    color: yellow;
+}
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: yellow;
+    text-decoration: none;
+    border: 2px solid yellow;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+.back-link:hover {
+    background-color: #90ee90; /* light green hover */
+    color: black;
+}
+</style>
 </head>
 <body>
-  <h1>Projects</h1>
 
-  <!-- Dynamic project buttons will be inserted here -->
-  <div class="button-grid" id="project-grid"></div>
+<div class="owner-signature">Root0zaki © Owner</div>
 
-  <script>
-    async function loadProjects() {
-      try {
-        const response = await fetch("projects.json");
-        const projects = await response.json();
-        const grid = document.getElementById("project-grid");
+<div id="content">Loading...</div>
 
-        projects.forEach(p => {
-          const a = document.createElement("a");
-          a.className = "button";
-          a.href = `project_template.html?file=${p.file}`;
-          a.innerHTML = `<div class="button-icon">${p.icon}</div>${p.title}`;
-          grid.appendChild(a);
-        });
-      } catch (error) {
-        console.error("Error loading projects.json:", error);
-      }
-    }
+<a class="back-link" href="./">⬅ Back to Projects</a>
 
-    loadProjects();
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get("file");
+
+  if (file) {
+    fetch(file)
+      .then(res => res.text())
+      .then(md => {
+        const converter = new showdown.Converter();
+        document.getElementById("content").innerHTML = converter.makeHtml(md);
+      })
+      .catch(() => {
+        document.getElementById("content").innerHTML = "<p style='color:red'>Error loading file.</p>";
+      });
+  } else {
+    document.getElementById("content").innerHTML = "<p style='color:red'>No project selected.</p>";
+  }
+</script>
 </body>
 </html>
-
-
