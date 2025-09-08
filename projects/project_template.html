@@ -4,38 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Viewer - Root0zaki</title>
+
+  <!-- Import Hack font -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+
   <style>
     body {
       background-color: black;
-      color: green;
-      font-family: Arial, sans-serif;
+      color: #39FF14; /* neon green */
+      font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
-    }
-    .container {
       display: flex;
-      gap: 40px;
+      flex-direction: column;
+      align-items: center; /* center the content horizontally */
     }
     #content {
-      flex: 1;
-      max-width: 50%;
+      max-width: 800px; /* keeps text in a clean column */
+      width: 100%;
+      text-align: left; /* ensures left alignment */
     }
     h1, h2, h3, h4 {
-      color: red;
+      color: red; /* headings in red */
     }
     p, li {
       line-height: 1.6;
     }
-    /* Put images in a separate column */
-    .image-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .image-container img {
+    img {
+      display: block;
       margin: 20px auto;
-      max-width: 100%;
+      max-width: 80%;
       border: 3px solid yellow;
       border-radius: 10px;
     }
@@ -50,18 +48,16 @@
       border: 2px solid yellow;
       padding: 10px 20px;
       border-radius: 8px;
+      font-family: 'Hack', monospace;
     }
     .back-link:hover {
-      background-color: green;
+      background-color: #39FF14; /* neon green hover */
       color: black;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="content">Loading...</div>
-    <div class="image-container" id="images"></div>
-  </div>
+  <div id="content">Loading...</div>
 
   <a class="back-link" href="project_index.html">⬅ Back to Projects</a>
 
@@ -76,22 +72,7 @@
         .then(res => res.text())
         .then(md => {
           const converter = new showdown.Converter();
-          const html = converter.makeHtml(md);
-
-          // Create a temporary element to separate text and images
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = html;
-
-          const contentDiv = document.getElementById("content");
-          const imagesDiv = document.getElementById("images");
-
-          // Move images to the right column
-          tempDiv.querySelectorAll("img").forEach(img => {
-            imagesDiv.appendChild(img);
-          });
-
-          // Keep text on the left column
-          contentDiv.innerHTML = tempDiv.innerHTML;
+          document.getElementById("content").innerHTML = converter.makeHtml(md);
         })
         .catch(() => {
           document.getElementById("content").innerHTML =
@@ -104,4 +85,3 @@
   </script>
 </body>
 </html>
-
