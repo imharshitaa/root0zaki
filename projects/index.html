@@ -7,7 +7,7 @@
 <style>
 body {
     background-color: black;
-    color: #90ee90; /* light green coder vibes */
+    color: #39FF14; /* neon hacker green */
     font-family: Arial, sans-serif;
     padding: 30px;
 }
@@ -27,8 +27,8 @@ p, li {
 #content {
     max-width: 800px;
     margin: 0 auto;
-    text-align: left;
-    padding-left: 40px; /* shift text slightly right */
+    text-align: left;   /* keep text readable */
+    padding-left: 40px; /* shift slightly right */
 }
 img {
     display: block;
@@ -50,7 +50,7 @@ a {
     border-radius: 8px;
 }
 .back-link:hover {
-    background-color: #90ee90; /* light green hover */
+    background-color: #39FF14; /* neon hover */
     color: black;
 }
 </style>
@@ -63,6 +63,7 @@ a {
 
 <a class="back-link" href="./">⬅ Back to Projects</a>
 
+<!-- Load Showdown (Markdown → HTML converter) -->
 <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <script>
   const params = new URLSearchParams(window.location.search);
@@ -70,17 +71,24 @@ a {
 
   if (file) {
     fetch(file)
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) throw new Error("File not found");
+        return res.text();
+      })
       .then(md => {
         const converter = new showdown.Converter();
         document.getElementById("content").innerHTML = converter.makeHtml(md);
       })
-      .catch(() => {
-        document.getElementById("content").innerHTML = "<p style='color:red'>Error loading file.</p>";
+      .catch(err => {
+        document.getElementById("content").innerHTML =
+          "<p style='color:red'>⚠ Error loading file.</p>";
+        console.error(err);
       });
   } else {
-    document.getElementById("content").innerHTML = "<p style='color:red'>No project selected.</p>";
+    document.getElementById("content").innerHTML =
+      "<p style='color:red'>⚠ No project selected.</p>";
   }
 </script>
 </body>
 </html>
+
