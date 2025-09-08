@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects - Root0zaki</title>
+<style>
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+h1 {
+    margin-top: 50px;
+    color: green;
+}
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 40px;
+}
+.button {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+    border: 3px solid yellow;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+}
+.button:hover {
+    transform: scale(1.1);
+    background-color: green;
+    color: black;
+}
+.button-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<h1>Projects</h1>
+<div class="button-grid">
+    <a class="button" href="project_template.html?file=project1.md">
+        <div class="button-icon">⚡</div>
+        Project 1
+    </a>
+    <a class="button" href="project_template.html?file=project2.md">
+        <div class="button-icon">🔥</div>
+        Project 2
+    </a>
+    <a class="button" href="project_template.html?file=project3.md">
+        <div class="button-icon">🛰️</div>
+        Project 3
+    </a>
+</div>
+</body>
+</html>
+
