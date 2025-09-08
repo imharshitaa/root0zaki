@@ -1,4 +1,4 @@
-# Building cyberdeck
+# cyberdeck
 
 This is my first project.  
 All text is **green**, and headings are **red**.
