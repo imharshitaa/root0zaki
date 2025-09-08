@@ -1,5 +1,5 @@
 [
-  { "file": "project1.md", "title": "Project 1", "icon": "⚡" },
+  { "file": "cyberdeck.md", "title": "cyberdeck", "icon": "⚡" },
   { "file": "project2.md", "title": "Project 2", "icon": "🔥" },
   { "file": "project3.md", "title": "Project 3", "icon": "🛰️" }
 ]
