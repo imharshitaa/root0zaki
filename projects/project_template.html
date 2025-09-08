@@ -10,12 +10,18 @@ body {
     color: green;
     font-family: Arial, sans-serif;
     padding: 30px;
+    text-align: center; /* ensures overall centering */
 }
 h1, h2, h3, h4 {
     color: red;
 }
 p, li {
     line-height: 1.6;
+}
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }
 img {
     display: block;
@@ -44,7 +50,9 @@ a {
 </head>
 <body>
 <div id="content">Loading...</div>
-<a class="back-link" href="index.html">⬅ Back to Projects</a>
+
+<!-- fixed back link -->
+<a class="back-link" href="./">⬅ Back to Projects</a>
 
 <!-- Load Showdown (Markdown → HTML converter) -->
 <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
@@ -69,3 +77,4 @@ a {
 </script>
 </body>
 </html>
+
