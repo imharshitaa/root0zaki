@@ -1,5 +1,5 @@
 [
   { "file": "cyberdeck.md", "title": "cyberdeck", "icon": "⚡" },
   { "file": "malware_exploit.md", "title": "malware exploit", "icon": "🔥" },
-  { "file": "project3.md", "title": "Project 3", "icon": "🛰️" }
+  { "file": "binary_reverse_engineering.md", "title": "binary reverse engineering", "icon": "🛰️" }
 ]
