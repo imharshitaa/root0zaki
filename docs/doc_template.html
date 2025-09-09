@@ -8,8 +8,8 @@
   <!-- Hack font -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 
-  <!-- Highlight.js (for syntax highlighting) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <!-- Highlight.js (syntax highlighting with GitHub theme) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
 
@@ -30,7 +30,7 @@
       text-align: left;
     }
     h1, h2, h3, h4 {
-      color: #00BFFF; /* light blue for headings */
+      color: #00BFFF; /* light blue headings */
     }
     p, li {
       line-height: 1.6;
@@ -46,15 +46,16 @@
       color: yellow;
     }
     pre {
-      background: #222; /* dark grey background */
+      background: #f5f5f5; /* faint grey background */
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow-x: auto;
-      border: 1px solid #39FF14;
+      border: 1px solid #ccc;
     }
     code {
       font-family: "Hack", monospace;
       font-size: 14px;
+      color: black; /* default text inside code */
     }
     .back-link {
       display: inline-block;
@@ -109,11 +110,10 @@
             simpleLineBreaks: true,
             openLinksInNewWindow: true
           });
-          // Convert markdown → HTML
           const html = converter.makeHtml(md);
           document.getElementById("content").innerHTML = html;
 
-          // Apply syntax highlighting to code blocks
+          // Apply syntax highlighting
           document.querySelectorAll("pre code").forEach(block => {
             hljs.highlightElement(block);
           });
@@ -129,4 +129,12 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
