@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Intro to XSS",
+    "description": "Understanding Cross-Site Scripting attacks with examples.",
+    "file": "doc1.md"
+  },
+  {
+    "title": "Linux Privilege Escalation",
+    "description": "Step-by-step guide to escalating privileges in Linux systems.",
+    "file": "doc2.md"
+  }
+]
