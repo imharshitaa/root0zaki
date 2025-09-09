@@ -10,9 +10,10 @@ Always learning, always breaking, always fixing. ⚡
 
 ## 🔗 Connect with me  
 
-- **LinkedIn**: [Linkedin Profile}(https://www.linkedin.com/in/harshitaa-ashish-85767621a/)  
+- **LinkedIn**: [Harshitaa Ashish](https://www.linkedin.com/in/harshitaa-ashish-85767621a/)  
 - **GitHub**: [imharshitaa](https://github.com/imharshitaa)  
-- **Email**: root0zaki@gmail.com   
+- **Email**: root0zaki@gmail.com  
+
 
 ---
 
