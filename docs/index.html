@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs - Root0zaki</title>
+
+  <!-- Hack font -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+
+  <style>
+    body {
+      background-color: black;
+      color: #39ff14; /* neon green */
+      font-family: "Hack", monospace;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 40px;
+      color: #00BFFF; /* light blue title */
+    }
+    .docs-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-top: 60px;
+    }
+    .doc-card {
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+      border: 2px solid yellow;
+      border-radius: 12px;
+      background-color: #111;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .doc-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #39ff14;
+      background-color: black;
+    }
+    .doc-title {
+      font-size: 22px;
+      color: #39ff14;
+      margin-bottom: 10px;
+    }
+    .doc-desc {
+      font-size: 16px;
+      color: lightgray;
+    }
+    a {
+      text-decoration: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 50px;
+      color: yellow;
+      text-decoration: none;
+      border: 2px solid yellow;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+    .back-link:hover {
+      background-color: #39ff14;
+      color: black;
+      box-shadow: 0 0 15px #39ff14;
+    }
+    .footer {
+      margin-top: 70px;
+      font-size: 14px;
+      color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>📑 Docs & Blogs</h1>
+
+  <!-- Docs list -->
+  <div class="docs-grid" id="docs-grid"></div>
+
+  <!-- Back to home -->
+  <a class="back-link" href="../index.html">⬅ Back to Home</a>
+
+  <!-- Footer -->
+  <div class="footer">
+    imharshitaa @ owner
+  </div>
+
+  <!-- Script to load docs dynamically -->
+  <script>
+    async function loadDocs() {
+      try {
+        const response = await fetch("docs.json");
+        const docs = await response.json();
+        const grid = document.getElementById("docs-grid");
+
+        docs.forEach(d => {
+          const a = document.createElement("a");
+          a.href = `doc_template.html?file=${d.file}`;
+
+          const card = document.createElement("div");
+          card.className = "doc-card";
+
+          card.innerHTML = `
+            <div class="doc-title">${d.title}</div>
+            <div class="doc-desc">${d.description}</div>
+          `;
+
+          a.appendChild(card);
+          grid.appendChild(a);
+        });
+      } catch (err) {
+        console.error("Error loading docs.json", err);
+      }
+    }
+
+    loadDocs();
+  </script>
+</body>
+</html>
 
