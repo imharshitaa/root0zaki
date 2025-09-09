@@ -1,7 +1,7 @@
-# About Me  
+<u> # About Me  <u>
 
 Hi 👋  
-I'm **Root0zaki**, a **Pentester** and **Security Researcher**.  
+I'm a **Pentester** and **Security Researcher**.  
 
 I explore vulnerabilities, test systems, and work on innovative solutions to improve cybersecurity.  
 Always learning, always breaking, always fixing. ⚡  
