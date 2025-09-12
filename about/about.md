@@ -1,7 +1,8 @@
-# <u>About Me</u>
+# <u>About</u>
 
 Hi, I am Harshitaa. 
-Security Research Engineer | PenTester | Certified Ethical Hacker (CEH)  
+
+Security Research Engineer | PenTester | Certified Ethical Hacker (CEH)
 
 Tech stack:
 - Application API Web Security
@@ -11,9 +12,6 @@ Tech stack:
 - Python | Postman | Burp Suite | Metasploit | Linux | Open Source tools
 
 Projects:
-- AI API LLM agent risks
-- 
-- 
 
 
 --- 
