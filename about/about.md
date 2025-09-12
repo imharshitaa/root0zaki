@@ -5,7 +5,7 @@ Security Research Engineer | PenTester | Certified Ethical Hacker (CEH)
 
 Tech stack:
 - Application API Web Security
-- Exploit Code Development
+- Exploit Code Development (offensive &  defensive)
 - Threat Intelligence & Research
 - DevSecOps & Secure Automation
 - Python | Postman | Burp Suite | Metasploit | Linux | Open Source tools
