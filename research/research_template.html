@@ -1,0 +1,93 @@
+<!-- research/research_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research</title>
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: "Courier New", monospace;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { color: lightgreen; }
+    a { color: yellow; }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    pre {
+      background: #111;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: "Fira Code", monospace;
+      font-size: 0.9em;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      color: yellow;
+      text-decoration: none;
+    }
+    .back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1 id="title">Loading...</h1>
+  <div id="content">Please wait...</div>
+  <a href="index.html" class="back">⬅ Back to Research Index</a>
+
+  <script>
+    // Get markdown filename from URL ?file=research1.md
+    const urlParams = new URLSearchParams(window.location.search);
+    const file = urlParams.get("file");
+
+    if (file) {
+      fetch(file)
+        .then(res => res.text())
+        .then(md => {
+          // Render Markdown → HTML
+          const html = marked.parse(md, {
+            highlight: function(code, lang) {
+              if (hljs.getLanguage(lang)) {
+                return hljs.highlight(code, { language: lang }).value;
+              }
+              return hljs.highlightAuto(code).value;
+            }
+          });
+          document.getElementById("content").innerHTML = html;
+
+          // Use first line as title if it starts with "#"
+          const firstLine = md.split("\n")[0];
+          if (firstLine.startsWith("# ")) {
+            document.getElementById("title").textContent = firstLine.replace("# ", "");
+          } else {
+            document.getElementById("title").textContent = "Research Note";
+          }
+        })
+        .catch(err => {
+          document.getElementById("content").innerHTML = "<p style='color:red;'>Error loading file.</p>";
+        });
+    } else {
+      document.getElementById("content").innerHTML = "<p>No research file specified.</p>";
+    }
+  </script>
+</body>
+</html>
