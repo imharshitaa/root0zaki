@@ -1,5 +1,5 @@
 [
   { "file": "3_devsecops.md", "title": "dev - sec - ops", "icon": "⚡" },
-  { "file": "2_api_new_cases.md", "title": "new test cases for APIs", "icon": "🔥" },
+  { "file": "2_api_new_case.md", "title": "new test cases for APIs", "icon": "🔥" },
   { "file": "1_api_ai_agent.md", "title": "Risks in API & AI agents", "icon": "🛰️" }
 ]
