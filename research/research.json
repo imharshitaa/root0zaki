@@ -16,6 +16,7 @@
   }
   {
     "title": "malware analysis",
-    "file": "4_malware.md"
+    "file": "4_malware.md",
+    "description": "malware exploiting analysis"
   }
 ]
