@@ -5,13 +5,17 @@
     "description": "open source tools for hacking"
   },
   {
-    "title": "Network Exploits",
-    "file": "research2.md",
-    "description": "Deep dive into modern exploit techniques used in networks."
+    "title": "Cyberdeck",
+    "file": "2_cyberdeck.md",
+    "description": "building cyberdeck"
   },
   {
     "title": "Reverse Engineering",
-    "file": "research3.md",
+    "file": "3_reverse.md",
     "description": "Notes and methodologies for reverse engineering binaries."
+  }
+  {
+    "title": "malware analysis",
+    "file": "4_malware.md"
   }
 ]
