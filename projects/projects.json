@@ -1,5 +1,5 @@
 [
-  { "file": "cyberdeck.md", "title": "cyberdeck", "icon": "⚡" },
-  { "file": "malware_exploit.md", "title": "malware exploit", "icon": "🔥" },
-  { "file": "ai_agent_llm_vuln.md", "title": "Vulnerabilities in API & AI agents", "icon": "🛰️" }
+  { "file": "3_devsecops.md", "title": "dev - sec - ops", "icon": "⚡" },
+  { "file": "2_api_new_cases.md", "title": "new test cases for APIs", "icon": "🔥" },
+  { "file": "1_api_ai_agent.md", "title": "Risks in API & AI agents", "icon": "🛰️" }
 ]
