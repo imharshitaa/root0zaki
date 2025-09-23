@@ -1,5 +1,5 @@
 [
   { "file": "cyberdeck.md", "title": "cyberdeck", "icon": "⚡" },
   { "file": "malware_exploit.md", "title": "malware exploit", "icon": "🔥" },
-  { "file": "binary_reverse_engineering.md", "title": "binary reverse engineering", "icon": "🛰️" }
+  { "file": "ai_agent_llm_vuln.md", "title": "Vulnerabilities in API & AI agents", "icon": "🛰️" }
 ]
