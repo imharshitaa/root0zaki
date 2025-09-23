@@ -1,0 +1,17 @@
+[
+  {
+    "title": "AI in Cybersecurity",
+    "file": "research1.md",
+    "description": "Exploring applications of artificial intelligence in security defense."
+  },
+  {
+    "title": "Network Exploits",
+    "file": "research2.md",
+    "description": "Deep dive into modern exploit techniques used in networks."
+  },
+  {
+    "title": "Reverse Engineering",
+    "file": "research3.md",
+    "description": "Notes and methodologies for reverse engineering binaries."
+  }
+]
