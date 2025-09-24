@@ -13,7 +13,7 @@
     "title": "Reverse Engineering",
     "file": "3_reverse.md",
     "description": "Notes and methodologies for reverse engineering binaries."
-  }
+  },
   {
     "title": "malware analysis",
     "file": "4_malware.md",
