@@ -11,12 +11,11 @@
   <!-- Highlight.js (syntax highlighting with GitHub theme) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
 
   <style>
     body {
       background-color: black;
-      color: #39FF14; /* neon green */
+      color: #39FF14; /* default text neon green */
       font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
@@ -24,17 +23,31 @@
       flex-direction: column;
       align-items: center;
     }
+
     #content {
       max-width: 850px;
       width: 100%;
       text-align: left;
     }
-    h1, h2, h3, h4 {
-      color: #00BFFF; /* light blue headings */
+
+    /* Headings */
+    h1 {
+      color: red; /* main title */
     }
+
+    h2 {
+      color: lightblue; /* subtitles */
+    }
+
+    h3, h4, h5, h6 {
+      color: red;
+    }
+
     p, li {
       line-height: 1.6;
     }
+
+    /* Images */
     img {
       display: block;
       margin: 20px auto;
@@ -42,21 +55,37 @@
       border: 3px solid yellow;
       border-radius: 10px;
     }
+
+    /* Links */
     a {
       color: yellow;
     }
+
+    /* Inline code */
+    code {
+      color: yellow;
+      background-color: transparent;
+      font-size: 1em;
+      font-family: "Courier New", Courier, monospace; /* typewriter font */
+    }
+
+    /* Code blocks (highlight.js) */
     pre {
-      background: #f5f5f5; /* faint grey background */
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
       border: 1px solid #ccc;
+      margin: 20px 0;
+      background-color: #1e1e1e; /* dark background for code */
     }
-    code {
-      font-family: "Hack", monospace;
+
+    pre code {
+      color: #f8f8f2; /* text inside code block */
+      font-family: "Courier New", Courier, monospace;
       font-size: 14px;
-      color: black; /* default text inside code */
     }
+
+    /* Back button */
     .back-link {
       display: inline-block;
       margin-top: 30px;
@@ -67,11 +96,14 @@
       border-radius: 8px;
       font-family: 'Hack', monospace;
     }
+
     .back-link:hover {
       background-color: #39FF14;
       color: black;
       box-shadow: 0 0 15px #39FF14;
     }
+
+    /* Footer */
     .footer {
       margin-top: 60px;
       padding: 20px;
@@ -85,13 +117,9 @@
 <body>
   <div id="content">Loading...</div>
 
-  <!-- Back to Docs index -->
   <a class="back-link" href="index.html">⬅ Back to Docs</a>
 
-  <!-- Footer -->
-  <div class="footer">
-    imharshitaa @ owner
-  </div>
+  <div class="footer">imharshitaa @ owner</div>
 
   <!-- Showdown (Markdown → HTML converter) -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
@@ -104,7 +132,7 @@
         .then(res => res.text())
         .then(md => {
           const converter = new showdown.Converter({
-            ghCodeBlocks: true,       // GitHub-style code
+            ghCodeBlocks: true,
             tables: true,
             strikethrough: true,
             simpleLineBreaks: true,
@@ -113,7 +141,7 @@
           const html = converter.makeHtml(md);
           document.getElementById("content").innerHTML = html;
 
-          // Apply syntax highlighting
+          // Highlight.js for code blocks
           document.querySelectorAll("pre code").forEach(block => {
             hljs.highlightElement(block);
           });
