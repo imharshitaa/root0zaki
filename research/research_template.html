@@ -3,56 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research</title>
+  <title>Research - Root0zaki</title>
 
-  <!-- Markdown parser -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Hack font -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 
-  <!-- Syntax highlighting -->
+  <!-- Highlight.js for code blocks -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
   <style>
     body {
       background-color: black;
-      color: white;
-      font-family: "Courier New", monospace;
+      color: #39FF14; /* neon green */
+      font-family: 'Hack', monospace;
+      margin: 0;
       padding: 30px;
-      max-width: 900px;
-      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #content {
+      max-width: 850px;
+      width: 100%;
+      text-align: left;
+    }
+
+    /* Headings */
+    h1 {
+      color: red; /* main title */
+    }
+
+    h2 {
+      color: lightblue; /* subtitles */
+      font-size: 1em; /* same as normal text */
+      font-weight: normal; /* optional: make it not bold if you want */
+    }
+
+    h3, h4, h5, h6 {
+      color: red;
+    }
+
+    p, li {
       line-height: 1.6;
     }
-    h1, h2, h3 { color: lightgreen; }
-    a { color: yellow; }
+
+    /* Images */
     img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin: 15px 0;
+      display: block;
+      margin: 20px auto;
+      max-width: 80%;
+      border: 3px solid yellow;
+      border-radius: 10px;
     }
+
+    /* Links */
+    a {
+      color: orange;
+    }
+
+    /* Inline code (`text`) - orange + typewriter font */
+    code {
+      color: orange;
+      background-color: transparent;
+      font-size: 1em;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    /* Code blocks */
     pre {
-      background: #111;
-      padding: 12px;
+      padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
+      border: 1px solid #ccc;
+      margin: 20px 0;
+      background-color: #1e1e1e;
     }
-    code {
-      font-family: "Fira Code", monospace;
-      font-size: 0.9em;
+
+    pre code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      color: #f8f8f2;
     }
+
+    /* Back button */
     .back {
       display: inline-block;
       margin-top: 30px;
-      color: yellow;
+      color: orange;
       text-decoration: none;
+      border: 2px solid orange;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Hack', monospace;
     }
-    .back:hover { text-decoration: underline; }
+
+    .back:hover {
+      background-color: #39FF14;
+      color: black;
+      box-shadow: 0 0 15px #39FF14;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 16px;
+      color: lightblue;
+      font-family: 'Hack', monospace;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <h1 id="title">Loading...</h1>
   <div id="content">Please wait...</div>
-  <a href="index.html" class="back">⬅ Back to Research Index</a>
 
+  <a href="index.html" class="back">⬅ Back to Research Index</a>
+  <div class="footer">imharshitaa @ owner</div>
+
+  <!-- Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const file = urlParams.get("file");
@@ -64,10 +136,12 @@
           const html = marked.parse(md);
           document.getElementById("content").innerHTML = html;
 
+          // Highlight.js for code blocks
           document.querySelectorAll('pre code').forEach(block => {
             hljs.highlightElement(block);
           });
 
+          // Set main title from first line if it's a # header
           const firstLine = md.split("\n")[0];
           if (firstLine.startsWith("# ")) {
             document.getElementById("title").textContent = firstLine.replace("# ", "");
@@ -75,7 +149,7 @@
             document.getElementById("title").textContent = "Research Note";
           }
         })
-        .catch(err => {
+        .catch(() => {
           document.getElementById("content").innerHTML = "<p style='color:red;'>Error loading file.</p>";
         });
     } else {
@@ -84,3 +158,4 @@
   </script>
 </body>
 </html>
+
