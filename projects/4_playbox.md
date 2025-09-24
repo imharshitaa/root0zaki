@@ -1,6 +1,6 @@
 # Playbox
 
-`Vulnerable Lab Environment for Security Research & Testing`
+> Vulnerable Lab Environment for Security Research & Testing
 
 Github link: `https://github.com/imharshitaa/playbox`
 
