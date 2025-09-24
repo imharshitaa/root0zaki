@@ -21,28 +21,18 @@
     }
 
     #content {
-      max-width: 800px;
+      max-width: 850px;
       width: 100%;
       text-align: left;
     }
 
     /* Headings */
-    h1 {
-      color: red; /* main title */
-    }
-
-    h2 {
-      color: lightblue; /* subtitles from ## */
-    }
-
-    h3, h4, h5, h6 {
-      color: red; /* other headings remain red */
-    }
+    h1 { color: red; }
+    h2 { color: lightblue; }
+    h3, h4, h5, h6 { color: red; }
 
     /* Paragraphs and list items */
-    p, li {
-      line-height: 1.6;
-    }
+    p, li { line-height: 1.6; }
 
     /* Images */
     img {
@@ -54,16 +44,22 @@
     }
 
     /* Links */
-    a {
-      color: yellow;
+    a { color: yellow; }
+
+    /* Inline code (`text`) - orange + typewriter font */
+    code {
+      color: orange;
+      background-color: transparent;
+      font-size: 1em;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: normal;
     }
 
-    /* Inline code (`text`) - yellow + typewriter font */
-    code {
+    /* Bold text from **text** - yellow + typewriter font */
+    strong {
       color: yellow;
-      background-color: transparent;
-      font-size: 1em; /* same as normal text */
-      font-family: "Courier New", Courier, monospace; /* typewriter style */
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
     }
 
     /* Back button */
@@ -102,7 +98,7 @@
 
   <div class="footer">imharshitaa @ owner</div>
 
-  <!-- Showdown Markdown → HTML -->
+  <!-- Showdown (Markdown → HTML converter) -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -112,14 +108,22 @@
       fetch(file)
         .then(res => res.text())
         .then(md => {
-          const converter = new showdown.Converter();
+          const converter = new showdown.Converter({
+            ghCodeBlocks: true,
+            tables: true,
+            strikethrough: true,
+            simpleLineBreaks: true,
+            openLinksInNewWindow: true
+          });
           document.getElementById("content").innerHTML = converter.makeHtml(md);
         })
         .catch(() => {
-          document.getElementById("content").innerHTML = "<p style='color:red'>Error loading file.</p>";
+          document.getElementById("content").innerHTML =
+            "<p style='color:red'>Error loading file.</p>";
         });
     } else {
-      document.getElementById("content").innerHTML = "<p style='color:red'>No project selected.</p>";
+      document.getElementById("content").innerHTML =
+        "<p style='color:red'>No project selected.</p>";
     }
   </script>
 </body>
