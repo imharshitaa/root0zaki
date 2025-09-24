@@ -11,7 +11,7 @@
   <style>
     body {
       background-color: black;
-      color: #39ff14; /* neon green */
+      color: #39ff14;
       font-family: "Hack", monospace;
       text-align: center;
       margin: 0;
@@ -19,7 +19,7 @@
     }
     h1 {
       margin-top: 40px;
-      color: #FF1493; /* neon pink title */
+      color: #FF1493;
     }
     .research-grid {
       display: flex;
@@ -52,14 +52,12 @@
       font-size: 16px;
       color: lightgray;
     }
-    /* Only stretch research links */
     .research-grid a {
       text-decoration: none;
       width: 100%;
       display: flex;
       justify-content: center;
     }
-    /* Back button stays compact */
     .back-link {
       display: inline-block;
       margin-top: 50px;
@@ -68,7 +66,6 @@
       border: 2px solid yellow;
       padding: 10px 20px;
       border-radius: 8px;
-      width: auto;
     }
     .back-link:hover {
       background-color: #39ff14;
@@ -121,6 +118,7 @@
         });
       } catch (err) {
         console.error("Error loading research.json", err);
+        document.getElementById("research-grid").innerHTML = "<p style='color:red;'>Failed to load research list.</p>";
       }
     }
 
