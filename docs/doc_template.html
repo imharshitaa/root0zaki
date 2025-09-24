@@ -8,10 +8,6 @@
   <!-- Hack font -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 
-  <!-- Highlight.js (syntax highlighting with GitHub theme) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
   <style>
     body {
       background-color: black;
@@ -61,28 +57,12 @@
       color: yellow;
     }
 
-    /* Inline code */
+    /* Inline code (`text`) - orange + typewriter font */
     code {
-      color: yellow;
+      color: orange;
       background-color: transparent;
       font-size: 1em;
-      font-family: "Courier New", Courier, monospace; /* typewriter font */
-    }
-
-    /* Code blocks (highlight.js) */
-    pre {
-      padding: 15px;
-      border-radius: 8px;
-      overflow-x: auto;
-      border: 1px solid #ccc;
-      margin: 20px 0;
-      background-color: #1e1e1e; /* dark background for code */
-    }
-
-    pre code {
-      color: #f8f8f2; /* text inside code block */
       font-family: "Courier New", Courier, monospace;
-      font-size: 14px;
     }
 
     /* Back button */
@@ -138,13 +118,7 @@
             simpleLineBreaks: true,
             openLinksInNewWindow: true
           });
-          const html = converter.makeHtml(md);
-          document.getElementById("content").innerHTML = html;
-
-          // Highlight.js for code blocks
-          document.querySelectorAll("pre code").forEach(block => {
-            hljs.highlightElement(block);
-          });
+          document.getElementById("content").innerHTML = converter.makeHtml(md);
         })
         .catch(() => {
           document.getElementById("content").innerHTML =
@@ -157,7 +131,6 @@
   </script>
 </body>
 </html>
-
 
 
 
