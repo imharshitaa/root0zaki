@@ -1,6 +1,6 @@
 # API Playbook
 
-This playbook gives a compact, practical reference for beginners learning about APIs — what they are, how they work, common security issues, and quick testing/checklist items. 
+This playbook gives a compact, practical reference for beginners learning about APIs: what they are, how they work, common security issues, and quick testing/checklist items. 
 It's designed to be easy to reference during API testing.
 
 ## What is an API?
