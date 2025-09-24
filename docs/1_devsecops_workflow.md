@@ -1,7 +1,6 @@
 # Building DevSecOps Workflow
 
-## Introduction
-DevSecOps is the practice of adding security into the DevOps pipeline. Instead of waiting until after development to run security tests, checks are done throughout the lifecycle — from writing code to deploying and monitoring applications.
+DevSecOps is the practice of adding security into the DevOps pipeline. Instead of waiting until after development to run security tests, checks are done throughout the lifecycle from writing code to deploying and monitoring applications.
 
 This approach reduces risks, catches vulnerabilities earlier, and helps deliver software that is both fast and secure.
 
