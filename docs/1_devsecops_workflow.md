@@ -56,16 +56,4 @@ DevSecOps is not just about tools, it’s about ensuring security is built into 
 By securing code, dependencies, deployments, and monitoring systems, teams can release applications quickly without sacrificing safety.
 
 
-### Inline Code
-
-Use `console.log("Hello World");` inside your text.
-
----
-
-### Code Block
-
-```python
-def hello_world():
-    print("Hello, Root0zaki 🚀")
-hello_world()
 
