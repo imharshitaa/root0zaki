@@ -11,25 +11,33 @@
   <style>
     body {
       background-color: black;
-      color: #39FF14; /* neon green */
+      color: #39FF14; /* neon green default text */
       font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center horizontally */
+      align-items: center;
     }
+
     #content {
-      max-width: 800px; /* keeps text in a clean column */
+      max-width: 800px;
       width: 100%;
-      text-align: left; /* left alignment */
+      text-align: left;
     }
-    h1, h2, h3, h4 {
-      color: red; /* headings in red */
+
+    /* Headings colors */
+    h1 {
+      color: #FF4D4D; /* red for main title */
     }
+    h2, h3 {
+      color: #00BFFF; /* blue for subtitles */
+    }
+
     p, li {
       line-height: 1.6;
     }
+
     img {
       display: block;
       margin: 20px auto;
@@ -37,9 +45,31 @@
       border: 3px solid yellow;
       border-radius: 10px;
     }
+
     a {
       color: yellow;
     }
+
+    /* Inline code and code blocks in yellow with normal font size */
+    code {
+      color: yellow;
+      background: transparent;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-size: 1em; /* same size as text */
+    }
+
+    pre code {
+      display: block;
+      padding: 12px;
+      background: #111;
+      border: 1px solid #39FF14;
+      border-radius: 6px;
+      color: yellow;
+      font-size: 1em; /* same as text */
+      overflow-x: auto;
+    }
+
     .back-link {
       display: inline-block;
       margin-top: 30px;
@@ -50,11 +80,13 @@
       border-radius: 8px;
       font-family: 'Hack', monospace;
     }
+
     .back-link:hover {
       background-color: #39FF14; /* neon green hover */
       color: black;
       box-shadow: 0 0 15px #39FF14;
     }
+
     .footer {
       margin-top: 60px;
       padding: 20px;
@@ -68,7 +100,7 @@
 <body>
   <div id="content">Loading...</div>
 
-  <!-- Corrected link to projects index -->
+  <!-- Back link -->
   <a class="back-link" href="index.html">⬅ Back to Projects</a>
 
   <!-- Footer -->
@@ -76,7 +108,7 @@
     imharshitaa @ owner
   </div>
 
-  <!-- Load Showdown (Markdown → HTML converter) -->
+  <!-- Showdown Markdown converter -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
