@@ -2,21 +2,22 @@
   {
     "title": "Open source tools for hacking",
     "file": "1_os_tools.md",
-    "description": "open source tools for hacking"
+    "description": "Open source tools for hacking"
   },
   {
     "title": "Cyberdeck",
     "file": "2_cyberdeck.md",
-    "description": "building cyberdeck"
+    "description": "Building cyberdeck"
   },
   {
     "title": "Reverse Engineering",
     "file": "3_reverse.md",
-    "description": "Notes and methodologies for reverse engineering binaries."
+    "description": "Notes and methodologies for reverse engineering binaries"
   },
   {
-    "title": "malware analysis",
+    "title": "Malware Analysis",
     "file": "4_malware.md",
-    "description": "malware exploiting analysis"
+    "description": "Malware exploiting analysis"
   }
 ]
+
