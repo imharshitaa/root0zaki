@@ -49,10 +49,10 @@ A DevSecOps pipeline has five key stages:
 5. IaC Security: Checkov, Kics
 6. Monitoring & Runtime Security: Grafana, Prometheus, Falco
 
-Conclusion:
+**Conclusion:**
 
-DevSecOps is not just about tools, it’s about ensuring security is built into the development workflow. 
-By securing code, dependencies, deployments, and monitoring systems, teams can release applications quickly without sacrificing safety.
+`DevSecOps is not just about tools, it’s about ensuring security is built into the development workflow. 
+By securing code, dependencies, deployments, and monitoring systems, teams can release applications quickly without sacrificing safety.`
 
 
 
