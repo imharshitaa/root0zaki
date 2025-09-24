@@ -8,14 +8,10 @@
   <!-- Hack font -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 
-  <!-- Highlight.js for code blocks -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
   <style>
     body {
       background-color: black;
-      color: #39FF14; /* neon green */
+      color: #39FF14; /* default text neon green */
       font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
@@ -31,23 +27,11 @@
     }
 
     /* Headings */
-    h1 {
-      color: red; /* main title */
-    }
+    h1 { color: red; }
+    h2 { color: lightblue; font-size: 1em; font-weight: normal; }
+    h3, h4, h5, h6 { color: red; }
 
-    h2 {
-      color: lightblue; /* subtitles */
-      font-size: 1em; /* same as normal text */
-      font-weight: normal; /* optional: make it not bold if you want */
-    }
-
-    h3, h4, h5, h6 {
-      color: red;
-    }
-
-    p, li {
-      line-height: 1.6;
-    }
+    p, li { line-height: 1.6; }
 
     /* Images */
     img {
@@ -59,9 +43,7 @@
     }
 
     /* Links */
-    a {
-      color: orange;
-    }
+    a { color: yellow; }
 
     /* Inline code (`text`) - orange + typewriter font */
     code {
@@ -69,37 +51,29 @@
       background-color: transparent;
       font-size: 1em;
       font-family: "Courier New", Courier, monospace;
+      font-weight: normal;
     }
 
-    /* Code blocks */
-    pre {
-      padding: 15px;
-      border-radius: 8px;
-      overflow-x: auto;
-      border: 1px solid #ccc;
-      margin: 20px 0;
-      background-color: #1e1e1e;
-    }
-
-    pre code {
+    /* Bold text from **text** - yellow + typewriter font */
+    strong {
+      color: yellow;
       font-family: "Courier New", Courier, monospace;
-      font-size: 14px;
-      color: #f8f8f2;
+      font-weight: bold;
     }
 
     /* Back button */
-    .back {
+    .back-link {
       display: inline-block;
       margin-top: 30px;
-      color: orange;
+      color: yellow;
       text-decoration: none;
-      border: 2px solid orange;
+      border: 2px solid yellow;
       padding: 10px 20px;
       border-radius: 8px;
       font-family: 'Hack', monospace;
     }
 
-    .back:hover {
+    .back-link:hover {
       background-color: #39FF14;
       color: black;
       box-shadow: 0 0 15px #39FF14;
@@ -117,45 +91,40 @@
   </style>
 </head>
 <body>
-  <h1 id="title">Loading...</h1>
-  <div id="content">Please wait...</div>
+  <div id="content">Loading...</div>
 
-  <a href="index.html" class="back">⬅ Back to Research Index</a>
+  <a class="back-link" href="index.html">⬅ Back to Research Index</a>
+
   <div class="footer">imharshitaa @ owner</div>
 
-  <!-- Markdown parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Showdown (Markdown → HTML converter) -->
+  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const file = urlParams.get("file");
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get("file");
 
     if (file) {
       fetch(file)
         .then(res => res.text())
         .then(md => {
-          const html = marked.parse(md);
-          document.getElementById("content").innerHTML = html;
-
-          // Highlight.js for code blocks
-          document.querySelectorAll('pre code').forEach(block => {
-            hljs.highlightElement(block);
+          const converter = new showdown.Converter({
+            ghCodeBlocks: true,
+            tables: true,
+            strikethrough: true,
+            simpleLineBreaks: true,
+            openLinksInNewWindow: true
           });
 
-          // Set main title from first line if it's a # header
-          const firstLine = md.split("\n")[0];
-          if (firstLine.startsWith("# ")) {
-            document.getElementById("title").textContent = firstLine.replace("# ", "");
-          } else {
-            document.getElementById("title").textContent = "Research Note";
-          }
+          document.getElementById("content").innerHTML = converter.makeHtml(md);
         })
         .catch(() => {
-          document.getElementById("content").innerHTML = "<p style='color:red;'>Error loading file.</p>";
+          document.getElementById("content").innerHTML =
+            "<p style='color:red'>Error loading file.</p>";
         });
     } else {
-      document.getElementById("content").innerHTML = "<p>No research file specified.</p>";
+      document.getElementById("content").innerHTML =
+        "<p style='color:red'>No research file selected.</p>";
     }
   </script>
 </body>
 </html>
-
