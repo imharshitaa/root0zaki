@@ -2,7 +2,7 @@
 
 `Vulnerable Lab Environment for Security Research & Testing`
 
-Github link: https://github.com/imharshitaa/playbox
+Github link: `https://github.com/imharshitaa/playbox`
 
 Status: In progress
 
