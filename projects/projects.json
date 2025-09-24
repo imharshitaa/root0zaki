@@ -1,6 +1,6 @@
 [
-  { "file": "1_api_ai_agent.md", "title": "Risks in API & AI agents", "icon": "⚡️" },
-  { "file": "2_api_new_case.md", "title": "New Test Cases for APIs", "icon": "⚡️" },
-  { "file": "3_devsecops.md", "title": "DevSecOps Tools", "icon": "⭐️" },
-  { "file": "4_playbox.md", "title": "Vulnerable Applications", "icon":"⭐️" }
+  { "file": "1_api_ai_agent.md", "title": "⚡️Risks in API & AI agents" },
+  { "file": "2_api_new_case.md", "title": "⚡️New Test Cases for APIs" },
+  { "file": "3_devsecops.md", "title": "⭐️ DevSecOps Tools" },
+  { "file": "4_playbox.md", "title": "⭐️ Vulnerable Applications" }
 ]
