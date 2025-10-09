@@ -5,6 +5,16 @@
     "description": "Impact of Darkweb activities to society"
   },
   {
+    "title": "Open-Source Threat Hunting and Log management ",
+    "file": "6_opensourcethreat.pdf",
+    "description": "Capstone Project 1 - Using open source tools for finding vulnerabilities"
+  },
+  {
+    "title": "Threat Detection using SOAR and EDR",
+    "file": "7_threatdetection.pdf",
+    "description": "Capstone Project 2 - Using tools for vulnerability management"
+  },
+  {
     "title": "Open source tools for hacking",
     "file": "1_os_tools.md",
     "description": "Open source tools for hacking"
