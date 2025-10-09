@@ -19,5 +19,10 @@
     "file": "4_malware.md",
     "description": "Malware exploiting analysis"
   }
+  {
+    "title": "Darkweb Black Market Research Paper",
+    "file": "5_Darkweb.pdf",
+    "description": "Impact of Darkweb activities to society"
+  }
 ]
 
