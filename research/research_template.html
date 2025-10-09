@@ -11,7 +11,7 @@
   <style>
     body {
       background-color: black;
-      color: #39FF14; 
+      color: #39FF14;
       font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
@@ -55,7 +55,7 @@
     /* Links */
     a { color: yellow; }
 
-    /* Inline code (`text`) */
+    /* Inline code */
     code {
       color: orange;
       background-color: transparent;
@@ -111,35 +111,37 @@
     const file = params.get("file");
 
     if (file) {
-      fetch(file)
-        .then(res => res.text())
-        .then(md => {
-          const converter = new showdown.Converter({
-            ghCodeBlocks: true,
-            tables: true,
-            strikethrough: true,
-            simpleLineBreaks: true,
-            openLinksInNewWindow: true
+      const contentDiv = document.getElementById("content");
+
+      // Detect if file is a PDF
+      if (file.toLowerCase().endsWith(".pdf")) {
+        contentDiv.innerHTML = `<embed src="./${file}" type="application/pdf" width="100%" height="800px" />`;
+      } else {
+        // Otherwise treat as Markdown
+        fetch(file)
+          .then(res => res.text())
+          .then(md => {
+            const converter = new showdown.Converter({
+              ghCodeBlocks: true,
+              tables: true,
+              strikethrough: true,
+              simpleLineBreaks: true,
+              openLinksInNewWindow: true
+            });
+            contentDiv.innerHTML = converter.makeHtml(md);
+
+            // Optional: fix relative PDF paths in Markdown
+            const embeds = document.querySelectorAll("embed");
+            embeds.forEach(e => {
+              if (!e.src.startsWith("http") && !e.src.startsWith("/")) {
+                e.src = "./" + e.src;
+              }
+            });
+          })
+          .catch(() => {
+            contentDiv.innerHTML = "<p style='color:red'>Error loading file.</p>";
           });
-
-          // convert Markdown to HTML
-          const html = converter.makeHtml(md);
-
-          // inject HTML into content div
-          document.getElementById("content").innerHTML = html;
-
-          // OPTIONAL: if PDF file is embedded without "./", automatically fix relative paths
-          const embeds = document.querySelectorAll("embed");
-          embeds.forEach(e => {
-            if (!e.src.startsWith("http") && !e.src.startsWith("/")) {
-              e.src = "./" + e.src;
-            }
-          });
-        })
-        .catch(() => {
-          document.getElementById("content").innerHTML =
-            "<p style='color:red'>Error loading file.</p>";
-        });
+      }
     } else {
       document.getElementById("content").innerHTML =
         "<p style='color:red'>No research file selected.</p>";
