@@ -1,4 +1,4 @@
-# VULN-AI
+# AI-Pentest
 
 AI Testcases and Toolkit for Pentesting
 
