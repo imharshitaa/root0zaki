@@ -11,7 +11,7 @@
   <style>
     body {
       background-color: black;
-      color: #39FF14; /* default text neon green */
+      color: #39FF14; 
       font-family: 'Hack', monospace;
       margin: 0;
       padding: 30px;
@@ -42,10 +42,20 @@
       border-radius: 10px;
     }
 
+    /* PDF Embed styling */
+    embed, iframe {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      height: 800px;
+      border: 2px solid yellow;
+      border-radius: 8px;
+    }
+
     /* Links */
     a { color: yellow; }
 
-    /* Inline code (`text`) - orange + typewriter font */
+    /* Inline code (`text`) */
     code {
       color: orange;
       background-color: transparent;
@@ -54,14 +64,12 @@
       font-weight: normal;
     }
 
-    /* Bold text from **text** - yellow + typewriter font */
     strong {
       color: yellow;
       font-family: "Courier New", Courier, monospace;
       font-weight: bold;
     }
 
-    /* Back button */
     .back-link {
       display: inline-block;
       margin-top: 30px;
@@ -79,7 +87,6 @@
       box-shadow: 0 0 15px #39FF14;
     }
 
-    /* Footer */
     .footer {
       margin-top: 60px;
       padding: 20px;
@@ -97,7 +104,7 @@
 
   <div class="footer">imharshitaa @ owner</div>
 
-  <!-- Showdown (Markdown → HTML converter) -->
+  <!-- Showdown Markdown converter -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -115,7 +122,19 @@
             openLinksInNewWindow: true
           });
 
-          document.getElementById("content").innerHTML = converter.makeHtml(md);
+          // convert Markdown to HTML
+          const html = converter.makeHtml(md);
+
+          // inject HTML into content div
+          document.getElementById("content").innerHTML = html;
+
+          // OPTIONAL: if PDF file is embedded without "./", automatically fix relative paths
+          const embeds = document.querySelectorAll("embed");
+          embeds.forEach(e => {
+            if (!e.src.startsWith("http") && !e.src.startsWith("/")) {
+              e.src = "./" + e.src;
+            }
+          });
         })
         .catch(() => {
           document.getElementById("content").innerHTML =
