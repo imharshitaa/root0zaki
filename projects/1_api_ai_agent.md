@@ -2,7 +2,7 @@
 
 AI Testcases and Toolkit for Pentesting
 
-Github link: `https://github.com/imharshitaa/AI-testcases?utm_source=chatgpt.com`
+Github link: `https://github.com/imharshitaa/AI-Pentest`
 
 **Status: In progress**
 
