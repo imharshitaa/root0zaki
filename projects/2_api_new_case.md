@@ -2,7 +2,7 @@
 
 Advanced API Testcases for Security Vulnerability Research (Beyond OWASP)
 
-Github link: `https://github.com/imharshitaa/API_testcases`
+Github link: `https://github.com/imharshitaa/API_Pentest`
 
 Status: In Progress
 
