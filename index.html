@@ -127,7 +127,6 @@ h1 {
 
 <!-- demo -->
 <!-- demo -->
-
 <!-- demo -->
 <div class="github-window">
   <div class="window-bar">
@@ -136,7 +135,7 @@ h1 {
       <span class="dot yellow"></span>
       <span class="dot green"></span>
     </div>
-    <span class="window-url"> github.com : imharshitaa </span>
+    <span class="window-url">github.com : imharshitaa</span>
   </div>
 
   <a href="https://github.com/imharshitaa" target="_blank">
@@ -146,6 +145,59 @@ h1 {
       alt="GitHub Live Preview">
   </a>
 </div>
+
+<style>
+.github-window {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #ffffff;            /* clean light frame */
+    border: 1px solid #d0d7de;      /* subtle border */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Window title bar */
+.window-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f6f8fa;            /* GitHub-like light bar */
+    border-bottom: 1px solid #d0d7de;
+    font-family: Hack, monospace;
+    font-size: 13px;
+    color: #24292f;
+}
+
+/* macOS dots */
+.window-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.window-url {
+    margin-left: 14px;
+    opacity: 0.9;
+}
+
+/* GitHub preview – normal colors */
+.github-preview {
+    width: 100%;
+    display: block;
+}
+</style>
+
 
 <!-- Footer -->
 <div class="footer">
