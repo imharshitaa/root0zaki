@@ -127,8 +127,8 @@ h1 {
 
 <!-- demo -->
 <!-- demo -->
-<div class="section-title">work demo</div>
 
+<!-- demo -->
 <div class="github-window">
   <div class="window-bar">
     <div class="window-dots">
@@ -141,10 +141,63 @@ h1 {
 
   <a href="https://github.com/imharshitaa" target="_blank">
     <img
+      class="github-preview"
       src="https://image.thum.io/get/width/1200/https://github.com/imharshitaa"
       alt="GitHub Live Preview">
   </a>
 </div>
+
+<!-- CSS (place inside <head> or your existing <style>) -->
+<style>
+.github-window {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.85);
+}
+
+.window-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    font-family: Hack, monospace;
+    font-size: 13px;
+    color: #c9d1d9;
+}
+
+.window-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.window-url {
+    margin-left: 14px;
+    opacity: 0.85;
+}
+
+/* GitHub preview dark-mode illusion */
+.github-preview {
+    width: 100%;
+    display: block;
+    filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
+}
+</style>
 
 <!-- Footer -->
 <div class="footer">
