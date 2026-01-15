@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Root0zaki</title>
 
 <!-- Hack font -->
@@ -11,102 +11,149 @@
 <style>
 body {
     background-color: black;
-    color: #39ff14; /* neon green */
-    font-family: "JetBrains Mono", monospace;
+    color: #39ff14;
+    font-family: "Hack", monospace;
     text-align: center;
     margin: 0;
 }
+
+/* Title */
 h1 {
-    margin-top: 50px;
-    color: #39ff14; /* neon green */
-    text-shadow: 0 0 8px #39FF14, 0 0 16px #39FF14, 0 0 24px #39FF14; /* glow effect */
+    margin-top: 35px;
+    font-size: 46px;
+    text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
 }
+
+/* Subtitle */
+.subtitle {
+    margin-top: 8px;
+    font-size: 17px;
+    color: #b6ffb6;
+}
+
+/* Grid */
 .button-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 100px;
-    gap: 40px;
+    margin-top: 45px;
+    gap: 28px;
 }
+
+/* Card buttons */
 .button {
-    width: 200px;
-    height: 200px;
+    width: 135px;
+    height: 135px;
+    background-color: #111;
+    border: 2px solid yellow;
+    border-radius: 16px;
+    color: white;
+    font-size: 17px;
+    text-decoration: none;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #111;
-    border: 3px solid yellow;
-    border-radius: 20px;
-    color: white;
-    font-size: 24px;
-    text-decoration: none;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+
+    transition: transform 0.2s ease, background-color 0.2s, box-shadow 0.2s;
 }
+
 .button:hover {
-    transform: scale(1.1);
-    background-color: #39ff14; /* neon green */
+    transform: scale(1.08);
+    background-color: #39ff14;
     color: black;
-    box-shadow: 0 0 20px #39ff14;
+    box-shadow: 0 0 18px #39ff14;
 }
+
+/* Icons */
 .button-icon {
-    font-size: 50px;
-    margin-bottom: 10px;
+    font-size: 34px;
+    margin-bottom: 6px;
 }
+
+/* Section title */
+.section-title {
+    margin-top: 70px;
+    font-size: 24px;
+    color: #39ff14;
+    text-shadow: 0 0 6px #39ff14;
+}
+
+/* Footer */
 .footer {
-    margin-top: 80px;
+    margin-top: 70px;
     padding: 20px;
-    font-size: 16px;
+    font-size: 14px;
     color: lightblue;
-    font-family: "Hack", monospace;
 }
 </style>
 </head>
+
 <body>
+
 <h1>Root0zaki</h1>
+<div class="subtitle">
+    Cybersecurity Engineer • Security Researcher • Pentester • Bug Bounty Hunter
+</div>
+
+<!-- Internal sections -->
 <div class="button-grid">
     <a class="button" href="about/index.html">
         <div class="button-icon">🪐</div>
         About
     </a>
+
     <a class="button" href="projects/index.html">
         <div class="button-icon">💻</div>
         Projects
     </a>
+
     <a class="button" href="research/index.html">
         <div class="button-icon">🔬</div>
         Research
     </a>
+
     <a class="button" href="docs/index.html">
         <div class="button-icon">📄</div>
         Docs
     </a>
+
     <a class="button" href="pentesting/index.html">
         <div class="button-icon">🛡️</div>
         Pentesting
     </a>
 </div>
 
+<!-- Online Presence -->
+<div class="section-title">Online Presence</div>
+
+<div class="button-grid">
+    <a class="button" href="https://github.com/imharshitaa" target="_blank">
+        <div class="button-icon">🐙</div>
+        GitHub
+    </a>
+
+    <a class="button" href="https://medium.com/@imharshitaa" target="_blank">
+        <div class="button-icon">✍️</div>
+        Medium
+    </a>
+
+    <a class="button" href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank">
+        <div class="button-icon">🔗</div>
+        LinkedIn
+    </a>
+
+    <a class="button" href="https://bugcrowd.com/h/imharshitaa" target="_blank">
+        <div class="button-icon">🐞</div>
+        Bugcrowd
+    </a>
+</div>
+
 <!-- Footer -->
 <div class="footer">
-    imharshitaa @ owner
+    imharshitaa © owner
 </div>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
