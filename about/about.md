@@ -11,8 +11,6 @@ Tech stack:
 - DevSecOps & Secure Automation
 - Python | Postman | Burp Suite | Metasploit | Linux | Open Source tools
 
-Projects:
-
 
 --- 
 
