@@ -19,8 +19,8 @@ body {
 
 /* Title */
 h1 {
-    margin-top: 35px;
-    font-size: 32px;
+    margin-top: 30px;
+    font-size: 33px;
     text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
 }
 
@@ -202,6 +202,75 @@ h1 {
     
 </style>
 
+<!-- Social / Work Links Windows -->
+
+<style>
+/* Window container */
+.github-window {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #ffffff;
+    border: 3px solid #ffd700;      /* yellow frame */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* Top bar */
+.window-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #000000;
+    border-bottom: 1px solid #222;
+    font-family: Hack, monospace;
+    font-size: 13px;
+    color: #39ff14;
+}
+
+/* macOS dots */
+.window-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.window-url {
+    margin-left: 14px;
+    font-weight: 500;
+}
+
+/* Content area */
+.window-content {
+    background: #f6f8fa;           /* clean docs-style grey */
+    padding: 18px 22px;
+    font-family: Hack, monospace;
+    font-size: 15px;
+    border-top: 1px solid #d0d7de;
+}
+
+/* Link styling */
+.profile-link {
+    color: #0969da;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
+</style>
+
 <!-- LinkedIn window -->
 <div class="github-window">
   <div class="window-bar">
@@ -214,15 +283,13 @@ h1 {
   </div>
 
   <div class="window-content">
-    <a
-      class="profile-link"
-      href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/"
-      target="_blank">
-      <span class="prompt">root@portfolio</span>:<span class="path">~</span>$ open linkedin
+    <a class="profile-link"
+       href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/"
+       target="_blank">
+      linkedin.com/in/harshitaa-ashish-85767621a
     </a>
   </div>
 </div>
-
 
 <!-- Medium window -->
 <div class="github-window">
@@ -235,12 +302,13 @@ h1 {
     <span class="window-url">medium.com : @imharshitaa</span>
   </div>
 
-  <a href="https://medium.com/@imharshitaa" target="_blank">
-    <img
-      class="github-preview"
-      src="https://image.thum.io/get/width/1200/https://medium.com/@imharshitaa"
-      alt="Medium Preview">
-  </a>
+  <div class="window-content">
+    <a class="profile-link"
+       href="https://medium.com/@imharshitaa"
+       target="_blank">
+      medium.com/@imharshitaa
+    </a>
+  </div>
 </div>
 
 <!-- Bugcrowd window -->
@@ -254,12 +322,13 @@ h1 {
     <span class="window-url">bugcrowd.com : imharshitaa</span>
   </div>
 
-  <a href="https://bugcrowd.com/h/imharshitaa" target="_blank">
-    <img
-      class="github-preview"
-      src="https://image.thum.io/get/width/1200/https://bugcrowd.com/h/imharshitaa"
-      alt="Bugcrowd Preview">
-  </a>
+  <div class="window-content">
+    <a class="profile-link"
+       href="https://bugcrowd.com/h/imharshitaa"
+       target="_blank">
+      bugcrowd.com/h/imharshitaa
+    </a>
+  </div>
 </div>
 
 
