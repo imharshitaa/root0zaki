@@ -11,14 +11,13 @@ Tech stack:
 - DevSecOps & Secure Automation
 - Python | Postman | Burp Suite | Metasploit | Linux | Open Source tools
 
-
 --- 
 
 ## 🔗 Connect with me  
 
 - **LinkedIn**: [Harshitaa Ashish](https://www.linkedin.com/in/harshitaa-ashish-85767621a/)  
 - **GitHub**: [imharshitaa](https://github.com/imharshitaa)  
-- **Email**: root0zaki@gmail.com
+- **Email**: harshitaa729.com
 - **Portfolio**: [Website](https://imharshitaa.github.io/root0zaki/)   
 
 ---
