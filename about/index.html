@@ -28,9 +28,12 @@
       padding: 18px 0 26px;
       color: var(--text);
       font-family: "Space Grotesk", sans-serif;
-      background-color: #03060c;
+      background-color: #020612;
       background:
-        linear-gradient(180deg, #03060c 0%, #071223 45%, #03060c 100%);
+        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
+        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
+        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
+        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
       position: relative;
       overflow-x: hidden;
     }
@@ -39,6 +42,7 @@
       width: min(1000px, 92vw);
       margin: 0 auto;
       padding: 0;
+      margin-top: clamp(56px, 10vh, 130px);
     }
 
     .panel {
