@@ -17,7 +17,7 @@ Tech stack:
 
 - **LinkedIn**: [Harshitaa Ashish](https://www.linkedin.com/in/harshitaa-ashish-85767621a/)  
 - **GitHub**: [imharshitaa](https://github.com/imharshitaa)  
-- **Email**: harshitaa729.com
+- **Email**: harshitaa729gmail.com
 - **Portfolio**: [Website](https://imharshitaa.github.io/root0zaki/)   
 
 ---
