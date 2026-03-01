@@ -1,343 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Root0zaki</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Root0zaki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-main: #03060c;
+      --bg-panel: rgba(7, 11, 22, 0.72);
+      --cyan: #56f6ff;
+      --blue: #62a4ff;
+      --green: #55ff9d;
+      --text: #dff5ff;
+      --text-dim: #8bb6cf;
+      --line: rgba(86, 246, 255, 0.28);
+    }
 
-<!-- Hack font -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-    background-color: black;
-    color: #39ff14;
-    font-family: "Hack", monospace;
-    text-align: center;
-    margin: 0;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(86, 246, 255, 0.18), transparent 33%),
+        radial-gradient(circle at 88% 12%, rgba(98, 164, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, #040914 0%, #03060c 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
 
-/* Title */
-h1 {
-    margin-top: 30px;
-    font-size: 25px;
-    text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: repeating-linear-gradient(
+        180deg,
+        rgba(86, 246, 255, 0.08) 0px,
+        rgba(86, 246, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.16;
+      animation: scan 10s linear infinite;
+    }
 
-/* Subtitle */
-.subtitle {
-    margin-top: 8px;
-    font-size: 17px;
-    color: #b6ffb6;
-}
+    .wrap {
+      width: min(1060px, 92vw);
+      margin: 40px auto;
+    }
 
-/* Grid */
-.button-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 45px;
-    gap: 28px;
-}
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(3px);
+      box-shadow:
+        0 0 0 1px rgba(86, 246, 255, 0.08) inset,
+        0 18px 42px rgba(0, 0, 0, 0.45);
+    }
 
-/* Card buttons */
-.button {
-    width: 135px;
-    height: 135px;
-    background-color: #111;
-    border: 2px solid yellow;
-    border-radius: 16px;
-    color: white;
-    font-size: 17px;
-    text-decoration: none;
+    .hero {
+      padding: 28px 26px;
+      margin-bottom: 22px;
+      position: relative;
+    }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(85, 255, 157, 0.35);
+      background: rgba(85, 255, 157, 0.08);
+      font: 500 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
 
-    transition: transform 0.2s ease, background-color 0.2s, box-shadow 0.2s;
-}
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: pulse 1.4s infinite;
+    }
 
-.button:hover {
-    transform: scale(1.08);
-    background-color: #39ff14;
-    color: black;
-    box-shadow: 0 0 18px #39ff14;
-}
+    h1 {
+      margin: 14px 0 10px;
+      font-family: "Share Tech Mono", monospace;
+      font-size: clamp(28px, 6vw, 58px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      text-shadow: 0 0 12px rgba(86, 246, 255, 0.32);
+      animation: glitch 2.8s infinite;
+    }
 
-/* Icons */
-.button-icon {
-    font-size: 34px;
-    margin-bottom: 6px;
-}
+    .subtitle {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: clamp(15px, 2.2vw, 18px);
+      line-height: 1.5;
+    }
 
-/* Section title */
-.section-title {
-    margin-top: 70px;
-    font-size: 24px;
-    color: #39ff14;
-    text-shadow: 0 0 6px #39ff14;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
 
-/* Footer */
-.footer {
-    margin-top: 70px;
-    padding: 20px;
-    font-size: 14px;
-    color: lightblue;
-}
-</style>
+    .card {
+      min-height: 148px;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 14px;
+      border: 1px solid rgba(98, 164, 255, 0.28);
+      background:
+        linear-gradient(120deg, rgba(98, 164, 255, 0.08), transparent 52%),
+        rgba(7, 12, 24, 0.86);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 18px 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 18px rgba(86, 246, 255, 0.25);
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(86, 246, 255, 0.5);
+      display: grid;
+      place-items: center;
+      font-family: "Share Tech Mono", monospace;
+      font-size: 18px;
+      color: var(--cyan);
+      background: rgba(86, 246, 255, 0.08);
+    }
+
+    .title {
+      margin: 0;
+      font: 700 19px/1 "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      color: #f0fbff;
+      text-transform: uppercase;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .social {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .social a {
+      text-decoration: none;
+      border: 1px solid rgba(86, 246, 255, 0.25);
+      border-radius: 12px;
+      background: rgba(8, 14, 28, 0.82);
+      color: var(--text);
+      padding: 12px;
+      font-size: 14px;
+      font-family: "Share Tech Mono", monospace;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .social a:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      padding-bottom: 20px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-25%); }
+      100% { transform: translateY(25%); }
+    }
+
+    @keyframes glitch {
+      0%, 91%, 100% { transform: translate(0); }
+      92% { transform: translate(-1px, 1px); }
+      94% { transform: translate(1px, -1px); }
+      96% { transform: translate(-1px, 0); }
+      98% { transform: translate(1px, 0); }
+    }
+
+    @media (max-width: 920px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .social {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 22px 18px;
+      }
+      .wrap {
+        margin-top: 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <main class="wrap">
+    <section class="panel hero">
+      <div class="signal">
+        <span class="signal-dot"></span>
+        Live Portfolio Node
+      </div>
+      <h1>Harshitaa // Root0zaki</h1>
+      <p class="subtitle">Cybersecurity Engineer | Security Researcher | Pentester</p>
+    </section>
 
-<h1> >>> Harshitaa @Root0zaki </h1>
-<div class="subtitle">
-    Cybersecurity Engineer • Security Researcher • Pentester 
-</div>
+    <section class="grid">
+      <a class="card" href="about/index.html">
+        <div class="icon">A1</div>
+        <p class="title">About</p>
+        <p class="desc">Background, focus areas, and profile.</p>
+      </a>
+      <a class="card" href="projects/index.html">
+        <div class="icon">P2</div>
+        <p class="title">Projects</p>
+        <p class="desc">Builds, experiments, and security tools.</p>
+      </a>
+      <a class="card" href="research/index.html">
+        <div class="icon">R3</div>
+        <p class="title">Research</p>
+        <p class="desc">Papers, notes, and technical investigations.</p>
+      </a>
+      <a class="card" href="docs/index.html">
+        <div class="icon">D4</div>
+        <p class="title">Docs</p>
+        <p class="desc">Playbooks, blogs, and implementation notes.</p>
+      </a>
+      <a class="card" href="pentesting/index.html">
+        <div class="icon">X5</div>
+        <p class="title">Pentesting</p>
+        <p class="desc">Methodology and service playbook.</p>
+      </a>
+    </section>
 
-<!-- Internal sections -->
-<div class="button-grid">
-    <a class="button" href="about/index.html">
-        <div class="button-icon">🪐</div>
-        About
-    </a>
+    <section class="panel social">
+      <a href="https://github.com/imharshitaa" target="_blank" rel="noopener noreferrer">github.com/imharshitaa</a>
+      <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer">linkedin.com/in/harshitaa-ashish-85767621a</a>
+      <a href="https://medium.com/@imharshitaa" target="_blank" rel="noopener noreferrer">medium.com/@imharshitaa</a>
+    </section>
 
-    <a class="button" href="projects/index.html">
-        <div class="button-icon">💻</div>
-        Projects
-    </a>
-
-    <a class="button" href="research/index.html">
-        <div class="button-icon">🔬</div>
-        Research
-    </a>
-
-    <a class="button" href="docs/index.html">
-        <div class="button-icon">📄</div>
-        Docs
-    </a>
-
-    <a class="button" href="pentesting/index.html">
-        <div class="button-icon">🛡️</div>
-        Pentesting
-    </a>
-</div>
-
-<!-- demo -->
-<!-- demo -->
-<!-- demo -->
-<div class="github-window">
-  <div class="window-bar">
-    <div class="window-dots">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-    <span class="window-url">github.com : imharshitaa</span>
-  </div>
-
-  <a href="https://github.com/imharshitaa" target="_blank">
-    <img
-      class="github-preview"
-      src="https://image.thum.io/get/width/1200/https://github.com/imharshitaa?refresh=1"
-      alt="GitHub Live Preview">
-  </a>
-</div>
-
-<style>
-
-.github-window {
-    width: 90%;
-    max-width: 1000px;
-    margin: 40px auto;
-    background: #ffffff;
-    border: 3px solid #ffd700;      /* YELLOW FRAME */
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-}
-
-/* Window title bar */
-.window-bar {
-    display: flex;
-    align-items: center;
-    padding: 10px 14px;
-    background: #000000;            /* BLACK BAR */
-    border-bottom: 1px solid #222;
-    font-family: Hack, monospace;
-    font-size: 13px;
-    color: #39ff14;                 /* GREEN TEXT */
-}
-
-/* macOS dots */
-.window-dots {
-    display: flex;
-    gap: 6px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
-
-/* URL text */
-.window-url {
-    margin-left: 14px;
-    font-weight: 500;
-    color: #39ff14;                 /* FORCE GREEN github.com */
-}
-
-/* GitHub preview – normal colors */
-.github-preview {
-    width: 100%;
-    display: block;
-}
-    
-</style>
-
-<!-- Social / Work Links Windows -->
-
-<style>
-/* Window container */
-.github-window {
-    width: 90%;
-    max-width: 1000px;
-    margin: 40px auto;
-    background: #ffffff;
-    border: 3px solid #ffd700;      /* yellow frame */
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-}
-
-/* Top bar */
-.window-bar {
-    display: flex;
-    align-items: center;
-    padding: 10px 14px;
-    background: #000000;
-    border-bottom: 1px solid #222;
-    font-family: Hack, monospace;
-    font-size: 13px;
-    color: #39ff14;
-}
-
-/* macOS dots */
-.window-dots {
-    display: flex;
-    gap: 6px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
-
-.window-url {
-    margin-left: 14px;
-    font-weight: 500;
-}
-
-.window-content {
-    background: #2b2f36;        /* GREY background */
-    padding: 18px 22px;
-    font-family: Hack, monospace;
-    font-size: 15px;
-    border-top: 1px solid #3a3f45;
-    text-align: left;           /* LEFT aligned text */
-}
-
-/* link color */
-.profile-link {
-    color: #8ab4f8;             /* LIGHT BLUE text */
-    text-decoration: none;
-    word-break: break-all;
-}
-
-.profile-link:hover {
-    text-decoration: underline;
-}
-    
-</style>
-
-<!-- LinkedIn window -->
-<div class="github-window">
-  <div class="window-bar">
-    <div class="window-dots">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-    <span class="window-url">linkedin.com : harshitaa-ashish</span>
-  </div>
-
-  <div class="window-content">
-    <a class="profile-link"
-       href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/"
-       target="_blank">
-      linkedin.com/in/harshitaa-ashish-85767621a
-    </a>
-  </div>
-</div>
-
-<!-- Medium window -->
-<div class="github-window">
-  <div class="window-bar">
-    <div class="window-dots">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-    <span class="window-url">medium.com : @imharshitaa</span>
-  </div>
-
-  <div class="window-content">
-    <a class="profile-link"
-       href="https://medium.com/@imharshitaa"
-       target="_blank">
-      medium.com/@imharshitaa
-    </a>
-  </div>
-</div>
-
-<!-- Bugcrowd window -->
-<div class="github-window">
-  <div class="window-bar">
-    <div class="window-dots">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-    <span class="window-url">bugcrowd.com : imharshitaa</span>
-  </div>
-
-  <div class="window-content">
-    <a class="profile-link"
-       href="https://bugcrowd.com/h/imharshitaa"
-       target="_blank">
-      bugcrowd.com/h/imharshitaa
-    </a>
-  </div>
-</div>
-
-
-
-<!-- Footer -->
-<div class="footer">
-    imharshitaa © owner
-</div>
-
+    <p class="footer">imharshitaa © owner</p>
+  </main>
 </body>
 </html>

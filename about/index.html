@@ -1,139 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About - Root0zaki</title>
-
-  <!-- Import Hack font -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
+    :root {
+      --bg-main: #03060c;
+      --bg-panel: rgba(7, 11, 22, 0.72);
+      --cyan: #56f6ff;
+      --blue: #62a4ff;
+      --green: #55ff9d;
+      --text: #dff5ff;
+      --text-dim: #8bb6cf;
+      --line: rgba(86, 246, 255, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      background-color: black;
-      color: #39FF14; /* neon green */
-      font-family: 'Hack', monospace;
       margin: 0;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(86, 246, 255, 0.18), transparent 33%),
+        radial-gradient(circle at 88% 12%, rgba(98, 164, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, #040914 0%, #03060c 100%);
+      position: relative;
+      overflow-x: hidden;
     }
-    #content {
-      max-width: 800px;
-      width: 100%;
-      text-align: left;
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: repeating-linear-gradient(
+        180deg,
+        rgba(86, 246, 255, 0.08) 0px,
+        rgba(86, 246, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.16;
+      animation: scan 10s linear infinite;
     }
-    h1, h2, h3 {
-      color: #00BFFF;
+
+    .wrap {
+      width: min(1000px, 92vw);
+      margin: 34px auto;
     }
-    p, li {
-      line-height: 1.6;
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(3px);
+      box-shadow: 0 0 0 1px rgba(86, 246, 255, 0.08) inset, 0 18px 42px rgba(0, 0, 0, 0.45);
+      padding: 22px;
     }
-    a {
-      color: yellow;
+
+    #content h1, #content h2, #content h3 {
+      color: var(--cyan);
+      font-family: "Share Tech Mono", monospace;
+      letter-spacing: 0.03em;
     }
-    .back-link {
-      display: inline-block;
-      margin-top: 30px;
-      color: yellow;
-      text-decoration: none;
-      border: 2px solid yellow;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-family: 'Hack', monospace;
-    }
-    .back-link:hover {
-      background-color: #39FF14;
-      color: black;
-      box-shadow: 0 0 15px #39FF14;
-    }
+
+    #content p, #content li { line-height: 1.65; }
+
+    #content a,
+    .contact-form a { color: var(--green); }
+
     .contact-form {
-      margin-top: 50px;
-      max-width: 800px;
-      width: 100%;
-      background: #111;
-      padding: 20px;
-      border: 2px solid yellow;
-      border-radius: 10px;
+      margin-top: 16px;
     }
+
     .contact-form h2 {
-      color: red;
-      margin-bottom: 20px;
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: var(--cyan);
+      font-family: "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
+
     .contact-form label {
       display: block;
-      margin-top: 15px;
-      color: #39FF14;
+      margin-top: 12px;
+      color: var(--text-dim);
+      font-family: "Share Tech Mono", monospace;
     }
-    .contact-form input, 
+
+    .contact-form input,
     .contact-form textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
-      background: black;
-      border: 1px solid #39FF14;
-      border-radius: 6px;
-      color: #39FF14;
-      font-family: 'Hack', monospace;
-    }
-    .contact-form button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      border: 2px solid yellow;
-      background: black;
-      color: yellow;
+      background: rgba(5, 9, 18, 0.9);
+      border: 1px solid rgba(86, 246, 255, 0.35);
       border-radius: 8px;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .contact-form button,
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(86, 246, 255, 0.45);
+      background: rgba(6, 11, 22, 0.92);
+      color: var(--cyan);
+      text-decoration: none;
+      font: 500 13px "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
       cursor: pointer;
-      font-size: 16px;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
-    .contact-form button:hover {
-      background-color: #39FF14;
-      color: black;
-      box-shadow: 0 0 15px #39FF14;
+
+    .contact-form button:hover,
+    .back-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-2px);
     }
+
     .footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 16px;
-      color: lightblue;
-      font-family: 'Hack', monospace;
+      margin-top: 20px;
       text-align: center;
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      padding-bottom: 8px;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-25%); }
+      100% { transform: translateY(25%); }
     }
   </style>
 </head>
 <body>
-  <div id="content">Loading About...</div>
+  <main class="wrap">
+    <section class="panel">
+      <div id="content">Loading About...</div>
+    </section>
 
-  <!-- Contact Form -->
-  <div class="contact-form">
-    <h2>Contact Me</h2>
-    <form action="https://formspree.io/f/xandvnze" method="POST">
-      <label>Name:</label>
-      <input type="text" name="name" required>
+    <section class="panel contact-form">
+      <h2>Contact Me</h2>
+      <form action="https://formspree.io/f/xandvnze" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" required />
 
-      <label>Phone:</label>
-      <input type="text" name="phone">
+        <label>Phone:</label>
+        <input type="text" name="phone" />
 
-      <label>Email:</label>
-      <input type="email" name="_replyto" required>
+        <label>Email:</label>
+        <input type="email" name="_replyto" required />
 
-      <label>Message:</label>
-      <textarea name="message" rows="5" required></textarea>
+        <label>Message:</label>
+        <textarea name="message" rows="5" required></textarea>
 
-      <button type="submit">Send</button>
-    </form>
-  </div>
+        <button type="submit">Send</button>
+      </form>
 
-  <!-- Back to Home -->
-  <a class="back-link" href="../index.html">⬅ Back to Home</a>
+      <a class="back-link" href="../index.html">⬅ Back to Home</a>
+    </section>
 
-  <!-- Footer -->
-  <div class="footer">
-    imharshitaa @ owner
-  </div>
+    <div class="footer">imharshitaa @ owner</div>
+  </main>
 
-  <!-- Load Showdown (Markdown → HTML converter) -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
     fetch("about.md")
@@ -144,7 +186,7 @@
       })
       .catch(() => {
         document.getElementById("content").innerHTML =
-          "<p style='color:red'>Error loading About content.</p>";
+          "<p style='color:#ff8c8c'>Error loading About content.</p>";
       });
   </script>
 </body>
