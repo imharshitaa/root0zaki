@@ -24,29 +24,20 @@
     body {
       margin: 0;
       min-height: 100vh;
+      padding: 18px 0 26px;
       color: var(--text);
       font-family: "Space Grotesk", sans-serif;
+      background-color: #03060c;
       background:
-        radial-gradient(circle at 12% 16%, rgba(86, 246, 255, 0.18), transparent 33%),
-        radial-gradient(circle at 88% 12%, rgba(98, 164, 255, 0.16), transparent 28%),
-        linear-gradient(180deg, #040914 0%, #03060c 100%);
+        linear-gradient(180deg, #03060c 0%, #071223 45%, #03060c 100%);
       position: relative;
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: repeating-linear-gradient(180deg, rgba(86, 246, 255, 0.08) 0px, rgba(86, 246, 255, 0.08) 1px, transparent 1px, transparent 3px);
-      opacity: 0.16;
-      animation: scan 10s linear infinite;
-    }
-
     .wrap {
       width: min(1000px, 92vw);
-      margin: 34px auto;
+      margin: 0 auto;
+      padding: 0;
       text-align: center;
     }
 
@@ -54,7 +45,7 @@
       margin: 0 0 20px;
       color: var(--cyan);
       font-family: "Share Tech Mono", monospace;
-      font-size: clamp(28px, 5vw, 42px);
+      font-size: clamp(30px, 5vw, 44px);
       letter-spacing: 0.04em;
       text-transform: uppercase;
       text-shadow: 0 0 12px rgba(86, 246, 255, 0.26);
@@ -88,14 +79,14 @@
     }
 
     .doc-title {
-      font-size: 20px;
+      font-size: 22px;
       color: var(--text);
       font-family: "Share Tech Mono", monospace;
       margin-bottom: 8px;
     }
 
     .doc-desc {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-dim);
     }
 
@@ -108,7 +99,7 @@
       background: rgba(6, 11, 22, 0.92);
       color: var(--cyan);
       text-decoration: none;
-      font: 500 13px "Share Tech Mono", monospace;
+      font: 500 15px "Share Tech Mono", monospace;
       letter-spacing: 0.04em;
       transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
@@ -122,14 +113,9 @@
     .footer {
       margin-top: 18px;
       color: var(--text-dim);
-      font: 12px "Share Tech Mono", monospace;
+      font: 14px "Share Tech Mono", monospace;
       letter-spacing: 0.04em;
       padding-bottom: 10px;
-    }
-
-    @keyframes scan {
-      0% { transform: translateY(-25%); }
-      100% { transform: translateY(25%); }
     }
   </style>
 </head>
