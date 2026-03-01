@@ -73,42 +73,8 @@
 
     #content p, #content li { line-height: 1.65; }
 
-    #content a,
-    .contact-form a { color: var(--green); }
+    #content a { color: var(--green); }
 
-    .contact-form {
-      margin-top: 16px;
-    }
-
-    .contact-form h2 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .contact-form label {
-      display: block;
-      margin-top: 12px;
-      color: var(--text-dim);
-      font-family: "Share Tech Mono", monospace;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      background: rgba(5, 9, 18, 0.9);
-      border: 1px solid rgba(86, 246, 255, 0.35);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .contact-form button,
     .back-link {
       display: inline-block;
       margin-top: 18px;
@@ -124,7 +90,6 @@
       transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
-    .contact-form button:hover,
     .back-link:hover {
       border-color: var(--green);
       color: var(--green);
@@ -150,26 +115,6 @@
   <main class="wrap">
     <section class="panel">
       <div id="content">Loading About...</div>
-    </section>
-
-    <section class="panel contact-form">
-      <h2>Contact Me</h2>
-      <form action="https://formspree.io/f/xandvnze" method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required />
-
-        <label>Phone:</label>
-        <input type="text" name="phone" />
-
-        <label>Email:</label>
-        <input type="email" name="_replyto" required />
-
-        <label>Message:</label>
-        <textarea name="message" rows="5" required></textarea>
-
-        <button type="submit">Send</button>
-      </form>
-
       <a class="back-link" href="../index.html">⬅ Back to Home</a>
     </section>
 
