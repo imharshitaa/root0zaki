@@ -77,6 +77,13 @@
       position: relative;
     }
 
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 72px;
+      gap: 18px;
+      align-items: start;
+    }
+
     .signal {
       display: inline-flex;
       align-items: center;
@@ -110,7 +117,7 @@
     h1 {
       margin: 14px 0 10px;
       font-family: "Share Tech Mono", monospace;
-      font-size: clamp(28px, 5.8vw, 52px);
+      font-size: clamp(26px, 5.6vw, 50px);
       line-height: 1;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -122,8 +129,28 @@
     .subtitle {
       margin: 0;
       color: var(--text-dim);
-      font-size: clamp(16px, 2vw, 18px);
+      font-size: clamp(17px, 2.1vw, 19px);
       line-height: 1.5;
+    }
+
+    .pitch-block {
+      margin-top: 12px;
+      max-width: 820px;
+    }
+
+    .pitch-label {
+      margin: 0 0 8px;
+      color: var(--cyan);
+      font: 600 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pitch-text {
+      margin: 0;
+      color: #cce8fb;
+      font-size: 15px;
+      line-height: 1.55;
     }
 
     .codetag {
@@ -271,6 +298,42 @@
       color: var(--green);
     }
 
+    .hero-social {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 6px;
+    }
+
+
+    .hero-social a {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(86, 246, 255, 0.35);
+      background: rgba(8, 14, 28, 0.82);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hero-social a:hover {
+      transform: translateY(-2px);
+      border-color: var(--green);
+      box-shadow: 0 0 12px rgba(64, 255, 165, 0.22);
+    }
+
+    .hero-social img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      display: block;
+    }
+
     .github-window {
       border: 1px solid rgba(86, 246, 255, 0.25);
       border-radius: 12px;
@@ -371,6 +434,13 @@
     }
 
     @media (max-width: 920px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-social {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -392,18 +462,42 @@
 <body>
   <main class="wrap">
     <section class="panel hero">
-      <div class="signal-row">
-        <div class="signal">
-          <span class="signal-dot"></span>
-          Live Portfolio Node
+      <div class="hero-layout">
+        <div>
+          <div class="signal-row">
+            <div class="signal">
+              <span class="signal-dot"></span>
+              Live Portfolio Node
+            </div>
+            <div class="codetag">
+              <span class="codetag-dot"></span>
+              root0zaki
+            </div>
+          </div>
+          <h1>&gt;_ HARSHITAA ASHISH</h1>
+          <p class="subtitle">Cybersecurity research engineer | Certified Ethical Hacker (CEH)</p>
+          <div class="pitch-block">
+            <p class="pitch-text">
+              Building and breaking modern applications through security product research, testing and automated pipelines.
+              Specializing in vulnerability discovery, exploit development and scalable security management workflows.
+            </p>
+          </div>
         </div>
-        <div class="codetag">
-          <span class="codetag-dot"></span>
-          root0zaki
+        <div class="hero-social" aria-label="social links">
+          <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" />
+          </a>
+          <a href="https://medium.com/@imharshitaa" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Medium_logo_Monogram.svg" alt="Medium logo" />
+          </a>
+          <a href="https://bugcrowd.com/h/root0zaki" target="_blank" rel="noopener noreferrer" aria-label="Bugcrowd">
+            <img src="https://cdn.simpleicons.org/bugcrowd/F26822" alt="Bugcrowd logo" />
+          </a>
+          <a href="https://www.credly.com/users/harshitaa-ashish/badges#credly" target="_blank" rel="noopener noreferrer" aria-label="Credly">
+            <img src="https://cdn.simpleicons.org/credly/FF6B35" alt="Credly logo" />
+          </a>
         </div>
       </div>
-      <h1>harshitaa ashish</h1>
-      <p class="subtitle"> Cybersecurity Research Engineer | Certified Ethical Hacker (CEH) </p>
     </section>
 
     <section class="grid">
@@ -427,30 +521,6 @@
         <p class="title">Solutions</p>
         <p class="desc">still figuring out...</p>
       </a>
-    </section>
-
-    <section class="panel section">
-      <h2 class="section-heading">Find Me</h2>
-      <div class="social-icons">
-        <a class="social-link" href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer">
-          <span class="social-logo">
-            <img class="social-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" />
-          </span>
-          linkedin.com/in/harshitaa-ashish
-        </a>
-        <a class="social-link" href="https://medium.com/@imharshitaa" target="_blank" rel="noopener noreferrer">
-          <span class="social-logo">
-            <img class="social-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Medium_logo_Monogram.svg" alt="Medium logo" />
-          </span>
-          medium.com/imharshitaa
-        </a>
-        <a class="social-link" href="https://bugcrowd.com/h/root0zaki" target="_blank" rel="noopener noreferrer">
-          <span class="social-logo">
-            <img class="social-logo-img" src="https://cdn.simpleicons.org/bugcrowd/F26822" alt="Bugcrowd logo" />
-          </span>
-          bugcrowd.com/h/root0zaki
-        </a>
-      </div>
     </section>
 
     <section class="panel section">
