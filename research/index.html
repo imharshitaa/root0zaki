@@ -39,60 +39,188 @@
     }
 
     .wrap {
-      width: min(1000px, 92vw);
+      width: min(1150px, 92vw);
       margin: 0 auto;
       padding: 0;
       margin-top: clamp(56px, 10vh, 130px);
       text-align: center;
     }
 
-    h1 {
-      margin: 0 0 20px;
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(86, 246, 255, 0.3);
+      font: 12px "Share Tech Mono", monospace;
       color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      font-size: clamp(30px, 5vw, 44px);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(86, 246, 255, 0.26);
+      background: rgba(5, 12, 24, 0.65);
+    }
+
+    h1 {
+      margin: 14px 0 10px;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 14px rgba(86, 246, 255, 0.2);
+    }
+
+    .subtitle {
+      margin: 0 auto 28px;
+      max-width: 700px;
+      color: var(--text-dim);
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .research-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .research-grid a {
-      text-decoration: none;
-      width: 100%;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      justify-items: center;
     }
 
     .research-card {
       width: 100%;
       padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--bg-panel);
+      border: 1px solid rgba(86, 246, 255, 0.18);
+      border-radius: 18px;
+      background: rgba(7, 11, 22, 0.82);
       text-align: left;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      display: grid;
+      gap: 12px;
+      min-height: 280px;
+      max-width: 380px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
     }
 
     .research-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: var(--cyan);
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.2);
+      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tag-pill {
+      font: 600 11px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(86, 246, 255, 0.3);
+      background: rgba(6, 12, 24, 0.7);
+    }
+
+    .progress-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: 600 11px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffd27a;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 210, 122, 0.45);
+      background: rgba(30, 24, 10, 0.6);
+    }
+
+    .complete-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: 600 11px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8bffcc;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(86, 246, 255, 0.45);
+      background: rgba(10, 26, 20, 0.6);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #55ff9d;
+      box-shadow: 0 0 8px rgba(85, 255, 157, 0.6);
+      display: inline-block;
+    }
+
+    .status-dot-warn {
+      background: #ffd27a;
+      box-shadow: 0 0 8px rgba(255, 210, 122, 0.6);
     }
 
     .research-title {
-      font-size: 22px;
+      font-size: 20px;
       color: var(--text);
       font-family: "Share Tech Mono", monospace;
-      margin-bottom: 8px;
+      margin: 0;
     }
 
     .research-desc {
-      font-size: 16px;
       color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(210, 230, 244, 0.7);
+      font-size: 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(139, 182, 207, 0.12);
+      color: rgba(210, 230, 244, 0.75);
+      font-size: 12px;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .read-more svg {
+      width: 14px;
+      height: 14px;
     }
 
     .back-link {
@@ -126,41 +254,185 @@
 </head>
 <body>
   <main class="wrap">
-    <h1>🔬 Research</h1>
-    <div class="research-grid" id="research-grid"></div>
+    <div class="pill">Writeups & Learning</div>
+    <h1>Writeups & Learning</h1>
+    <p class="subtitle">Technical articles, research notes, and documentation from my cybersecurity learning journey.</p>
+
+    <div class="research-grid">
+      <a class="research-card" href="research_template.html?file=5_darkweb.pdf">
+        <div class="card-top">
+          <span class="tag-pill">Research</span>
+          <span class="complete-pill">
+            <span class="status-dot"></span>
+            Complete
+          </span>
+        </div>
+        <h2 class="research-title">Dark Web Black Market Ecosystem Analysis</h2>
+        <div class="research-desc">A research study examining the operational structure, economic models, and societal impact of dark web marketplaces, including illicit trade networks, cryptocurrency payment mechanisms, and law-enforcement disruption strategies.</div>
+        <div class="meta">
+          <span>15 min</span>
+          <span>2024-12</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Dark Web</span>
+          <span class="tag">Cybercrime</span>
+          <span class="tag">Threat Intelligence</span>
+          <span class="tag">Cryptocurrency</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=6_opensourcethreat.pdf">
+        <div class="card-top">
+          <span class="tag-pill">Capstone Project</span>
+          <span class="complete-pill">
+            <span class="status-dot"></span>
+            Complete
+          </span>
+        </div>
+        <h2 class="research-title">Open-Source Threat Hunting & Log Analysis</h2>
+        <div class="research-desc">A capstone project demonstrating how open-source SIEM and log analysis tools can be used to detect anomalous behavior, uncover security vulnerabilities, and perform proactive threat hunting across enterprise systems.</div>
+        <div class="meta">
+          <span>14 min</span>
+          <span>2024-11</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Threat Hunting</span>
+          <span class="tag">Log Analysis</span>
+          <span class="tag">Open Source Security</span>
+          <span class="tag">SIEM</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=7_threatdetection.pdf">
+        <div class="card-top">
+          <span class="tag-pill">Capstone Project</span>
+          <span class="complete-pill">
+            <span class="status-dot"></span>
+            Complete
+          </span>
+        </div>
+        <h2 class="research-title">Automated Threat Detection with SOAR & EDR</h2>
+        <div class="research-desc">A practical implementation of SOAR and EDR platforms to automate incident detection, response workflows, and vulnerability remediation through integrated endpoint telemetry and security orchestration playbooks.</div>
+        <div class="meta">
+          <span>16 min</span>
+          <span>2024-10</span>
+        </div>
+        <div class="tags">
+          <span class="tag">SOAR</span>
+          <span class="tag">EDR</span>
+          <span class="tag">Incident Response</span>
+          <span class="tag">Security Automation</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=1_os_tools.md">
+        <div class="card-top">
+          <span class="tag-pill">Research</span>
+          <span class="complete-pill">
+            <span class="status-dot"></span>
+            Complete
+          </span>
+        </div>
+        <h2 class="research-title">Offensive Security with Open-Source Tools</h2>
+        <div class="research-desc">A technical overview of widely used open-source offensive security tools and frameworks for reconnaissance, exploitation, and vulnerability assessment within authorized penetration testing environments.</div>
+        <div class="meta">
+          <span>12 min</span>
+          <span>2024-09</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Offensive Security</span>
+          <span class="tag">Pentesting</span>
+          <span class="tag">Security Tools</span>
+          <span class="tag">Red Team</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=2_cyberdeck.md">
+        <div class="card-top">
+          <span class="tag-pill">Research</span>
+          <span class="progress-pill">
+            <span class="status-dot status-dot-warn"></span>
+            In Progress
+          </span>
+        </div>
+        <h2 class="research-title">Cyberdeck</h2>
+        <div class="research-desc">Building a portable cyberdeck setup focused on secure tooling, field workflows, and compact offensive security labs.</div>
+        <div class="meta">
+          <span>TBD</span>
+          <span>2025</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Hardware</span>
+          <span class="tag">Ops Lab</span>
+          <span class="tag">Field Tools</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=3_reverse.md">
+        <div class="card-top">
+          <span class="tag-pill">Research</span>
+          <span class="progress-pill">
+            <span class="status-dot status-dot-warn"></span>
+            In Progress
+          </span>
+        </div>
+        <h2 class="research-title">Reverse Engineering</h2>
+        <div class="research-desc">Notes and methodologies for analyzing binaries, program behavior, and debugging complex software targets.</div>
+        <div class="meta">
+          <span>TBD</span>
+          <span>2025</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Binary Analysis</span>
+          <span class="tag">Debugging</span>
+          <span class="tag">Reverse Engineering</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+
+      <a class="research-card" href="research_template.html?file=4_malware.md">
+        <div class="card-top">
+          <span class="tag-pill">Research</span>
+          <span class="progress-pill">
+            <span class="status-dot status-dot-warn"></span>
+            In Progress
+          </span>
+        </div>
+        <h2 class="research-title">Malware Analysis</h2>
+        <div class="research-desc">Work-in-progress notes on malware behavior, static analysis, and sandbox-based dynamic triage.</div>
+        <div class="meta">
+          <span>TBD</span>
+          <span>2025</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Malware</span>
+          <span class="tag">Sandboxing</span>
+          <span class="tag">Threat Analysis</span>
+        </div>
+        <div class="read-more">Read more
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 11h11.17l-4.58-4.59L13 5l7 7-7 7-1.41-1.41L16.17 13H5z"/></svg>
+        </div>
+      </a>
+    </div>
     <a class="back-link" href="../index.html">⬅ Back to Home</a>
     <div class="footer">imharshitaa @ owner</div>
   </main>
-
-  <script>
-    async function loadResearch() {
-      try {
-        const response = await fetch("research.json");
-        const researchList = await response.json();
-        const grid = document.getElementById("research-grid");
-
-        researchList.forEach(r => {
-          const a = document.createElement("a");
-          a.href = `research_template.html?file=${r.file}`;
-
-          const card = document.createElement("div");
-          card.className = "research-card";
-
-          card.innerHTML = `
-            <div class="research-title">${r.title}</div>
-            <div class="research-desc">${r.description}</div>
-          `;
-
-          a.appendChild(card);
-          grid.appendChild(a);
-        });
-      } catch (err) {
-        console.error("Error loading research.json", err);
-        document.getElementById("research-grid").innerHTML = "<p style='color:#ff8c8c;'>Failed to load research list.</p>";
-      }
-    }
-
-    loadResearch();
-  </script>
 </body>
 </html>
