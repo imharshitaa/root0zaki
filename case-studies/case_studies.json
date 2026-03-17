@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Vulnerability Scanner",
+    "file": "1_vuln_scanner.md",
+    "tag": "live demo",
+    "description": "Interactive OWASP Top 10 scanner walkthrough with CVSS scoring, remediation guidance, and code examples.",
+    "bullets": [
+      "OWASP Top 10 (2021) vulnerability showcase",
+      "CVSS v3.1 scoring with visual indicators",
+      "Remediation guides with code examples",
+      "CWE/CVE reference mapping"
+    ]
+  },
+  {
+    "title": "SIEM Detection Console",
+    "file": "2_siem_console.md",
+    "tag": "live demo",
+    "description": "Real-time security event monitoring with MITRE ATT&CK mapping and custom detection rules.",
+    "bullets": [
+      "Query engine with KQL-like syntax",
+      "Time-window threat detection algorithms",
+      "MITRE ATT&CK tactics & techniques mapping",
+      "30+ realistic security events with detections"
+    ]
+  },
+  {
+    "title": "Threat Modeling Playground",
+    "file": "3_threat_modeling.md",
+    "tag": "prototype",
+    "description": "Interactive STRIDE-based threat modeling tool with risk scoring and workflow coverage maps.",
+    "bullets": [
+      "DFD editor with asset classification",
+      "STRIDE risk scoring matrix",
+      "Controls coverage heatmap",
+      "Exportable model reports"
+    ]
+  },
+  {
+    "title": "Azure Security Blueprint",
+    "file": "4_azure_blueprint.md",
+    "tag": "prototype",
+    "description": "Security baseline blueprint for Azure Landing Zones with policy-as-code and CIS mappings.",
+    "bullets": [
+      "Management group hierarchy design",
+      "Policy-as-code workflows",
+      "CIS benchmark alignment",
+      "Compliance tracking dashboard"
+    ]
+  }
+]
