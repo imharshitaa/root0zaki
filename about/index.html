@@ -26,7 +26,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 18px 0 26px;
+      padding: 20px 0 28px;
       color: var(--text);
       font-family: "Space Grotesk", sans-serif;
       background-color: #020612;
@@ -43,18 +43,18 @@
       width: min(1180px, 94vw);
       margin: 0 auto;
       padding: 0;
-      margin-top: clamp(44px, 8vh, 110px);
+      margin-top: clamp(46px, 8vh, 112px);
     }
 
     .page-title {
       margin-bottom: 12px;
-      font: 600 clamp(22px, 3.6vw, 36px) "Share Tech Mono", monospace;
+      font: 600 clamp(24px, 3.6vw, 38px) "Share Tech Mono", monospace;
       letter-spacing: 0.1em;
       color: var(--cyan);
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .typing {
@@ -78,7 +78,7 @@
 
     .layout {
       display: grid;
-      gap: 22px;
+      gap: 24px;
       grid-template-columns: minmax(0, 1fr) 270px;
       align-items: start;
     }
@@ -95,15 +95,15 @@
       background: var(--bg-panel);
       backdrop-filter: blur(3px);
       box-shadow: 0 0 0 1px rgba(86, 246, 255, 0.08) inset, 0 18px 42px rgba(0, 0, 0, 0.45);
-      padding: 18px 22px 22px;
+      padding: 20px 24px 24px;
       position: relative;
     }
 
     .window-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
+      gap: 10px;
+      padding: 10px 12px;
       margin: -8px -10px 10px;
       border-radius: 12px;
       background: rgba(5, 12, 24, 0.9);
@@ -122,7 +122,7 @@
     .dot-green { background: #27c93f; box-shadow: 0 0 6px rgba(39, 201, 63, 0.6); }
 
     .prompt {
-      font: 600 14px "Share Tech Mono", monospace;
+      font: 600 16px "Share Tech Mono", monospace;
       letter-spacing: 0.08em;
       color: #bfe9ff;
       margin-left: 6px;
@@ -130,12 +130,12 @@
 
     .chevrons {
       display: inline-flex;
-      gap: 4px;
+      gap: 6px;
       align-items: center;
     }
 
     .chevrons span {
-      font: 700 20px "Share Tech Mono", monospace;
+      font: 700 22px "Share Tech Mono", monospace;
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
     }
 
@@ -145,7 +145,7 @@
 
     .hacker-title {
       position: relative;
-      font: 700 clamp(24px, 4.6vw, 42px) "Share Tech Mono", monospace;
+      font: 700 clamp(26px, 4.6vw, 44px) "Share Tech Mono", monospace;
       letter-spacing: 0.18em;
       color: #7ff7ff;
       text-shadow: 0 0 10px rgba(127, 247, 255, 0.35);
@@ -190,10 +190,10 @@
     }
 
     #content h2 {
-      font-size: 20px;
+      font-size: 22px;
     }
 
-    #content p, #content li { line-height: 1.65; }
+    #content p, #content li { font-size: 18px; line-height: 1.7; }
 
     #content a { color: var(--green); }
 
@@ -201,10 +201,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 9px 18px;
+      padding: 11px 20px;
       border-radius: 999px;
       border: 1px solid rgba(86, 246, 255, 0.3);
-      font: 15px "Share Tech Mono", monospace;
+      font: 17px "Share Tech Mono", monospace;
       color: var(--cyan);
       letter-spacing: 0.08em;
       text-transform: uppercase;
