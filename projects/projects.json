@@ -1,6 +1,8 @@
 [
-  { "file": "1_api_ai_agent.md", "title": "⚡️ Risks in API & AI agents" },
-  { "file": "2_api_new_case.md", "title": "⚡️ New Test Cases for APIs" },
-  { "file": "3_devsecops.md", "title": "⭐️ DevSecOps Tools" },
-  { "file": "4_playbox.md", "title": "⭐️ Vulnerable Applications" }
+  { "file": "bugpilot.md", "title": "BUGPILOT" },
+  { "file": "toolkit.md", "title": "ToolKit" },
+  { "file": "devseckit.md", "title": "DevSecKit" },
+  { "file": "aivector.md", "title": "AIvector" },
+  { "file": "apivector.md", "title": "APIvector" },
+  { "file": "playbox.md", "title": "Playbox" }
 ]

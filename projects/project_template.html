@@ -92,6 +92,15 @@
 
     #content strong { color: #f7fbff; }
 
+    #content .mermaid {
+      margin: 20px 0;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(86, 246, 255, 0.2);
+      background: rgba(6, 11, 22, 0.9);
+      overflow-x: auto;
+    }
+
     .controls {
       margin-top: 16px;
       display: flex;
@@ -139,6 +148,21 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "dark",
+      securityLevel: "loose"
+    });
+
+    window.renderMermaid = async () => {
+      await mermaid.run({
+        querySelector: ".mermaid"
+      });
+    };
+  </script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const file = params.get("file");
@@ -154,7 +178,18 @@
             simpleLineBreaks: true,
             openLinksInNewWindow: true
           });
-          document.getElementById("content").innerHTML = converter.makeHtml(md);
+          const html = converter.makeHtml(md).replace(
+            /<pre><code class="mermaid(?: language-mermaid)?">([\s\S]*?)<\/code><\/pre>/g,
+            (_, code) => `<div class="mermaid">${code
+              .replace(/&amp;/g, "&")
+              .replace(/&lt;/g, "<")
+              .replace(/&gt;/g, ">")}</div>`
+          );
+
+          document.getElementById("content").innerHTML = html;
+          if (window.renderMermaid) {
+            window.renderMermaid();
+          }
         })
         .catch(() => {
           document.getElementById("content").innerHTML =
