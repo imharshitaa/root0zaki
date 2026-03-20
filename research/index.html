@@ -10,6 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
+    @font-face {
+      font-family: "DepartureMono-Regular";
+      src: url("https://cdn.jsdelivr.net/gh/woffz/a3@main/DepartureMono-Regular/DepartureMono-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
       --bg-main: #03060c;
       --bg-panel: rgba(7, 11, 22, 0.72);
@@ -74,14 +82,27 @@
       background: rgba(5, 12, 24, 0.65);
     }
 
-    h1 {
+    h1.page-title {
       margin: 0 0 26px;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
+      color: var(--cyan);
+      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
       font-size: clamp(34px, 5vw, 50px);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 14px rgba(86, 246, 255, 0.2);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-shadow:
+        0 0 8px rgba(86, 246, 255, 0.5),
+        0 0 20px rgba(86, 246, 255, 0.3);
+    }
+
+    .page-title.typing::after {
+      content: "_";
+      margin-left: 3px;
+      color: var(--green);
+      animation: title-caret 1s steps(1, end) infinite;
+    }
+
+    @keyframes title-caret {
+      50% { opacity: 0; }
     }
 
     .subtitle {
@@ -267,9 +288,7 @@
 </head>
 <body>
   <main class="wrap">
-    <div class="pill">Writeups & Learning</div>
-    <h1>Research work</h1>
-    <p class="subtitle">Technical articles, research notes, and documentation from my cybersecurity learning journey.</p>
+    <h1 class="page-title" data-title="Research">Research</h1>
 
     <div class="research-grid">
       <a class="research-card" href="research_template.html?file=5_darkweb.pdf">
@@ -447,5 +466,24 @@
     <a class="back-link" href="../index.html">⬅ Back to Home</a>
     <div class="footer">imharshitaa @ owner</div>
   </main>
+  <script>
+    const titleEl = document.querySelector(".page-title");
+    if (titleEl) {
+      const fullText = titleEl.dataset.title || titleEl.textContent.trim();
+      titleEl.textContent = "";
+      titleEl.classList.add("typing");
+      let i = 0;
+      const typeNext = () => {
+        if (i < fullText.length) {
+          titleEl.textContent += fullText.charAt(i);
+          i += 1;
+          setTimeout(typeNext, 55);
+        } else {
+          titleEl.classList.remove("typing");
+        }
+      };
+      typeNext();
+    }
+  </script>
 </body>
 </html>
