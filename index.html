@@ -2677,6 +2677,24 @@
       }
     }
 
+    /* Quick-card subtitle size tune (-3) */
+    .quick-grid .mini-desc {
+      font-size: 0.79rem !important;
+      line-height: 1.25 !important;
+    }
+
+    /* Final gap fix: pull Contact directly under badges (desktop) */
+    @media (min-width: 1024px) {
+      .badge-stack-panel {
+        margin-bottom: -14px !important;
+      }
+
+      .contact-panel {
+        margin-top: clamp(-170px, -14vh, -90px) !important;
+        margin-bottom: 8px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
