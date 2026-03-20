@@ -1246,11 +1246,12 @@
       }
     }
 
-    /* Final dashboard lock + layout placement */
+    /* Desktop layout placement (fluid, non-locked) */
     @media (min-width: 1024px) {
       html, body {
-        height: 100%;
-        overflow: hidden;
+        height: auto;
+        min-height: 100%;
+        overflow: visible;
       }
 
       body {
@@ -1261,16 +1262,16 @@
       .wrap {
         width: 100%;
         max-width: none;
-        height: 100vh;
+        height: auto;
         margin: 0;
         padding: 16px;
       }
 
       .dashboard-grid {
-        height: 100%;
+        height: auto;
         grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto auto 1fr;
-        gap: 16px;
+        grid-template-rows: auto auto auto auto;
+        gap: 10px;
       }
 
       .hero { grid-column: 1; grid-row: 1; }
@@ -1363,10 +1364,10 @@
       }
     }
 
-    /* Final tune: fixed laptop dashboard + compact quick cards */
+    /* Final tune: fluid laptop dashboard + compact quick cards */
     @media (min-width: 1024px) {
       html, body {
-        overflow: hidden !important;
+        overflow: visible !important;
       }
 
       body {
@@ -1374,15 +1375,15 @@
       }
 
       .wrap {
-        height: 100vh !important;
-        overflow: hidden !important;
+        height: auto !important;
+        overflow: visible !important;
       }
 
       .dashboard-grid {
-        height: calc(100vh - 32px);
-        overflow: hidden;
+        height: auto !important;
+        overflow: visible !important;
         grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto auto auto auto;
+        grid-template-rows: auto auto auto auto !important;
       }
 
       .quick-grid .mini-card {
@@ -1706,7 +1707,8 @@
       }
 
       .dashboard-grid {
-        height: calc(100vh - 46px) !important;
+        height: auto !important;
+        min-height: 0 !important;
       }
 
       .section.compact.contact-panel {
@@ -1714,26 +1716,27 @@
       }
     }
 
-    /* One-page fit fix: keep contact panel + footer fully visible on laptop */
+    /* One-page fit fix: keep natural growth on laptop */
     @media (min-width: 1024px) {
       html, body {
-        height: 100%;
-        overflow: hidden !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
       }
 
       .wrap {
-        height: 100vh !important;
+        height: auto !important;
         padding: 12px 16px 8px !important;
-        grid-template-rows: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
         gap: 8px;
-        overflow: hidden !important;
+        overflow: visible !important;
       }
 
       .dashboard-grid {
-        height: 100% !important;
+        height: auto !important;
         min-height: 0;
-        grid-template-rows: auto auto minmax(0, 1fr);
-        gap: 12px;
+        grid-template-rows: auto auto auto auto !important;
+        gap: 10px;
       }
 
       .section.compact.contact-panel {
@@ -1978,8 +1981,8 @@
     @media (min-width: 1024px) {
       .dashboard-grid {
         grid-template-columns: 2fr 1fr !important;
-        grid-template-rows: auto auto minmax(0, 1fr) auto !important;
-        gap: 12px;
+        grid-template-rows: auto auto auto auto !important;
+        gap: 10px;
       }
 
       .hero { grid-column: 1; grid-row: 1; }
@@ -2683,15 +2686,93 @@
       line-height: 1.25 !important;
     }
 
-    /* Final gap fix: pull Contact directly under badges (desktop) */
+    /* Final gap tune: keep clean badge -> contact separation */
     @media (min-width: 1024px) {
-      .badge-stack-panel {
-        margin-bottom: -14px !important;
+      .dashboard-grid {
+        gap: 10px !important;
       }
 
       .contact-panel {
-        margin-top: clamp(-170px, -14vh, -90px) !important;
+        margin-top: 4px !important;
         margin-bottom: 8px !important;
+      }
+    }
+
+    /* Unclip layout globally: remove fixed viewport locking and let sections grow */
+    html,
+    body {
+      height: auto !important;
+      min-height: 100% !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+
+    .wrap,
+    .dashboard-grid,
+    .bottom-grid,
+    .panel,
+    .contact-panel,
+    .section.compact.contact-panel,
+    .section.compact.contact-panel .contact-form {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+    }
+
+    .wrap,
+    .dashboard-grid,
+    .bottom-grid,
+    .contact-panel,
+    .section.compact.contact-panel,
+    .section.compact.contact-panel .contact-form {
+      overflow: visible !important;
+    }
+
+    /* Keep only badge section internally scrollable */
+    .badge-carousel-track {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      scroll-behavior: smooth;
+    }
+
+    /* Final grid row fix: remove flexible row stretching on desktop */
+    @media (min-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 2fr 1fr !important;
+        grid-template-rows: auto auto auto auto !important;
+        gap: 10px !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        align-content: start !important;
+      }
+
+      .badge-stack-panel {
+        grid-row: 3 !important;
+        align-self: start !important;
+        margin-bottom: 0 !important;
+      }
+
+      .contact-panel {
+        grid-row: 4 !important;
+        align-self: start !important;
+        margin-top: 10px !important;
+      }
+
+      .bottom-grid {
+        grid-row: 3 / 5 !important;
+        grid-template-rows: auto !important;
+        align-self: start !important;
+        height: auto !important;
+        min-height: 0 !important;
+      }
+
+      .bottom-grid .github-panel,
+      .bottom-grid .github-panel .github-window {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
       }
     }
 
