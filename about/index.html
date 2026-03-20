@@ -39,13 +39,27 @@
       overflow-x: hidden;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(86, 246, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 246, 255, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px, 34px 34px;
+      opacity: 0.22;
+    }
+
     .wrap {
       width: min(1180px, 94vw);
       margin: 0 auto;
       padding: 0;
       margin-top: clamp(46px, 8vh, 112px);
+      position: relative;
+      z-index: 1;
     }
-
     .page-title {
       margin-bottom: 12px;
       font: 600 clamp(24px, 3.6vw, 38px) "Share Tech Mono", monospace;
@@ -798,7 +812,6 @@
 
     <div class="footer">imharshitaa @ owner</div>
   </main>
-
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
   <script>
     fetch("about.md")

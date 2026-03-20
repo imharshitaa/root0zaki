@@ -38,13 +38,27 @@
       overflow-x: hidden;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(86, 246, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 246, 255, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px, 34px 34px;
+      opacity: 0.22;
+    }
+
     .wrap {
       width: min(1040px, 92vw);
       margin: 0 auto;
       padding: 6px 0 14px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
-
     h1 {
       margin: 0 0 20px;
       color: var(--cyan);
