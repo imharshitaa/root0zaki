@@ -228,6 +228,7 @@
     .panel-kicker,
     .section-kicker {
       color: var(--amber);
+      font-size: 15px;
     }
 
     .hero-panel h2,
@@ -238,8 +239,8 @@
     }
 
     .hero-panel h2 {
-      font-size: 22px;
-      line-height: 1.22;
+      font-size: 19px;
+      line-height: 1.28;
     }
 
     .hero-panel p,
@@ -292,8 +293,9 @@
     }
 
     .section h2 {
-      font-size: clamp(20px, 2.6vw, 28px);
-      line-height: 1.18;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.28;
+      font-weight: 500;
     }
 
     .split-2,
@@ -303,6 +305,12 @@
       display: grid;
       gap: 14px;
       grid-template-columns: 1fr 1fr;
+      margin-top: 16px;
+    }
+
+    .evidence-stack {
+      display: grid;
+      gap: 14px;
       margin-top: 16px;
     }
 
@@ -819,56 +827,54 @@
         <section class="section">
           <div class="section-kicker">Evidence</div>
           <h2>Example finding, patch, and pull request payload.</h2>
-          <div class="example-layout">
-            <div>
-              <div class="code-grid">
-                <div class="code-card">
-                  <div class="code-head">
-                    <span>Finding Input</span>
-                    <span>SARIF-Derived</span>
-                  </div>
-                  <pre>{
+          <div class="evidence-stack">
+            <div class="code-grid">
+              <div class="code-card">
+                <div class="code-head">
+                  <span>Finding Input</span>
+                  <span>SARIF-Derived</span>
+                </div>
+                <pre>{
   "rule": "sql-injection",
   "severity": "high",
   "file": "user.js",
   "line": 42,
   "code": "query = 'SELECT * FROM users WHERE id = ' + userId"
 }</pre>
-                </div>
-                <div class="code-card">
-                  <div class="code-head">
-                    <span>Patch Output</span>
-                    <span>Generated Fix</span>
-                  </div>
-                  <pre>const query = "SELECT * FROM users WHERE id = ?";
-db.execute(query, [userId]);</pre>
-                </div>
               </div>
-              <div class="code-grid">
-                <div class="code-card">
-                  <div class="code-head">
-                    <span>Validation Policy</span>
-                    <span>Gate</span>
-                  </div>
-                  <pre>checks:
+              <div class="code-card">
+                <div class="code-head">
+                  <span>Patch Output</span>
+                  <span>Generated Fix</span>
+                </div>
+                <pre>const query = "SELECT * FROM users WHERE id = ?";
+db.execute(query, [userId]);</pre>
+              </div>
+            </div>
+            <div class="code-grid">
+              <div class="code-card">
+                <div class="code-head">
+                  <span>Validation Policy</span>
+                  <span>Gate</span>
+                </div>
+                <pre>checks:
   - syntax_pass == true
   - policy_pass == true
   - confidence >= 0.80
   - repo_write_scope == approved</pre>
+              </div>
+              <div class="code-card">
+                <div class="code-head">
+                  <span>PR Description</span>
+                  <span>Delivery</span>
                 </div>
-                <div class="code-card">
-                  <div class="code-head">
-                    <span>PR Description</span>
-                    <span>Delivery</span>
-                  </div>
-                  <pre>Title: Fix SQL injection in user lookup
+                <pre>Title: Fix SQL injection in user lookup
 
 Context:
 - Rule: sql-injection
 - File: user.js:42
 - Severity: high
 - Strategy: parameterized query</pre>
-                </div>
               </div>
             </div>
             <div class="output-box">
