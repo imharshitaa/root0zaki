@@ -287,7 +287,7 @@
         cases.forEach((item, idx) => {
           const a = document.createElement("a");
           a.className = "case-card";
-          a.href = `case_template.html?file=${item.file}`;
+          a.href = item.href || `case_template.html?file=${item.file}`;
 
           const list = item.bullets.map(b => `<li>${b}</li>`).join("");
 
