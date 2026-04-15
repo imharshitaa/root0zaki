@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered Vulnerability Remediation Orchestrator</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: "DepartureMono-Regular";
+      src: url("https://cdn.jsdelivr.net/gh/woffz/a3@main/DepartureMono-Regular/DepartureMono-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-main: #03060c;
+      --bg-panel: rgba(8, 12, 24, 0.86);
+      --bg-soft: rgba(10, 17, 32, 0.78);
+      --bg-strong: rgba(5, 11, 22, 0.94);
+      --cyan: #56f6ff;
+      --green: #55ff9d;
+      --amber: #ffd479;
+      --red: #ff6b81;
+      --blue: #7fd4ff;
+      --text: #dff5ff;
+      --text-dim: #8bb6cf;
+      --line: rgba(86, 246, 255, 0.2);
+      --shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 22px 0 30px;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      background-color: #020612;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255, 107, 129, 0.12), transparent 38%),
+        radial-gradient(circle at 85% 8%, rgba(86, 246, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, #020612 0%, #041020 50%, #020612 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(86, 246, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 246, 255, 0.03) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.22;
+      z-index: 0;
+    }
+
+    .wrap {
+      width: min(1240px, 94vw);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .top-note {
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero,
+    .section,
+    .rail-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--bg-panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 24px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, rgba(255, 107, 129, 0.08), transparent 30%),
+        radial-gradient(circle at right top, rgba(86, 246, 255, 0.08), transparent 30%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 212, 121, 0.35);
+      background: rgba(39, 24, 10, 0.55);
+      color: var(--amber);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1.2fr 0.9fr;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    h1 {
+      margin: 14px 0 10px;
+      color: var(--cyan);
+      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 14px rgba(86, 246, 255, 0.2);
+    }
+
+    .hero-copy {
+      margin: 0 0 14px;
+      max-width: 760px;
+      color: var(--text-dim);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .tag-row,
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag,
+    .status-box {
+      border-radius: 14px;
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border: 1px solid rgba(127, 212, 255, 0.2);
+      background: rgba(10, 18, 30, 0.72);
+      color: var(--blue);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-row {
+      margin-top: 14px;
+    }
+
+    .status-box {
+      min-width: 126px;
+      padding: 10px 12px;
+      border: 1px solid rgba(86, 246, 255, 0.14);
+      background: rgba(9, 16, 30, 0.88);
+    }
+
+    .status-box .label {
+      color: var(--text-dim);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .status-box .value {
+      margin-top: 6px;
+      font-size: 16px;
+      color: #f4fbff;
+    }
+
+    .status-box.cyan { border-color: rgba(86, 246, 255, 0.22); }
+    .status-box.green { border-color: rgba(85, 255, 157, 0.24); }
+    .status-box.amber { border-color: rgba(255, 212, 121, 0.24); }
+    .status-box.red { border-color: rgba(255, 107, 129, 0.24); }
+    .status-box.green .value { color: var(--green); }
+    .status-box.amber .value { color: var(--amber); }
+    .status-box.red .value { color: #ff9dad; }
+    .status-box.cyan .value { color: var(--cyan); }
+
+    .hero-panel {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--bg-soft);
+      border: 1px solid rgba(86, 246, 255, 0.14);
+    }
+
+    .panel-kicker,
+    .section-kicker,
+    .label,
+    .code-head,
+    .mini-title {
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .panel-kicker,
+    .section-kicker {
+      color: var(--amber);
+    }
+
+    .hero-panel h2,
+    .section h2 {
+      margin: 10px 0 10px;
+      color: var(--cyan);
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .hero-panel h2 {
+      font-size: 22px;
+      line-height: 1.22;
+    }
+
+    .hero-panel p,
+    .section-intro,
+    .detail-copy,
+    .section p,
+    .rail-card p,
+    .rail-card li,
+    .detail-list li,
+    .list-clean li,
+    .workflow-copy,
+    .flow-note,
+    .impact-copy {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .hero-panel ul,
+    .list-clean,
+    .detail-list,
+    .rail-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 310px;
+      align-items: start;
+    }
+
+    .stack,
+    .side-rail {
+      display: grid;
+      gap: 18px;
+    }
+
+    .side-rail {
+      position: sticky;
+      top: 16px;
+    }
+
+    .section,
+    .rail-card {
+      padding: 22px;
+    }
+
+    .section h2 {
+      font-size: clamp(20px, 2.6vw, 28px);
+      line-height: 1.18;
+    }
+
+    .split-2,
+    .architecture-layout,
+    .workflow-layout,
+    .example-layout {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 16px;
+    }
+
+    .architecture-layout,
+    .workflow-layout {
+      grid-template-columns: 1fr 340px;
+    }
+
+    .mini-card,
+    .detail-panel,
+    .workflow-card,
+    .code-card,
+    .impact-card,
+    .diagram-card,
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-soft);
+    }
+
+    .mini-card,
+    .impact-card,
+    .callout {
+      padding: 18px;
+    }
+
+    .mini-card.problem {
+      border-color: rgba(255, 107, 129, 0.22);
+    }
+
+    .mini-card.solution {
+      border-color: rgba(85, 255, 157, 0.2);
+    }
+
+    .core-gap {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(39, 24, 10, 0.62);
+      border: 1px solid rgba(255, 212, 121, 0.25);
+      color: var(--amber);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .pipeline-strip {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .pipe-step {
+      position: relative;
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      min-height: 104px;
+    }
+
+    .pipe-step::after {
+      content: "→";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cyan);
+      font: 16px "Share Tech Mono", monospace;
+    }
+
+    .pipe-step:last-child::after {
+      display: none;
+    }
+
+    .pipe-step.cyan { border-color: rgba(86, 246, 255, 0.22); }
+    .pipe-step.amber { border-color: rgba(255, 212, 121, 0.22); }
+    .pipe-step.green { border-color: rgba(85, 255, 157, 0.22); }
+    .pipe-step.red { border-color: rgba(255, 107, 129, 0.2); }
+    .pipe-step.blue { border-color: rgba(127, 212, 255, 0.22); }
+
+    .pipe-step strong {
+      display: block;
+      margin: 6px 0 8px;
+      color: #f4fbff;
+      font: 700 13px "Share Tech Mono", monospace;
+    }
+
+    .pipe-step span {
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .architecture-grid,
+    .workflow-steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .arch-button,
+    .step-button,
+    .back-link {
+      appearance: none;
+      border: 1px solid rgba(86, 246, 255, 0.28);
+      background: rgba(6, 11, 22, 0.92);
+      color: var(--cyan);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .arch-button:hover,
+    .step-button:hover,
+    .back-link:hover,
+    .arch-button.active,
+    .step-button.active {
+      transform: translateY(-1px);
+      border-color: var(--green);
+      box-shadow: 0 0 18px rgba(86, 246, 255, 0.16);
+      background: rgba(8, 16, 32, 0.96);
+    }
+
+    .arch-button strong,
+    .step-button strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #effbff;
+      font: 700 13px "Share Tech Mono", monospace;
+    }
+
+    .arch-button span,
+    .step-button span {
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .detail-panel,
+    .workflow-card {
+      padding: 18px;
+      background: var(--bg-strong);
+    }
+
+    .diagram-card {
+      padding: 18px;
+    }
+
+    .single-line-diagram {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .diagram-node {
+      min-width: 145px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(8, 15, 28, 0.9);
+    }
+
+    .diagram-node strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #f4fbff;
+      font: 700 13px "Share Tech Mono", monospace;
+    }
+
+    .diagram-node span {
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .diagram-node.red { border-color: rgba(255, 107, 129, 0.24); }
+    .diagram-node.amber { border-color: rgba(255, 212, 121, 0.24); }
+    .diagram-node.green { border-color: rgba(85, 255, 157, 0.24); }
+    .diagram-node.blue { border-color: rgba(127, 212, 255, 0.24); }
+    .diagram-node.cyan { border-color: rgba(86, 246, 255, 0.24); }
+
+    .diagram-arrow {
+      align-self: center;
+      color: var(--cyan);
+      font: 18px "Share Tech Mono", monospace;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .log-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(8, 15, 28, 0.88);
+      border: 1px solid rgba(86, 246, 255, 0.14);
+      color: #d8ebff;
+      font: 12px/1.65 "Share Tech Mono", monospace;
+      white-space: pre-wrap;
+    }
+
+    .code-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .code-card {
+      overflow: hidden;
+    }
+
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--cyan);
+      background: rgba(10, 18, 32, 0.9);
+    }
+
+    pre {
+      margin: 0;
+      padding: 14px;
+      overflow-x: auto;
+      background: #081a33;
+      color: #ffd78a;
+      font: 12px/1.68 "Share Tech Mono", monospace;
+    }
+
+    .output-box {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(16, 44, 88, 0.98) 0%, rgba(11, 77, 104, 0.96) 100%);
+      border: 1px solid rgba(85, 255, 157, 0.18);
+    }
+
+    .output-box h3,
+    .rail-card h3,
+    .impact-card h3,
+    .detail-panel h3,
+    .callout h3 {
+      margin: 0 0 10px;
+      color: #f4fbff;
+      font: 700 16px "Share Tech Mono", monospace;
+    }
+
+    .pr-name {
+      display: inline-flex;
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(85, 255, 157, 0.1);
+      border: 1px solid rgba(85, 255, 157, 0.18);
+      color: #dfffe7;
+      font: 12px "Share Tech Mono", monospace;
+    }
+
+    .impact-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .impact-card {
+      min-height: 132px;
+    }
+
+    .impact-card.cyan { border-color: rgba(86, 246, 255, 0.2); }
+    .impact-card.green { border-color: rgba(85, 255, 157, 0.2); }
+    .impact-card.amber { border-color: rgba(255, 212, 121, 0.2); }
+
+    .impact-value {
+      display: block;
+      margin-bottom: 8px;
+      font: 700 24px "Share Tech Mono", monospace;
+    }
+
+    .impact-card.cyan .impact-value { color: var(--cyan); }
+    .impact-card.green .impact-value { color: var(--green); }
+    .impact-card.amber .impact-value { color: var(--amber); }
+
+    .callout.red {
+      border-color: rgba(255, 107, 129, 0.24);
+      background: rgba(28, 11, 20, 0.84);
+    }
+
+    .callout.green {
+      border-color: rgba(85, 255, 157, 0.24);
+      background: rgba(13, 31, 22, 0.78);
+    }
+
+    .footer-note {
+      color: var(--text-dim);
+      font: 12px "Share Tech Mono", monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .layout,
+      .architecture-layout,
+      .workflow-layout,
+      .example-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-strip,
+      .impact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .side-rail {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 14px 0 22px; }
+      .wrap { width: min(94vw, 100%); }
+      .hero, .section, .rail-card { padding: 18px; }
+      h1 { font-size: 32px; }
+      .split-2,
+      .code-grid,
+      .impact-grid,
+      .pipeline-strip {
+        grid-template-columns: 1fr;
+      }
+      .pipe-step::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <a class="back-link" href="index.html">Back to Case Studies</a>
+      <div class="top-note">Interactive Security Case Study</div>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">AI Remediation Operations</div>
+      <div class="hero-grid">
+        <div>
+          <h1>AI-Powered Vulnerability Remediation Orchestrator</h1>
+          <p class="hero-copy">
+            Security scanners detect risk. Engineering teams still have to triage, patch, validate, and open pull requests manually. This system automates that path while keeping merge approval with engineers.
+          </p>
+          <div class="tag-row">
+            <span class="tag">SARIF Ingestion</span>
+            <span class="tag">Risk Triage</span>
+            <span class="tag">Secure Patching</span>
+            <span class="tag">PR Automation</span>
+          </div>
+          <div class="status-row">
+            <div class="status-box cyan">
+              <div class="label">Model</div>
+              <div class="value">Detect -> Fix</div>
+            </div>
+            <div class="status-box green">
+              <div class="label">Gate</div>
+              <div class="value">Review Required</div>
+            </div>
+            <div class="status-box amber">
+              <div class="label">Input</div>
+              <div class="value">SARIF + Repo</div>
+            </div>
+            <div class="status-box red">
+              <div class="label">Target</div>
+              <div class="value">Backlog Reduction</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-kicker">Why it matters</div>
+          <h2>Detection scales. Remediation usually does not.</h2>
+          <ul>
+            <li>High finding volume overwhelms security and engineering queues.</li>
+            <li>Priority is often inconsistent across SAST, DAST, and SCA tools.</li>
+            <li>Manual fixes delay release pipelines and keep known risk open.</li>
+            <li>Most programs generate findings faster than they close them.</li>
+          </ul>
+          <div class="core-gap">Core gap: detection is automated, code-level remediation is not.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="section">
+          <div class="section-kicker">Operating Model</div>
+          <h2>Security finding to reviewed pull request.</h2>
+          <p class="section-intro">
+            The orchestrator normalizes scanner output, prioritizes the issue, generates a secure patch, validates it, and opens a pull request with evidence attached.
+          </p>
+          <div class="pipeline-strip">
+            <div class="pipe-step cyan">
+              <div class="mini-title">1. Ingest</div>
+              <strong>SARIF / Scanner Feed</strong>
+              <span>File, line, rule, severity, snippet.</span>
+            </div>
+            <div class="pipe-step amber">
+              <div class="mini-title">2. Triage</div>
+              <strong>Exploitability + Impact</strong>
+              <span>Normalize severity and remove duplicates.</span>
+            </div>
+            <div class="pipe-step blue">
+              <div class="mini-title">3. Remediate</div>
+              <strong>Secure Patch Draft</strong>
+              <span>Language-aware fix generation.</span>
+            </div>
+            <div class="pipe-step green">
+              <div class="mini-title">4. Validate</div>
+              <strong>Policy + Syntax Checks</strong>
+              <span>Reject brittle or non-compliant changes.</span>
+            </div>
+            <div class="pipe-step red">
+              <div class="mini-title">5. Deliver</div>
+              <strong>Branch + Commit + PR</strong>
+              <span>Engineer reviews before merge.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-kicker">Problem / Response</div>
+          <h2>What the system changes in practice.</h2>
+          <div class="split-2">
+            <div class="mini-card problem">
+              <h3>Current failure points</h3>
+              <ul class="list-clean">
+                <li>Scanner severity alone is noisy.</li>
+                <li>Fixing starts too late in the SDLC.</li>
+                <li>Security teams produce tickets, not code changes.</li>
+                <li>Known issues stay open across release cycles.</li>
+              </ul>
+            </div>
+            <div class="mini-card solution">
+              <h3>Orchestrator response</h3>
+              <ul class="list-clean">
+                <li>Ranks findings using context, not just CVSS.</li>
+                <li>Generates secure patches near the vulnerable code.</li>
+                <li>Validates output before developers see it.</li>
+                <li>Delivers remediation inside normal Git workflows.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="architecture">
+          <div class="section-kicker">Architecture</div>
+          <h2>Click through the control plane.</h2>
+          <div class="architecture-layout">
+            <div class="architecture-grid" id="architecture-grid"></div>
+            <div class="detail-panel">
+              <h3 id="arch-title">Input Layer</h3>
+              <p class="detail-copy" id="arch-copy">Receives SARIF and scanner events, then normalizes them for downstream decisioning.</p>
+              <ul class="detail-list" id="arch-list"></ul>
+            </div>
+          </div>
+          <div class="diagram-card" style="margin-top:14px;">
+            <div class="panel-kicker">High-Level Diagram</div>
+            <div class="single-line-diagram" style="margin-top:12px;">
+              <div class="diagram-node amber">
+                <strong>Scanner Layer</strong>
+                <span>SAST / DAST / SCA emit findings.</span>
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node cyan">
+                <strong>Classifier</strong>
+                <span>Normalizes severity and business context.</span>
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node blue">
+                <strong>LLM Fix Engine</strong>
+                <span>Builds patch, rationale, and commit text.</span>
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node green">
+                <strong>Validation Gate</strong>
+                <span>Syntax, policy, and basic regression checks.</span>
+              </div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-node red">
+                <strong>GitHub PR</strong>
+                <span>Developer review, approval, and merge.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="workflow">
+          <div class="section-kicker">Workflow</div>
+          <h2>Interactive remediation flow.</h2>
+          <div class="workflow-layout">
+            <div class="workflow-steps" id="workflow-steps"></div>
+            <div class="workflow-card">
+              <h3 id="workflow-stage">01 / Finding Ingested</h3>
+              <div class="workflow-copy" id="workflow-copy"></div>
+              <div class="log-box" id="event-log"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-kicker">Evidence</div>
+          <h2>Example finding, patch, and pull request payload.</h2>
+          <div class="example-layout">
+            <div>
+              <div class="code-grid">
+                <div class="code-card">
+                  <div class="code-head">
+                    <span>Finding Input</span>
+                    <span>SARIF-Derived</span>
+                  </div>
+                  <pre>{
+  "rule": "sql-injection",
+  "severity": "high",
+  "file": "user.js",
+  "line": 42,
+  "code": "query = 'SELECT * FROM users WHERE id = ' + userId"
+}</pre>
+                </div>
+                <div class="code-card">
+                  <div class="code-head">
+                    <span>Patch Output</span>
+                    <span>Generated Fix</span>
+                  </div>
+                  <pre>const query = "SELECT * FROM users WHERE id = ?";
+db.execute(query, [userId]);</pre>
+                </div>
+              </div>
+              <div class="code-grid">
+                <div class="code-card">
+                  <div class="code-head">
+                    <span>Validation Policy</span>
+                    <span>Gate</span>
+                  </div>
+                  <pre>checks:
+  - syntax_pass == true
+  - policy_pass == true
+  - confidence >= 0.80
+  - repo_write_scope == approved</pre>
+                </div>
+                <div class="code-card">
+                  <div class="code-head">
+                    <span>PR Description</span>
+                    <span>Delivery</span>
+                  </div>
+                  <pre>Title: Fix SQL injection in user lookup
+
+Context:
+- Rule: sql-injection
+- File: user.js:42
+- Severity: high
+- Strategy: parameterized query</pre>
+                </div>
+              </div>
+            </div>
+            <div class="output-box">
+              <h3>Generated Output</h3>
+              <div class="pr-name">fix/sql-injection-user-endpoint</div>
+              <ul class="list-clean">
+                <li>Patch attached to a new branch.</li>
+                <li>Risk summary included in the PR body.</li>
+                <li>Validation state recorded before opening PR.</li>
+                <li>Reviewer approval remains mandatory.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-kicker">Impact</div>
+          <h2>Operational outcomes.</h2>
+          <div class="impact-grid">
+            <div class="impact-card cyan">
+              <h3>Time to Remediate</h3>
+              <span class="impact-value">Lower</span>
+              <div class="impact-copy">Less manual triage, patch drafting, and PR preparation.</div>
+            </div>
+            <div class="impact-card green">
+              <h3>Fix Throughput</h3>
+              <span class="impact-value">Higher</span>
+              <div class="impact-copy">More findings move from backlog to reviewed remediation.</div>
+            </div>
+            <div class="impact-card amber">
+              <h3>Developer Friction</h3>
+              <span class="impact-value">Controlled</span>
+              <div class="impact-copy">Automation stays inside existing Git and CI approval paths.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-rail">
+        <div class="rail-card">
+          <h3>Key Controls</h3>
+          <ul>
+            <li>Severity normalization</li>
+            <li>Duplicate clustering</li>
+            <li>Patch validation</li>
+            <li>Human merge gate</li>
+          </ul>
+        </div>
+        <div class="callout red">
+          <h3>Risk if missing</h3>
+          <p>Without validation and approval gates, automated remediation can create noisy or unsafe pull requests.</p>
+        </div>
+        <div class="callout green">
+          <h3>Security value</h3>
+          <p>The main shift is from passive detection to controlled remediation execution.</p>
+        </div>
+        <a class="back-link" href="index.html">Back to Case Studies</a>
+        <div class="footer-note">Root0zaki case study viewer</div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const architectureItems = [
+      {
+        title: "Input Layer",
+        summary: "Receives SARIF and raw scanner output.",
+        detail: "Normalizes file, rule, line, severity, and snippet metadata into a single remediation object.",
+        bullets: [
+          "SAST, DAST, SCA ingestion",
+          "Schema normalization",
+          "Code context preservation"
+        ]
+      },
+      {
+        title: "Classification Engine",
+        summary: "Scores what actually matters first.",
+        detail: "Combines severity, exploitability, confidence, and business impact to reduce noise before patch generation.",
+        bullets: [
+          "Severity mapping",
+          "Exploitability weighting",
+          "Duplicate clustering"
+        ]
+      },
+      {
+        title: "Remediation Engine",
+        summary: "Builds a secure patch draft.",
+        detail: "Uses vulnerability type plus local code context to generate a targeted fix strategy and change set.",
+        bullets: [
+          "Language-aware fixes",
+          "Patch explanation",
+          "Commit message generation"
+        ]
+      },
+      {
+        title: "Validation Gate",
+        summary: "Rejects bad automation before PR creation.",
+        detail: "Runs syntax, policy, and lightweight regression checks so only acceptable changes move forward.",
+        bullets: [
+          "Syntax validation",
+          "Policy enforcement",
+          "Confidence thresholding"
+        ]
+      },
+      {
+        title: "PR Orchestrator",
+        summary: "Converts approved fixes into delivery artifacts.",
+        detail: "Creates the branch, commit, PR body, and reviewer routing with vulnerability evidence attached.",
+        bullets: [
+          "Branch creation",
+          "Context-rich PR body",
+          "Reviewer assignment"
+        ]
+      }
+    ];
+
+    const workflowItems = [
+      {
+        label: "01. Ingest finding",
+        note: "Receive SARIF or scanner event.",
+        stage: "01 / Finding Ingested",
+        copy: "The job starts with a normalized finding envelope tied to file, line, rule, and source metadata.",
+        log: "[ingest] source=sast\n[parse] rule=sql-injection\n[parse] target=user.js:42\n[queue] remediation_job=open"
+      },
+      {
+        label: "02. Classify risk",
+        note: "Rank by exploitability and impact.",
+        stage: "02 / Risk Classified",
+        copy: "The classifier reduces noise by mapping severity and deciding whether the issue should be remediated now, deferred, or suppressed.",
+        log: "[classify] severity=high\n[classify] exploitability=high\n[classify] confidence=0.94\n[classify] priority=immediate"
+      },
+      {
+        label: "03. Generate patch",
+        note: "Draft fix against local code context.",
+        stage: "03 / Patch Drafted",
+        copy: "The remediation engine proposes a concrete change such as parameterization, sanitization, or input validation at the vulnerable sink.",
+        log: "[remediate] strategy=parameterized-query\n[remediate] patch=generated\n[remediate] explanation=attached"
+      },
+      {
+        label: "04. Validate output",
+        note: "Apply checks before delivery.",
+        stage: "04 / Validation Passed",
+        copy: "The patch must pass syntax and policy checks before it is allowed to move to a pull request.",
+        log: "[validate] syntax=pass\n[validate] policy=pass\n[validate] confidence_gate=pass\n[state] ready_for_pr=true"
+      },
+      {
+        label: "05. Open PR",
+        note: "Create branch, commit, and review request.",
+        stage: "05 / PR Opened",
+        copy: "The orchestrator creates a branch, applies the patch, commits the change, and opens a pull request with rule context and review metadata.",
+        log: "[git] branch=fix/sql-injection-user-endpoint\n[git] commit=created\n[github] pr=open\n[github] reviewers=assigned"
+      }
+    ];
+
+    const architectureGrid = document.getElementById("architecture-grid");
+    const archTitle = document.getElementById("arch-title");
+    const archCopy = document.getElementById("arch-copy");
+    const archList = document.getElementById("arch-list");
+    const workflowSteps = document.getElementById("workflow-steps");
+    const workflowStage = document.getElementById("workflow-stage");
+    const workflowCopy = document.getElementById("workflow-copy");
+    const eventLog = document.getElementById("event-log");
+
+    function renderArchitecture(activeIndex = 0) {
+      architectureGrid.innerHTML = architectureItems.map((item, index) => `
+        <button class="arch-button ${index === activeIndex ? "active" : ""}" data-index="${index}">
+          <strong>${item.title}</strong>
+          <span>${item.summary}</span>
+        </button>
+      `).join("");
+
+      const activeItem = architectureItems[activeIndex];
+      archTitle.textContent = activeItem.title;
+      archCopy.textContent = activeItem.detail;
+      archList.innerHTML = activeItem.bullets.map((bullet) => `<li>${bullet}</li>`).join("");
+
+      architectureGrid.querySelectorAll(".arch-button").forEach((button) => {
+        button.addEventListener("click", () => renderArchitecture(Number(button.dataset.index)));
+      });
+    }
+
+    function renderWorkflow(activeIndex = 0) {
+      workflowSteps.innerHTML = workflowItems.map((item, index) => `
+        <button class="step-button ${index === activeIndex ? "active" : ""}" data-index="${index}">
+          <strong>${item.label}</strong>
+          <span>${item.note}</span>
+        </button>
+      `).join("");
+
+      const activeItem = workflowItems[activeIndex];
+      workflowStage.textContent = activeItem.stage;
+      workflowCopy.textContent = activeItem.copy;
+      eventLog.textContent = activeItem.log;
+
+      workflowSteps.querySelectorAll(".step-button").forEach((button) => {
+        button.addEventListener("click", () => renderWorkflow(Number(button.dataset.index)));
+      });
+    }
+
+    renderArchitecture();
+    renderWorkflow();
+  </script>
+</body>
+</html>
