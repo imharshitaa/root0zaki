@@ -259,6 +259,35 @@
     <div class="footer">imharshitaa @ owner</div>
   </main>
 
+  <script id="case-studies-fallback" type="application/json">
+  [
+    {
+      "title": "Zero-Day Security Architecture",
+      "href": "zero-day-security-architecture.html",
+      "tag": "interactive",
+      "description": "Production-style zero-day incident simulation showing exploit replay, containment trade-offs, blast-radius analysis, and automated response flows.",
+      "bullets": [
+        "Incident replay with step-by-step breach progression",
+        "MITRE ATT&CK mapping and threat scenario toggles",
+        "Containment decision view with zero-trust failure mode",
+        "Post-incident hardening and reproducibility guidance"
+      ]
+    },
+    {
+      "title": "AI-Powered Vulnerability Remediation Orchestrator",
+      "href": "ai-remediation-orchestrator.html",
+      "tag": "interactive",
+      "description": "Security remediation orchestration layer that triages findings, generates secure patches, validates fixes, and opens review-ready pull requests.",
+      "bullets": [
+        "Interactive architecture and workflow views (triage -> validate -> PR)",
+        "Concrete evidence: SARIF-derived finding, patch, validation, and PR payload",
+        "Clickable controls with glow only on interactive elements",
+        "Operational outcomes and control gates"
+      ]
+    }
+  ]
+  </script>
+
   <script>
     const titleEl = document.querySelector(".page-title");
     if (titleEl) {
@@ -278,37 +307,63 @@
       typeNext();
     }
 
+    function parseFallbackCases() {
+      const el = document.getElementById("case-studies-fallback");
+      if (!el) return null;
+      try {
+        return JSON.parse(el.textContent || "null");
+      } catch {
+        return null;
+      }
+    }
+
+    function renderCases(cases) {
+      const grid = document.getElementById("case-grid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      cases.forEach((item, idx) => {
+        const a = document.createElement("a");
+        a.className = "case-card";
+        a.href = item.href || `case_template.html?file=${item.file}`;
+
+        const list = (item.bullets || []).map(b => `<li>${b}</li>`).join("");
+
+        a.innerHTML = `
+          <div class="case-header">
+            <div class="case-icon">${idx + 1}</div>
+            <span class="case-pill">${item.tag || ""}</span>
+          </div>
+          <h2 class="case-title">${item.title || ""}</h2>
+          <p class="case-desc">${item.description || ""}</p>
+          <ul class="case-list">${list}</ul>
+          <div class="case-link">Explore Demo
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"/></svg>
+          </div>
+        `;
+
+        grid.appendChild(a);
+      });
+    }
+
     async function loadCases() {
       try {
         const response = await fetch("case_studies.json");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const cases = await response.json();
-        const grid = document.getElementById("case-grid");
-
-        cases.forEach((item, idx) => {
-          const a = document.createElement("a");
-          a.className = "case-card";
-          a.href = item.href || `case_template.html?file=${item.file}`;
-
-          const list = item.bullets.map(b => `<li>${b}</li>`).join("");
-
-          a.innerHTML = `
-            <div class="case-header">
-              <div class="case-icon">${idx + 1}</div>
-              <span class="case-pill">${item.tag}</span>
-            </div>
-            <h2 class="case-title">${item.title}</h2>
-            <p class="case-desc">${item.description}</p>
-            <ul class="case-list">${list}</ul>
-            <div class="case-link">Explore Demo
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"/></svg>
-            </div>
-          `;
-
-          grid.appendChild(a);
-        });
+        renderCases(cases);
       } catch (err) {
+        const fallback = parseFallbackCases();
+        if (Array.isArray(fallback) && fallback.length) {
+          renderCases(fallback);
+          return;
+        }
+
         console.error("Error loading case_studies.json", err);
-        document.getElementById("case-grid").innerHTML = "<p style='color:#ff8c8c;'>Failed to load case studies.</p>";
+        const grid = document.getElementById("case-grid");
+        if (grid) {
+          grid.innerHTML = "<p style='color:#ff8c8c;'>Failed to load case studies. If you opened this page via file://, run a local server (e.g. `python3 -m http.server`) and reload.</p>";
+        }
       }
     }
 
