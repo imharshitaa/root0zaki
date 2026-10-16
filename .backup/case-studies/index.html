@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>case studies — harshitaa</title>
+  <meta name="description" content="Security engineering case studies and deep-dives by Harshitaa Ashish." />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--sans); background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.35;
+    }
+    .site-wrap {
+      position: relative; z-index: 1;
+      width: min(1100px, 94vw); margin: 0 auto; padding-bottom: 80px;
+    }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0; gap: 24px;
+    }
+    .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .nav-id span { color: var(--purple); }
+    .nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 64px 0 52px; border-bottom: 1px solid var(--border); margin-bottom: 64px;
+    }
+    .ph-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ph-eyebrow::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-hi), transparent);
+    }
+    .page-title {
+      font-family: var(--mono); font-size: clamp(36px, 6vw, 64px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .page-title .acc { color: var(--purple); }
+    .page-sub { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 520px; }
+
+    /* CASES */
+    .cases-list { list-style: none; }
+    .case-item {
+      border-top: 1px solid var(--border); padding: 40px 0;
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 32px; align-items: start;
+      transition: background 0.15s;
+    }
+    .case-item:last-child { border-bottom: 1px solid var(--border); }
+    .case-item:hover { background: rgba(139,92,246,0.03); }
+    @media (max-width: 600px) { .case-item { grid-template-columns: 1fr; gap: 16px; } }
+
+    .case-num {
+      font-family: var(--mono); font-size: 11px; color: var(--border-hi);
+      letter-spacing: 0.06em; padding-top: 4px;
+    }
+    .case-body {}
+    .case-type {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--lavender); margin-bottom: 10px;
+    }
+    .case-title {
+      font-size: 22px; font-weight: 600; color: var(--text);
+      margin-bottom: 14px; line-height: 1.35;
+    }
+    .case-desc {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      max-width: 620px; margin-bottom: 20px;
+    }
+    .case-bullets {
+      list-style: none; margin-bottom: 24px;
+    }
+    .case-bullets li {
+      font-size: 13px; color: var(--muted); padding: 5px 0;
+      padding-left: 16px; position: relative; line-height: 1.5;
+      border-bottom: 1px solid rgba(139,92,246,0.06);
+    }
+    .case-bullets li:last-child { border-bottom: none; }
+    .case-bullets li::before {
+      content: "–"; position: absolute; left: 0;
+      color: var(--purple); font-family: var(--mono);
+    }
+    .case-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--text);
+      border: 1px solid var(--border-hi); padding: 10px 20px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .case-cta:hover {
+      background: rgba(139,92,246,0.1); color: var(--lavender); border-color: var(--lavender);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .footer-id .acc { color: var(--purple); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrap">
+
+  <nav aria-label="Main navigation">
+    <div class="nav-id"><span>harshitaa</span>@security:~/case-studies$</div>
+    <a href="../index.html" class="nav-back">← Home</a>
+  </nav>
+
+  <header class="page-header">
+    <div class="ph-eyebrow">// engineering cases</div>
+    <h1 class="page-title">case studies<span class="acc">_</span></h1>
+    <p class="page-sub">Deep-dives into specific security engineering problems, architectures, and workflows.</p>
+  </header>
+
+  <ul class="cases-list" role="list">
+
+    <li class="case-item">
+      <span class="case-num">case · 001</span>
+      <div class="case-body">
+        <div class="case-type">// incident simulation</div>
+        <h2 class="case-title">Zero-Day Security Architecture</h2>
+        <p class="case-desc">Production-style zero-day incident simulation showing exploit replay, containment trade-offs, blast-radius analysis, and automated response flows.</p>
+        <ul class="case-bullets">
+          <li>Incident replay with step-by-step breach progression</li>
+          <li>MITRE ATT&amp;CK mapping and threat scenario toggles</li>
+          <li>Containment decision view with zero-trust failure mode</li>
+          <li>Post-incident hardening and reproducibility guidance</li>
+        </ul>
+        <a class="case-cta" href="zero-day-security-architecture.html">Read Case Study →</a>
+      </div>
+    </li>
+
+    <li class="case-item">
+      <span class="case-num">case · 002</span>
+      <div class="case-body">
+        <div class="case-type">// product engineering</div>
+        <h2 class="case-title">AI-Powered Vulnerability Remediation Orchestrator</h2>
+        <p class="case-desc">Product-focused remediation case study showing how AI can triage vulnerabilities, generate secure patches, validate fixes, and create developer-ready pull requests.</p>
+        <ul class="case-bullets">
+          <li>Enterprise-style product narrative with problem, solution, and impact framing</li>
+          <li>Interactive architecture and workflow views for triage-to-PR automation</li>
+          <li>Concrete secure-fix example with PR output and portfolio positioning</li>
+          <li>Full build prompt for a FastAPI, React, LLM, and GitHub integration stack</li>
+        </ul>
+        <a class="case-cta" href="ai-remediation-orchestrator.html">Read Case Study →</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <footer role="contentinfo">
+    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/case-studies$</div>
+    <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
+  </footer>
+
+</div>
+</body>
+</html>

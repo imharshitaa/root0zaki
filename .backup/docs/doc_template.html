@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — harshitaa</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.35;
+    }
+
+    /* LAYOUT: sidebar + main */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 720px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 28px 20px;
+      background: rgba(22,13,32,0.6);
+      position: sticky; top: 0; height: 100vh;
+      overflow-y: auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .sidebar-brand {
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      letter-spacing: 0.08em; margin-bottom: 28px;
+    }
+    .sidebar-brand span { color: var(--purple); }
+    .sidebar-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 14px;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li {
+      border-top: 1px solid rgba(139,92,246,0.08);
+    }
+    .sidebar-nav li:last-child { border-bottom: 1px solid rgba(139,92,246,0.08); }
+    .sidebar-nav a {
+      display: block; padding: 10px 0;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s; line-height: 1.4;
+    }
+    .sidebar-nav a:hover { color: var(--lavender); }
+    .sidebar-nav a.active { color: var(--purple); }
+    .sidebar-home {
+      margin-top: auto; padding-top: 28px;
+      font-family: var(--mono); font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 8px 12px;
+      display: inline-block; transition: color 0.2s, border-color 0.2s;
+    }
+    .sidebar-home:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    /* MAIN */
+    .main-area {
+      padding: 32px 48px 80px;
+      max-width: 800px;
+    }
+    @media (max-width: 720px) { .main-area { padding: 28px 20px 60px; } }
+
+    .doc-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 40px; gap: 16px;
+    }
+    .doc-nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+    .doc-nav-id span { color: var(--purple); }
+    .doc-nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s; display: block;
+    }
+    .doc-nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    .doc-header { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .doc-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 12px;
+    }
+    #doc-title {
+      font-family: var(--mono); font-size: clamp(24px, 4vw, 38px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em;
+    }
+    #doc-title .acc { color: var(--purple); }
+
+    /* CONTENT */
+    #content {
+      font-size: 15px; line-height: 1.8; color: #C4BBD4;
+    }
+    #content h1, #content h2, #content h3, #content h4 {
+      font-family: var(--mono); color: var(--lavender);
+      letter-spacing: 0.02em; margin: 32px 0 12px;
+    }
+    #content h1 { font-size: 26px; }
+    #content h2 { font-size: 20px; }
+    #content h3 { font-size: 16px; color: var(--softpink); }
+    #content h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    #content p { margin-bottom: 16px; }
+    #content ul, #content ol { padding-left: 20px; margin-bottom: 16px; color: var(--muted); }
+    #content li { padding: 3px 0; line-height: 1.7; }
+    #content strong { color: var(--text); font-weight: 600; }
+    #content a { color: var(--lavender); }
+    #content a:hover { text-decoration: underline; }
+    #content hr {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-hi), transparent);
+      margin: 32px 0;
+    }
+    #content blockquote {
+      border-left: 2px solid var(--purple); padding-left: 16px;
+      color: var(--muted); margin: 20px 0;
+    }
+    #content code {
+      font-family: var(--mono); font-size: 13px;
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 1px 6px; color: var(--softpink);
+    }
+    #content pre {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 16px 20px; overflow-x: auto; margin: 20px 0;
+    }
+    #content pre code {
+      background: none; border: none; padding: 0;
+      color: var(--muted); font-size: 12px; line-height: 1.6;
+    }
+    #content table {
+      width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px;
+    }
+    #content th {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--purple);
+      border-bottom: 1px solid var(--border-hi); padding: 8px 12px; text-align: left;
+    }
+    #content td {
+      padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted);
+    }
+    #content img { max-width: 100%; display: block; margin: 24px 0; border: 1px solid var(--border); }
+
+    .doc-footer {
+      margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border);
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+    }
+    .doc-footer .acc { color: var(--purple); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-brand"><span>harshitaa</span>@security:~/docs</div>
+    <div class="sidebar-label">docs</div>
+    <ul class="sidebar-nav" role="list">
+      <li><a href="?file=1_devsecops_workflow.md" onclick="loadDoc(event,'1_devsecops_workflow.md','Build DevSecOps Workflow')">DevSecOps Workflow</a></li>
+      <li><a href="?file=2_frameworks.md" onclick="loadDoc(event,'2_frameworks.md','Frameworks for Hacking')">Hacking Frameworks</a></li>
+      <li><a href="?file=3_apis.md" onclick="loadDoc(event,'3_apis.md','API Playbook')">API Playbook</a></li>
+    </ul>
+    <div style="margin-top:auto;padding-top:28px;">
+      <a href="../index.html" class="sidebar-home">← home</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <nav class="doc-nav" aria-label="Page navigation">
+      <div class="doc-nav-id"><span>harshitaa</span>@security:~/docs$</div>
+      <a href="index.html" class="doc-nav-back">← docs index</a>
+    </nav>
+
+    <header class="doc-header">
+      <div class="doc-eyebrow">// documentation</div>
+      <h1 id="doc-title">Loading<span class="acc">_</span></h1>
+    </header>
+
+    <main id="content" aria-label="Document content">
+      <p style="font-family:var(--mono);font-size:13px;color:var(--muted);">loading…</p>
+    </main>
+
+    <footer class="doc-footer" role="contentinfo">
+      <span class="acc">harshitaa</span>@security:~/docs$
+    </footer>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+<script>
+(function() {
+  const converter = new showdown.Converter({
+    ghCodeBlocks: true, tables: true, strikethrough: true, openLinksInNewWindow: true
+  });
+  const titleEl  = document.getElementById("doc-title");
+  const contentEl = document.getElementById("content");
+  let currentFile = null;
+
+  function toLabel(val) {
+    if (!val) return "Document";
+    return val.split("/").pop().replace(/\.[^/.]+$/, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, m => m.toUpperCase());
+  }
+
+  function setActive(file) {
+    document.querySelectorAll(".sidebar-nav a").forEach(a => {
+      const href = a.getAttribute("href");
+      a.classList.toggle("active", href && href.includes(file));
+    });
+  }
+
+  window.loadDoc = function(e, file, title) {
+    if (e) e.preventDefault();
+    if (currentFile === file) return;
+    currentFile = file;
+    const label = title || toLabel(file);
+    titleEl.innerHTML = label + '<span class="acc">_</span>';
+    document.title = label + " — harshitaa";
+    contentEl.innerHTML = '<p style="font-family:var(--mono);font-size:13px;color:var(--muted);">loading…</p>';
+    setActive(file);
+    window.history.pushState({}, "", "?file=" + encodeURIComponent(file));
+    fetch(file)
+      .then(r => r.text())
+      .then(md => { contentEl.innerHTML = converter.makeHtml(md); })
+      .catch(() => { contentEl.innerHTML = '<p style="font-family:var(--mono);font-size:13px;color:#FF6B6B;">Error loading file.</p>'; });
+  };
+
+  // load from query param on page load
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get("file");
+  const titles = {
+    "1_devsecops_workflow.md": "Build DevSecOps Workflow",
+    "2_frameworks.md":         "Frameworks for Hacking",
+    "3_apis.md":               "API Playbook"
+  };
+  if (file) {
+    loadDoc(null, file, titles[file]);
+  } else {
+    titleEl.innerHTML = 'select a document<span class="acc">_</span>';
+    contentEl.innerHTML = '<p style="font-family:var(--mono);font-size:13px;color:var(--muted);">Use the sidebar or the <a href="index.html" style="color:var(--lavender)">docs index</a> to choose a document.</p>';
+  }
+})();
+</script>
+</body>
+</html>

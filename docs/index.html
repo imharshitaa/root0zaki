@@ -3,176 +3,306 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Docs - Root0zaki</title>
+  <title>docs — harshitaa</title>
+  <meta name="description" content="Technical documentation, playbooks, and engineering notes by Harshitaa Ashish." />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-main: #020612;
-      --bg-panel: rgba(4, 11, 25, 0.84);
-      --cyan: #49f3ff;
-      --green: #40ffa5;
-      --text: #dbf6ff;
-      --text-dim: #8eb8d2;
-      --line: rgba(73, 243, 255, 0.26);
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
     }
-
-    * { box-sizing: border-box; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 16px 0 24px;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-      background-color: #020612;
-      background:
-        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
-        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
-        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
-        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
-      position: relative;
-      overflow-x: hidden;
+      font-family: var(--sans); background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
     }
-
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(86, 246, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(86, 246, 255, 0.05) 1px, transparent 1px);
-      background-size: 34px 34px, 34px 34px;
-      opacity: 0.22;
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.35;
+    }
+    .site-wrap {
+      position: relative; z-index: 1;
+      width: min(1100px, 94vw); margin: 0 auto; padding-bottom: 80px;
     }
 
-    .wrap {
-      width: min(1040px, 92vw);
-      margin: 0 auto;
-      padding: 6px 0 14px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0; gap: 24px;
     }
-    h1 {
-      margin: 0 0 20px;
-      color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      font-size: clamp(30px, 5vw, 42px);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(86, 246, 255, 0.26);
+    .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .nav-id span { color: var(--purple); }
+    .nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
     }
+    .nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
 
+    /* PAGE HEADER */
+    .page-header {
+      padding: 64px 0 52px; border-bottom: 1px solid var(--border); margin-bottom: 64px;
+    }
+    .ph-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ph-eyebrow::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-hi), transparent);
+    }
+    .page-title {
+      font-family: var(--mono); font-size: clamp(36px, 6vw, 64px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .page-title .acc { color: var(--purple); }
+    .page-sub { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 520px; }
+
+    /* DOCS GRID */
     .docs-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+      background: var(--border);
     }
-
-    .docs-grid a {
-      text-decoration: none;
-      width: 100%;
-    }
-
     .doc-card {
-      width: 100%;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--bg-panel);
-      text-align: left;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      background: var(--bg);
+      padding: 32px 28px;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
     }
+    .doc-card:hover { background: rgba(139,92,246,0.05); }
+    .doc-card:focus { outline: 2px solid var(--purple); outline-offset: -2px; }
 
-    .doc-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--cyan);
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.2);
+    .doc-num {
+      font-family: var(--mono); font-size: 10px; color: var(--border-hi);
+      letter-spacing: 0.1em; margin-bottom: 16px;
     }
-
+    .doc-icon {
+      font-family: var(--mono); font-size: 20px; color: var(--purple);
+      margin-bottom: 12px;
+    }
     .doc-title {
-      font-size: 22px;
-      color: var(--text);
-      font-family: "Share Tech Mono", monospace;
-      margin-bottom: 8px;
+      font-size: 16px; font-weight: 600; color: var(--text);
+      margin-bottom: 8px; line-height: 1.4;
     }
-
     .doc-desc {
-      font-size: 16px;
-      color: var(--text-dim);
+      font-size: 13px; color: var(--muted); line-height: 1.65;
+    }
+    .doc-arrow {
+      position: absolute; bottom: 20px; right: 20px;
+      font-family: var(--mono); font-size: 14px; color: var(--border-hi);
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 18px;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      text-decoration: none;
-      font: 500 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    /* markdown viewer */
+    #md-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(9,7,13,0.96); overflow-y: auto;
+    }
+    #md-overlay.open { display: block; }
+    .md-layout {
+      display: grid; grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 720px) { .md-layout { grid-template-columns: 1fr; } }
+    .md-sidebar {
+      border-right: 1px solid var(--border); padding: 32px 24px;
+      background: var(--bg2);
+    }
+    @media (max-width: 720px) { .md-sidebar { display: none; } }
+    .md-sidebar-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 20px;
+    }
+    .md-sidebar-links { list-style: none; }
+    .md-sidebar-links li {
+      font-family: var(--mono); font-size: 11px; padding: 7px 0;
+      border-bottom: 1px solid rgba(139,92,246,0.08); cursor: pointer;
+      color: var(--muted); transition: color 0.2s; letter-spacing: 0.04em;
+    }
+    .md-sidebar-links li:hover { color: var(--lavender); }
+    .md-sidebar-links li.active { color: var(--purple); }
+
+    .md-main { padding: 40px 48px 80px; }
+    @media (max-width: 720px) { .md-main { padding: 28px 20px 60px; } }
+    .md-close {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 16px; background: none;
+      cursor: pointer; margin-bottom: 32px; transition: color 0.2s, border-color 0.2s;
+    }
+    .md-close:hover { color: var(--lavender); border-color: var(--lavender); }
+    .md-doc-title {
+      font-family: var(--mono); font-size: clamp(22px, 3.5vw, 32px);
+      color: var(--text); margin-bottom: 32px;
+    }
+    #md-content {
+      font-size: 15px; line-height: 1.8; color: #C4BBD4; max-width: 680px;
+    }
+    #md-content h1,#md-content h2,#md-content h3 {
+      font-family: var(--mono); color: var(--lavender); margin: 32px 0 14px;
+    }
+    #md-content p { margin-bottom: 16px; }
+    #md-content code {
+      font-family: var(--mono); font-size: 13px; background: var(--bg2);
+      border: 1px solid var(--border); padding: 1px 6px; color: var(--softpink);
+    }
+    #md-content pre {
+      background: var(--bg2); border: 1px solid var(--border); padding: 16px;
+      overflow-x: auto; margin-bottom: 16px;
+    }
+    #md-content pre code { background: none; border: none; padding: 0; color: var(--muted); font-size: 12px; }
+    #md-content ul, #md-content ol { padding-left: 20px; margin-bottom: 16px; color: var(--muted); }
+    #md-content a { color: var(--lavender); }
+    #md-content blockquote {
+      border-left: 2px solid var(--purple); padding-left: 16px;
+      color: var(--muted); font-style: italic; margin-bottom: 16px;
     }
 
-    .back-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0; margin-top: 64px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
     }
+    .footer-id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .footer-id .acc { color: var(--purple); }
 
-    .footer {
-      margin-top: 20px;
-      color: var(--text-dim);
-      font: 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      padding-bottom: 10px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <h1>📑 Docs & Blogs</h1>
-    <div class="docs-grid" id="docs-grid"></div>
-    <a class="back-link" href="../index.html">⬅ Back to Home</a>
-    <div class="footer">imharshitaa @ owner</div>
-  </main>
+<div class="site-wrap">
 
-  <script>
-    async function loadDocs() {
-      try {
-        const response = await fetch("docs.json");
-        const docs = await response.json();
-        const grid = document.getElementById("docs-grid");
+  <nav aria-label="Main navigation">
+    <div class="nav-id"><span>harshitaa</span>@security:~/docs$</div>
+    <a href="../index.html" class="nav-back">← Home</a>
+  </nav>
 
-        docs.forEach(d => {
-          const a = document.createElement("a");
-          a.href = `doc_template.html?file=${d.file}`;
+  <header class="page-header">
+    <div class="ph-eyebrow">// technical documentation</div>
+    <h1 class="page-title">docs<span class="acc">_</span></h1>
+    <p class="page-sub">Playbooks, tooling guides, and engineering references. Click to read in-browser.</p>
+  </header>
 
-          const card = document.createElement("div");
-          card.className = "doc-card";
+  <div class="docs-grid" role="list">
 
-          card.innerHTML = `
-            <div class="doc-title">${d.title}</div>
-            <div class="doc-desc">${d.description}</div>
-          `;
+    <div class="doc-card" role="listitem" tabindex="0"
+         onclick="openDoc('1_devsecops_workflow.md', 'Build DevSecOps Workflow')"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDoc('1_devsecops_workflow.md','Build DevSecOps Workflow')">
+      <div class="doc-num">doc · 001</div>
+      <div class="doc-icon">⬡</div>
+      <div class="doc-title">Build DevSecOps Workflow</div>
+      <p class="doc-desc">Tools and pipeline patterns for integrating security testing into DevSecOps workflows.</p>
+      <span class="doc-arrow">→</span>
+    </div>
 
-          a.appendChild(card);
-          grid.appendChild(a);
-        });
-      } catch (err) {
-        console.error("Error loading docs.json", err);
-      }
+    <div class="doc-card" role="listitem" tabindex="0"
+         onclick="openDoc('2_frameworks.md', 'Frameworks for Hacking')"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDoc('2_frameworks.md','Frameworks for Hacking')">
+      <div class="doc-num">doc · 002</div>
+      <div class="doc-icon">⬡</div>
+      <div class="doc-title">Frameworks for Hacking</div>
+      <p class="doc-desc">Security testing frameworks, methodologies, and structured approaches to offensive work.</p>
+      <span class="doc-arrow">→</span>
+    </div>
+
+    <div class="doc-card" role="listitem" tabindex="0"
+         onclick="openDoc('3_apis.md', 'API Playbook')"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDoc('3_apis.md','API Playbook')">
+      <div class="doc-num">doc · 003</div>
+      <div class="doc-icon">⬡</div>
+      <div class="doc-title">API Playbook</div>
+      <p class="doc-desc">Fundamentals, testing methodology, and security considerations for REST APIs.</p>
+      <span class="doc-arrow">→</span>
+    </div>
+
+  </div>
+
+  <footer role="contentinfo">
+    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/docs$</div>
+    <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
+  </footer>
+
+</div>
+
+<!-- DOC OVERLAY -->
+<div id="md-overlay" role="dialog" aria-modal="true" aria-label="Documentation viewer">
+  <div class="md-layout">
+    <nav class="md-sidebar" aria-label="Document navigation">
+      <div class="md-sidebar-label">docs</div>
+      <ul class="md-sidebar-links" role="list">
+        <li data-file="1_devsecops_workflow.md" data-title="Build DevSecOps Workflow"
+            onclick="openDoc(this.dataset.file, this.dataset.title)">DevSecOps Workflow</li>
+        <li data-file="2_frameworks.md" data-title="Frameworks for Hacking"
+            onclick="openDoc(this.dataset.file, this.dataset.title)">Hacking Frameworks</li>
+        <li data-file="3_apis.md" data-title="API Playbook"
+            onclick="openDoc(this.dataset.file, this.dataset.title)">API Playbook</li>
+      </ul>
+    </nav>
+    <div class="md-main">
+      <button class="md-close" onclick="closeOverlay()" aria-label="Close document">← close</button>
+      <h1 class="md-doc-title" id="md-overlay-title"></h1>
+      <div id="md-content"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+<script>
+  const overlay = document.getElementById("md-overlay");
+  const mdTitle = document.getElementById("md-overlay-title");
+  const mdContent = document.getElementById("md-content");
+  const converter = new showdown.Converter({ ghCodeBlocks: true, tables: true });
+  let currentFile = null;
+
+  function openDoc(file, title) {
+    if (currentFile !== file) {
+      currentFile = file;
+      mdTitle.textContent = title;
+      mdContent.innerHTML = '<span style="font-family:var(--mono);font-size:12px;color:var(--muted)">loading…</span>';
+      fetch(file)
+        .then(r => r.text())
+        .then(md => { mdContent.innerHTML = converter.makeHtml(md); })
+        .catch(() => { mdContent.innerHTML = '<p style="color:#FF6B6B;font-family:var(--mono);font-size:13px">Error loading file.</p>'; });
     }
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
 
-    loadDocs();
-  </script>
+    // update sidebar active state
+    document.querySelectorAll(".md-sidebar-links li").forEach(li => {
+      li.classList.toggle("active", li.dataset.file === file);
+    });
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeOverlay(); });
+</script>
 </body>
 </html>

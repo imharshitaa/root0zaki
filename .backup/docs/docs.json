@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Build DevSecOps Workflow",
+    "description": "Tools used for security testing in devsecops",
+    "file": "1_devsecops_workflow.md"
+  },
+  {
+    "title": "Frameworks for Hacking",
+    "description": "Framework used for security testing",
+    "file": "2_frameworks.md"
+  },
+  {
+    "title": "API Playbook",
+    "description": "Basics to know about APIs",
+    "file": "3_apis.md"
+  }
+]

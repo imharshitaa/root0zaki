@@ -3,3082 +3,922 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Root0zaki</title>
+  <title>harshitaa — cybersecurity engineer</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    @font-face {
-      font-family: "DepartureMono-Regular";
-      src: url("https://cdn.jsdelivr.net/gh/woffz/a3@main/DepartureMono-Regular/DepartureMono-Regular.woff2") format("woff2");
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-
     :root {
-      --bg-main: #020612;
-      --bg-panel: rgba(4, 11, 25, 0.88);
-      --cyan: #49f3ff;
-      --blue: #4d7eff;
-      --green: #40ffa5;
-      --text: #dbf6ff;
-      --text-dim: #8eb8d2;
-      --line: rgba(73, 243, 255, 0.32);
+      --bg: #09070D;
+      --bg-elevated: #110D18;
+      --purple: #8B5CF6;
+      --lavender: #B18CFF;
+      --pink: #FF4FA3;
+      --text: #F0EBF8;
+      --text-dim: #8B8299;
+      --border: rgba(139, 92, 246, 0.2);
+      --border-hover: rgba(139, 92, 246, 0.45);
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 20px 0 28px;
-      color: var(--text);
       font-family: "Space Grotesk", sans-serif;
-      background-color: var(--bg-main);
-      background:
-        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
-        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
-        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
-        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--lavender);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--pink);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    nav a:hover {
+      color: var(--purple);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 100px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ASCII Portrait */
+    .portrait-frame {
       position: relative;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      padding: 16px;
+    }
+
+    .portrait-label {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+    }
+
+    #ascii-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 6px;
+      line-height: 1.1;
+      white-space: pre;
+      color: var(--text);
       overflow-x: hidden;
     }
 
-    .wrap {
-      width: min(1100px, 92vw);
-      margin: 0 auto;
-      padding: 6px 0 14px;
-      position: relative;
-      z-index: 1;
-      transform: scale(0.96);
-      transform-origin: top center;
+    .hero-content {
+      padding-top: 20px;
     }
 
-    .binary-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.24;
+    .hero-heading {
+      font-family: "JetBrains Mono", monospace;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
     }
 
-    .panel {
-      position: relative;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(3px);
-      box-shadow:
-        0 0 0 1px rgba(73, 243, 255, 0.14) inset,
-        0 0 28px rgba(73, 243, 255, 0.08),
-        0 18px 42px rgba(0, 0, 0, 0.55);
+    .hero-heading .accent {
+      color: var(--purple);
     }
 
-    .panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border-radius: inherit;
-      background-image:
-        linear-gradient(rgba(73, 243, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(73, 243, 255, 0.03) 1px, transparent 1px);
-      background-size: 22px 22px, 22px 22px;
-      opacity: 0.25;
+    .hero-subtitle {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 15px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
     }
 
-    .hero {
-      padding: 26px 26px;
-      margin-bottom: 18px;
-      position: relative;
+    .hero-intro {
+      font-size: 16px;
+      color: var(--text);
+      max-width: 520px;
+      margin-bottom: 32px;
     }
 
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1fr 72px;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .signal {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(85, 255, 157, 0.35);
-      background: rgba(85, 255, 157, 0.08);
-      font: 500 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-
-    .signal-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
+    .hero-links {
+      display: flex;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .signal-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--green);
-      box-shadow: 0 0 10px var(--green);
-      animation: pulse 1.4s infinite;
-    }
-
-    h1 {
-      margin: 14px 0 10px;
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: clamp(26px, 5.2vw, 50px);
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: 0.02em;
-      color: var(--cyan);
-      text-shadow: 0 0 16px rgba(73, 243, 255, 0.42);
-      animation: glitch 2.8s infinite;
-    }
-
-    .subtitle {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: clamp(19px, 2.1vw, 21px);
-      line-height: 1.5;
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-weight: 400;
-    }
-
-    .pitch-block {
-      margin-top: 14px;
-      max-width: 820px;
-    }
-
-    .pitch-label {
-      margin: 0 0 8px;
-      color: var(--cyan);
-      font: 600 14px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .pitch-text {
-      margin: 0;
-      color: #cce8fb;
-      font-size: 15px;
-      line-height: 1.55;
-    }
-
-    .codetag {
+    .link-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(98, 164, 255, 0.45);
-      background: rgba(98, 164, 255, 0.14);
-      color: #9ec6ff;
-      font: 500 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: var(--text);
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .link-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      background: rgba(139, 92, 246, 0.08);
+    }
+
+    .link-btn.primary {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: var(--bg);
+    }
+
+    .link-btn.primary:hover {
+      background: var(--lavender);
+      border-color: var(--lavender);
+      color: var(--bg);
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--lavender);
       text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .codetag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #8ab6ff;
-      box-shadow: 0 0 10px #8ab6ff;
-      animation: pulse-blue 1.4s infinite;
-    }
-
-    .grid {
+    /* About Section */
+    .about-content {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 22px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
     }
 
-    .card {
-      min-height: 160px;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 14px;
-      border: 1px solid rgba(77, 126, 255, 0.34);
-      background:
-        linear-gradient(120deg, rgba(77, 126, 255, 0.12), transparent 55%),
-        rgba(4, 10, 22, 0.9);
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .about-text {
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .about-text p {
+      margin-bottom: 16px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cert-mini {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--bg-elevated);
+    }
+
+    .cert-mini h4 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--pink);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cert-item:last-child {
+      border-bottom: none;
+    }
+
+    .cert-name {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .cert-org {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--bg-elevated);
+      transition: border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .project-index {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: var(--pink);
+      letter-spacing: 1px;
+    }
+
+    .project-title {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .project-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: var(--purple);
+      background: rgba(139, 92, 246, 0.12);
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .project-link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .project-link:hover {
+      color: var(--pink);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill-category {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      background: var(--bg-elevated);
+    }
+
+    .skill-category h4 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-item {
+      font-size: 13px;
+      color: var(--text);
+      padding: 6px 12px;
+      background: rgba(139, 92, 246, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* Research Section */
+    .research-list {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 20px 18px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      gap: 16px;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--cyan);
-      box-shadow: 0 0 22px rgba(73, 243, 255, 0.28);
+    .research-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      transition: border-color 0.2s ease;
     }
 
-    .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid rgba(73, 243, 255, 0.6);
-      display: grid;
-      place-items: center;
-      font-family: "Share Tech Mono", monospace;
-      font-size: 20px;
-      color: var(--cyan);
-      background: rgba(73, 243, 255, 0.1);
+    .research-item:hover {
+      border-color: var(--border-hover);
     }
 
-    .title {
-      margin: 0;
-      font: 700 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .desc {
-      margin: 0;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    .title {
-      margin: 0;
-      font: 700 20px/1 "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      color: #f0fbff;
-      text-transform: uppercase;
-    }
-
-    .desc {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .section {
-      margin-bottom: 14px;
-      padding: 16px;
-    }
-
-    .section-heading {
-      margin: 0 0 14px;
-      color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      font-size: 18px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .social-icons {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .social-link {
-      text-decoration: none;
-      border: 1px solid rgba(86, 246, 255, 0.25);
-      border-radius: 12px;
-      background: rgba(8, 14, 28, 0.82);
+    .research-info h4 {
+      font-size: 15px;
       color: var(--text);
-      padding: 12px;
+      margin-bottom: 4px;
+    }
+
+    .research-info p {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .research-arrow {
+      color: var(--pink);
+      font-size: 18px;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-card {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 16px;
-      font-size: 14px;
-      font-family: "Share Tech Mono", monospace;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      transition: border-color 0.2s ease;
     }
 
-    .social-logo {
-      display: inline-flex;
+    .contact-card:hover {
+      border-color: var(--purple);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 24px;
-      width: 24px;
-      height: 24px;
-      color: #f0fbff;
-      font: 700 14px "Share Tech Mono", monospace;
-      border: 1px solid rgba(86, 246, 255, 0.28);
-      border-radius: 6px;
-      background: rgba(86, 246, 255, 0.04);
-      overflow: hidden;
-    }
-
-    .social-logo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .social-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .hero-social {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-      margin-top: 6px;
-    }
-
-
-    .hero-social a {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.35);
-      background: rgba(8, 14, 28, 0.82);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .hero-social a:hover {
-      transform: translateY(-2px);
-      border-color: var(--green);
-      box-shadow: 0 0 12px rgba(64, 255, 165, 0.22);
-    }
-
-    .hero-social img {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .badge-section {
-      padding: 18px;
-      margin-bottom: 18px;
-    }
-
-    .badge-carousel {
-      position: relative;
-      display: grid;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .badge-viewport {
-      overflow: hidden;
-      border-radius: 14px;
-      border: 1px solid rgba(86, 246, 255, 0.18);
-      background: rgba(6, 11, 22, 0.6);
-    }
-
-    .badge-track {
-      display: flex;
-      gap: 16px;
-      padding: 16px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-    }
-
-    .badge-track::-webkit-scrollbar {
-      display: none;
-    }
-
-    .badge-item {
-      min-width: 150px;
-      max-width: 150px;
-      flex: 0 0 auto;
-      display: grid;
-      gap: 8px;
-      place-items: center;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(86, 246, 255, 0.15);
-      background: rgba(8, 14, 28, 0.78);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-      position: relative;
-    }
-
-    .badge-item img {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      display: block;
-      filter: drop-shadow(0 0 6px rgba(73, 243, 255, 0.2));
-    }
-
-    .badge-item.badge-fallback::before {
-      content: "Badge";
-      font: 600 12px "Share Tech Mono", monospace;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .badge-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 34px;
-      height: 34px;
+      border: 1px solid var(--border);
       border-radius: 8px;
-      border: 1px solid rgba(86, 246, 255, 0.35);
-      background: rgba(6, 11, 22, 0.85);
-      color: var(--cyan);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-      z-index: 2;
-    }
-
-    .badge-nav:hover {
-      border-color: var(--green);
-      color: var(--green);
-      box-shadow: 0 0 12px rgba(64, 255, 165, 0.2);
-    }
-
-    .badge-nav.left {
-      left: -8px;
-    }
-
-    .badge-nav.right {
-      right: -8px;
-    }
-
-    .triangle {
-      width: 0;
-      height: 0;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-    }
-
-    .triangle.left {
-      border-right: 10px solid currentColor;
-      margin-left: 2px;
-    }
-
-    .triangle.right {
-      border-left: 10px solid currentColor;
-      margin-right: 2px;
-    }
-
-    .github-window {
-      border: 1px solid rgba(86, 246, 255, 0.25);
-      border-radius: 12px;
-      overflow: hidden;
-      background: rgba(8, 14, 28, 0.82);
-    }
-
-    .github-top {
-      display: block;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: var(--green);
-      font: 500 15px "Share Tech Mono", monospace;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.15);
-    }
-
-    .github-preview {
-      display: block;
-      width: 100%;
-      min-height: 250px;
-      object-fit: cover;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 10px;
-    }
-
-    .contact-form label {
-      font: 500 15px "Share Tech Mono", monospace;
-      color: var(--text-dim);
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      margin-top: 6px;
-      padding: 10px;
-      background: rgba(5, 9, 18, 0.9);
-      border: 1px solid rgba(86, 246, 255, 0.35);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .contact-form button {
-      width: fit-content;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      padding: 10px 16px;
-      border-radius: 10px;
-      font: 500 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .contact-form button:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
-    }
-
-    .contact-status {
-      margin: 0;
-      color: var(--text-dim);
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .footer {
-      text-align: center;
-      color: var(--text-dim);
-      font: 14px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      padding-bottom: 20px;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.6; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes glitch {
-      0%, 91%, 100% { transform: translate(0); }
-      92% { transform: translate(-1px, 1px); }
-      94% { transform: translate(1px, -1px); }
-      96% { transform: translate(-1px, 0); }
-      98% { transform: translate(1px, 0); }
-    }
-
-    @keyframes pulse-blue {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.65; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @media (max-width: 920px) {
-      .hero-layout {
-        grid-template-columns: 1fr;
-      }
-      .hero-social {
-        flex-direction: row;
-        justify-content: flex-start;
-      }
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .social-icons {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .hero {
-        padding: 22px 18px;
-      }
-    }
-
-    /* Compact one-page dashboard override */
-    body {
-      height: 100vh;
-      padding: 8px 0 10px;
-      overflow: hidden;
-    }
-
-    .wrap {
-      width: min(1220px, 96vw);
-      height: calc(100vh - 18px);
-      transform: none;
-      padding: 0;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      gap: 6px;
-    }
-
-    .dashboard-grid {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 260px;
-      grid-template-rows: 0.9fr 0.6fr 1.05fr;
-      gap: 10px;
-    }
-
-    .hero {
-      grid-column: 1;
-      grid-row: 1;
-      margin-bottom: 0;
-      padding: 14px 16px;
-    }
-
-    .hero-layout {
-      grid-template-columns: 1fr 52px;
-      gap: 12px;
-    }
-
-    .signal { font-size: 11px; padding: 5px 9px; gap: 8px; }
-    .codetag { font-size: 11px; padding: 4px 8px; gap: 7px; }
-
-    h1 {
-      margin: 8px 0 6px;
-      font-size: clamp(24px, 2.9vw, 36px);
-    }
-
-    .subtitle { font-size: clamp(13px, 1.2vw, 16px); line-height: 1.35; }
-    .pitch-block { margin-top: 8px; }
-    .pitch-text { font-size: 12px; line-height: 1.4; max-width: 760px; }
-
-    .hero-social { gap: 7px; margin-top: 0; }
-    .hero-social a { width: 52px; height: 52px; border-radius: 12px; }
-    .hero-social img { width: 30px; height: 30px; }
-
-    .metrics-panel {
-      grid-column: 2;
-      grid-row: 1;
-      padding: 10px;
-      display: grid;
-      align-items: center;
-    }
-
-    .metrics-bars {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      align-content: center;
-    }
-
-    .metric-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .metric-wrap {
-      width: 100%;
-      height: 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(86, 246, 255, 0.25);
-      background: rgba(7, 13, 26, 0.84);
-      padding: 2px;
-      display: flex;
-      align-items: center;
-    }
-
-    .metric-bar {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, rgba(73, 243, 255, 0.95), rgba(77, 126, 255, 0.85));
-      box-shadow: 0 0 10px rgba(73, 243, 255, 0.28);
-    }
-
-    .metric-label {
-      font: 700 10px "Share Tech Mono", monospace;
-      color: #def8ff;
-      letter-spacing: 0.03em;
-      min-width: 20px;
-      text-align: left;
-    }
-
-    .quick-grid {
-      grid-column: 1;
-      grid-row: 2;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .mini-card {
-      min-height: 0;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 10px;
-      border: 1px solid rgba(77, 126, 255, 0.34);
-      background: linear-gradient(120deg, rgba(77, 126, 255, 0.12), transparent 55%), rgba(4, 10, 22, 0.9);
-      padding: 8px;
-      display: grid;
-      gap: 4px;
-      align-content: center;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .mini-card:hover { transform: translateY(-2px); border-color: var(--cyan); }
-
-    .mini-head {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 8px;
-      font-family: "Share Tech Mono", monospace;
-      text-transform: uppercase;
-    }
-
-    .mini-code { color: var(--cyan); font-weight: 700; font-size: 15px; line-height: 1; }
-    .mini-title { color: #f0fbff; font-size: 14px; line-height: 1; letter-spacing: 0.02em; }
-    .mini-desc { margin: 0; color: var(--text-dim); font-size: 11px; line-height: 1.3; }
-
-    .badge-stack-panel {
-      grid-column: 2;
-      grid-row: 2 / 4;
-      padding: 10px 9px;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 6px;
-      align-items: stretch;
-      background: var(--bg-panel);
-    }
-
-    .badge-shell {
-      min-height: 0;
-      border: 1px solid rgba(86, 246, 255, 0.2);
-      border-radius: 10px;
-      background: rgba(6, 11, 22, 0.58);
-      padding: 6px;
-      display: flex;
-      max-height: 500px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
-      scrollbar-width: none;
-    }
-
-    .badge-shell::-webkit-scrollbar {
-      display: none;
-    }
-
-    .badge-stack {
-      min-height: 0;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      padding: 4px 2px;
-    }
-
-    .badge-stack .badge-item,
-    .badge-stack .badge {
-      width: 220px;
-      height: auto;
-      margin: 16px auto;
-      display: block;
-      flex: 0 0 auto;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.26);
-      background: rgba(9, 16, 30, 0.88);
-      box-shadow: inset 0 0 0 1px rgba(73, 243, 255, 0.08);
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      scroll-snap-align: start;
-    }
-
-    .badge-stack .badge-item:hover {
-      transform: scale(1.05);
-      border-color: rgba(64, 255, 165, 0.5);
-      box-shadow: 0 0 14px rgba(64, 255, 165, 0.16);
-    }
-
-    .badge-stack .badge-item img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    .badge-vnav {
-      width: 34px;
-      justify-self: center;
-      height: 24px;
-      border-radius: 8px;
-      border: 1px solid rgba(86, 246, 255, 0.38);
-      background: rgba(8, 14, 28, 0.88);
-      color: var(--cyan);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .badge-vnav:hover {
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .triangle.up {
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-bottom: 9px solid currentColor;
-      border-top: 0;
-    }
-
-    .triangle.down {
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 9px solid currentColor;
-      border-bottom: 0;
-    }
-
-    .bottom-grid {
-      grid-column: 1;
-      grid-row: 3;
-      min-height: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .section.compact {
-      margin: 0;
-      padding: 8px;
-      min-height: 0;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 6px;
-    }
-
-    .section.compact .section-heading {
-      margin: 0;
+      font-family: "JetBrains Mono", monospace;
       font-size: 16px;
-      line-height: 1;
+      color: var(--purple);
+      background: rgba(139, 92, 246, 0.08);
     }
 
-    .github-title {
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: 15px !important;
-      letter-spacing: 0.03em;
-    }
-
-    .github-window {
-      border-radius: 10px;
-      min-height: 0;
-      height: 100%;
-      display: grid;
-      grid-template-rows: auto 1fr;
-    }
-
-    .github-top { padding: 7px 10px; font-size: 12px; }
-    .github-preview { min-height: 0; height: 100%; object-fit: cover; }
-
-    .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      align-content: start;
-    }
-
-    .contact-form label { font-size: 11px; margin: 0; }
-
-    .contact-form input,
-    .contact-form textarea {
-      margin-top: 4px;
-      padding: 6px;
-      font-size: 11px;
-      border-radius: 6px;
-    }
-
-    .contact-form textarea {
-      resize: none;
-      min-height: 34px;
-      height: 34px;
-    }
-
-    .contact-form button {
-      grid-column: 1 / 2;
-      padding: 7px 11px;
-      font-size: 12px;
-      border-radius: 8px;
-    }
-
-    .contact-status {
-      grid-column: 1 / -1;
-      font-size: 11px;
-      line-height: 1.35;
-      margin-top: -2px;
-    }
-
-    .footer {
-      padding-bottom: 0;
-      font-size: 11px;
-      margin: 0;
-    }
-
-    /* Dashboard polish pass */
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      height: auto;
-      min-height: 100vh;
-      overflow-y: auto;
-      margin: 0;
-      padding: 20px 0;
-    }
-
-    .wrap {
-      width: min(1280px, 96vw);
-      height: auto;
-      min-height: unset;
-      margin: 0 auto;
-      padding: 20px;
-      gap: 20px;
-    }
-
-    .dashboard,
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-      min-height: unset;
-      grid-template-rows: auto auto auto;
-      align-items: start;
-    }
-
-    .section-grid,
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .panel,
-    .mini-card {
-      border: 1px solid rgba(73, 243, 255, 0.2);
-      border-radius: 18px;
-      padding: 20px;
-      background:
-        linear-gradient(165deg, rgba(73, 243, 255, 0.08), rgba(77, 126, 255, 0.05) 45%, rgba(3, 11, 24, 0.9) 100%),
-        rgba(6, 13, 27, 0.84);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.08);
-    }
-
-    .panel::after {
-      opacity: 0.08;
-    }
-
-    .hero,
-    .metrics-panel,
-    .badge-stack-panel,
-    .bottom-grid,
-    .section.compact {
-      margin: 0;
-      min-height: unset;
-      height: auto;
-    }
-
-    .hero {
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      line-height: 1.4;
-      letter-spacing: 0.5px;
-    }
-
-    h2,
-    .section-heading {
-      font-size: 1.6rem;
-      line-height: 1.6;
-      letter-spacing: 0.5px;
-      text-align: left;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      letter-spacing: 0.5px;
-    }
-
-    p,
-    .subtitle,
-    .pitch-text,
-    .mini-desc,
-    .desc {
-      font-size: 1rem;
-      line-height: 1.6;
-      letter-spacing: 0.5px;
-    }
-
-    .small-text,
-    .footer,
-    .contact-status,
-    .metric-label,
-    .contact-form label {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .mini-card {
-      padding: 16px;
-      gap: 12px;
-      border-radius: 18px;
-      min-height: 210px;
-      justify-content: flex-start;
-      background:
-        linear-gradient(180deg, rgba(9, 18, 36, 0.94), rgba(4, 10, 22, 0.96)),
-        rgba(4, 10, 22, 0.95);
-      border: 1px solid rgba(77, 126, 255, 0.3);
-      box-shadow:
-        inset 0 0 0 1px rgba(73, 243, 255, 0.05),
-        0 0 16px rgba(77, 126, 255, 0.08);
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .mini-head {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      text-transform: uppercase;
-    }
-
-    .mini-head.inline {
-      flex-direction: row;
-      align-items: center;
-    }
-
-    .mini-code {
-      font-size: 1.5rem;
-      width: 66px;
-      height: 66px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      border: 1px solid rgba(73, 243, 255, 0.45);
-      background: rgba(73, 243, 255, 0.12);
-      font-family: "Share Tech Mono", monospace;
-      letter-spacing: 0.03em;
-      color: var(--cyan);
-    }
-
-    .mini-title {
-      font-size: 1.5rem;
-      letter-spacing: 0.08em;
-      margin-top: 2px;
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      color: #dff4ff;
-      line-height: 1;
-    }
-
-    .mini-desc {
-      color: #97b8d2;
-      font-size: 0.875rem;
-      line-height: 1.55;
-      margin-left: 8px;
-    }
-
-    .mini-card:hover,
-    .panel:hover {
-      box-shadow:
-        inset 0 0 0 1px rgba(73, 243, 255, 0.2),
-        0 0 22px rgba(73, 243, 255, 0.22),
-        0 0 46px rgba(77, 126, 255, 0.12);
-      border-color: rgba(73, 243, 255, 0.45);
-    }
-
-    .bottom-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .section.compact {
-      padding: 20px;
-      gap: 12px;
-    }
-
-    .github-title {
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: 1.2rem !important;
-      text-align: left;
-    }
-
-    .github-window {
-      min-height: 240px;
-      height: auto;
-    }
-
-    .contact-form {
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-
-    .contact-form label {
-      margin: 0;
-      width: 100%;
-      text-align: left;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      margin-top: 6px;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-
-    .contact-form textarea {
-      min-height: 72px;
-      height: 72px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      justify-self: start;
-      align-self: start;
-      margin-top: 2px;
-      padding: 10px 16px;
-      font-size: 0.95rem;
-    }
-
-    .metrics-panel {
-      padding: 20px;
-    }
-
-    .metrics-bars {
-      gap: 12px;
-    }
-
-    .metric-item {
-      gap: 10px;
-    }
-
-    .metric-wrap {
-      height: 16px;
-      border-radius: 10px;
-    }
-
-    .metric-bar {
-      border-radius: 8px;
-    }
-
-    .badge-stack-panel {
-      padding: 20px 14px;
-      gap: 12px;
-    }
-
-    .badge-shell {
-      max-height: 500px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
-      padding: 8px;
-    }
-
-    .badge-stack,
-    .badge-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-      width: 100%;
-    }
-
-    .badge-stack .badge-item,
-    .badge-stack .badge {
-      width: 220px;
-      height: auto;
-      margin: 0 auto;
-      display: block;
-      border-radius: 12px;
-      scroll-snap-align: start;
-    }
-
-    .badge-stack .badge-item:hover {
-      transform: scale(1.05);
-      transition: 0.2s ease;
-    }
-
-    .badge-vnav {
-      width: 40px;
-      height: 28px;
-    }
-
-    @media (max-width: 1100px) {
-      body { overflow: auto; height: auto; }
-      .wrap { height: auto; min-height: calc(100vh - 18px); padding: 16px; }
-      .dashboard-grid, .dashboard { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .metrics-panel, .badge-stack-panel, .quick-grid, .bottom-grid, .hero { grid-column: 1; grid-row: auto; }
-      .metrics-panel { min-height: 180px; }
-      .badge-stack {
-        height: 320px;
-      }
-      .section-grid, .quick-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-      .bottom-grid {
-        grid-template-columns: 1fr;
-      }
-      .contact-form {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Desktop layout placement (fluid, non-locked) */
-    @media (min-width: 1024px) {
-      html, body {
-        height: auto;
-        min-height: 100%;
-        overflow: visible;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      .wrap {
-        width: 100%;
-        max-width: none;
-        height: auto;
-        margin: 0;
-        padding: 16px;
-      }
-
-      .dashboard-grid {
-        height: auto;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        gap: 10px;
-      }
-
-      .hero { grid-column: 1; grid-row: 1; }
-      .metrics-panel { grid-column: 2; grid-row: 1; }
-      .quick-grid { grid-column: 1; grid-row: 2; gap: 16px; }
-      .badge-stack-panel { grid-column: 2; grid-row: 2; padding: 12px; }
-      .bottom-grid { grid-column: 1; grid-row: 3; grid-template-columns: 1fr; }
-      .contact-panel { grid-column: 2; grid-row: 3; }
-
-      .section-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .mini-card {
-        padding: 14px;
-        min-height: 142px;
-        gap: 6px;
-      }
-
-      .mini-head {
-        gap: 8px;
-      }
-
-      .mini-code {
-        width: 46px;
-        height: 46px;
-        font-size: 0.9rem;
-        border-radius: 12px;
-      }
-
-      .mini-title {
-        font-size: 0.95rem;
-        letter-spacing: 0.04em;
-      }
-
-      .mini-desc {
-        font-size: 0.72rem;
-        line-height: 1.35;
-      }
-
-      .badge-carousel {
-        display: grid;
-        grid-template-columns: 28px minmax(0, 1fr) 28px;
-        gap: 10px;
-        align-items: center;
-      }
-
-      .badge-carousel-track {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        padding: 2px 0;
-      }
-
-      .badge-carousel-track::-webkit-scrollbar {
-        display: none;
-      }
-
-      .badge-carousel-track .badge-item,
-      .badge-carousel-track .badge {
-        width: 96px;
-        flex: 0 0 auto;
-        margin: 0;
-      }
-
-      .badge-carousel-btn {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        border: 1px solid rgba(86, 246, 255, 0.35);
-        background: rgba(8, 14, 28, 0.88);
-        color: var(--cyan);
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-      }
-
-      .badge-carousel-btn:hover {
-        border-color: var(--green);
-        color: var(--green);
-      }
-
-      .contact-panel .contact-form {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-    }
-
-    /* Final tune: fluid laptop dashboard + compact quick cards */
-    @media (min-width: 1024px) {
-      html, body {
-        overflow: visible !important;
-      }
-
-      body {
-        padding: 0 !important;
-      }
-
-      .wrap {
-        height: auto !important;
-        overflow: visible !important;
-      }
-
-      .dashboard-grid {
-        height: auto !important;
-        overflow: visible !important;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto auto auto auto !important;
-      }
-
-      .quick-grid .mini-card {
-        min-height: 132px;
-        padding: 12px;
-        gap: 6px;
-      }
-
-      .quick-grid .mini-head {
-        gap: 6px;
-      }
-
-      .quick-grid .mini-code {
-        width: 40px;
-        height: 40px;
-        font-size: 0.82rem;
-        border-radius: 10px;
-      }
-
-      .quick-grid .mini-title {
-        font-size: 0.95rem;
-        letter-spacing: 0.04em;
-      }
-
-      .quick-grid .mini-desc {
-        font-size: 0.8rem;
-        line-height: 1.3;
-        margin-left: 8px;
-      }
-
-      .badge-stack-panel {
-        grid-column: 1;
-        grid-row: 3;
-        padding: 10px 12px;
-      }
-
-      .contact-panel {
-        grid-column: 1;
-        grid-row: 4;
-      }
-
-      .bottom-grid {
-        grid-column: 2;
-        grid-row: 2 / 5;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        gap: 0;
-        min-height: 0;
-      }
-
-      .github-panel {
-        height: 100%;
-        min-height: 0;
-      }
-
-      .github-panel .github-window {
-        height: 100%;
-      }
-
-      .badge-carousel-track .badge-item,
-      .badge-carousel-track .badge {
-        width: 88px;
-      }
-
-      .github-panel {
-        padding: 12px;
-      }
-
-      .github-panel .section-heading {
-        margin-bottom: 8px;
-        font-size: 1.05rem;
-        line-height: 1.2;
-      }
-
-    .github-panel .github-window {
-      min-height: 220px;
-      max-height: 320px;
-      height: clamp(220px, 32vh, 320px);
-      border-radius: 12px;
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      border: 1px solid rgba(86, 246, 255, 0.28);
-      background: rgba(8, 14, 28, 0.92);
-    }
-
-    .github-panel .github-window-link {
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .github-panel .github-window-link:hover {
-      border-color: rgba(73, 243, 255, 0.42);
-      box-shadow: 0 0 16px rgba(73, 243, 255, 0.18);
-      transform: translateY(-1px);
-    }
-
-    .github-panel .mac-window-bar {
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      border-bottom: 1px solid rgba(130, 150, 180, 0.25);
-      background: linear-gradient(180deg, rgba(10, 30, 58, 0.95) 0%, rgba(7, 20, 41, 0.95) 100%);
-    }
-
-    .github-panel .mac-dots {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .github-panel .mac-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
-    }
-
-    .github-panel .mac-dot.red { background: #ff5f56; }
-    .github-panel .mac-dot.yellow { background: #ffbd2e; }
-    .github-panel .mac-dot.green { background: #27c93f; }
-
-    .github-panel .mac-title {
-      color: #9ac7e8;
-      font: 500 11px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
-      margin-right: 2px;
-    }
-
-    .github-panel .github-top {
-      padding: 8px 10px;
-      font-size: 12px;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.15);
-      color: var(--green);
-      font-family: "Share Tech Mono", monospace;
-    }
-
-      .github-panel .github-preview {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background: rgba(5, 11, 24, 0.9);
-      }
-    }
-
-    /* Contact form final polish */
-    .contact-panel {
-      padding: 18px;
-      align-self: start;
-      grid-template-rows: auto auto;
-    }
-
-    .contact-panel .section-heading {
-      margin: 0 0 12px;
-      text-align: left;
-    }
-
-    .contact-panel .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items: start;
-      align-content: start;
-    }
-
-    .contact-panel .contact-form label {
-      margin: 0;
-      width: 100%;
-      text-align: left;
-      font: 500 13px "Share Tech Mono", monospace;
-      color: var(--text-dim);
-      letter-spacing: 0.03em;
-    }
-
-    .contact-panel .contact-form label:nth-of-type(1) { grid-column: 1; grid-row: 1; }
-    .contact-panel .contact-form label:nth-of-type(2) { grid-column: 2; grid-row: 1; }
-    .contact-panel .contact-form label:nth-of-type(3) { grid-column: 1; grid-row: 2; }
-    .contact-panel .contact-form label:nth-of-type(4) { grid-column: 2; grid-row: 2; }
-
-    .contact-panel .contact-form input,
-    .contact-panel .contact-form textarea {
-      width: 100%;
-      margin-top: 6px;
-      padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(86, 246, 255, 0.35);
-      background: rgba(2, 10, 24, 0.86);
+    .contact-info h4 {
+      font-size: 14px;
       color: var(--text);
-      font: 500 14px "Space Grotesk", sans-serif;
-      line-height: 1.3;
+      margin-bottom: 2px;
     }
 
-    .contact-panel .contact-form input {
-      height: 44px;
-    }
-
-    .contact-panel .contact-form textarea {
-      min-height: 122px;
-      height: 122px;
-      resize: vertical;
-    }
-
-    .contact-panel .contact-form button {
-      grid-column: 1 / 2;
-      margin-top: 6px;
-      justify-self: start;
-      align-self: start;
-      padding: 12px 22px;
-      border-radius: 14px;
-      font: 600 18px "Share Tech Mono", monospace;
-    }
-
-    .contact-panel .contact-status {
-      grid-column: 1 / -1;
-      margin: 2px 0 0;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    @media (min-width: 1024px) {
-      .contact-panel .contact-form button {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .contact-panel .contact-form {
-        grid-template-columns: 1fr;
-      }
-      .contact-panel .contact-form label:nth-of-type(1),
-      .contact-panel .contact-form label:nth-of-type(2),
-      .contact-panel .contact-form label:nth-of-type(3),
-      .contact-panel .contact-form label:nth-of-type(4) {
-        grid-column: 1;
-        grid-row: auto;
-      }
-      .contact-panel .contact-form button {
-        grid-column: 1;
-      }
-    }
-
-    /* Contact section hotfix */
-    .section.compact.contact-panel {
-      display: block;
-      min-height: 0;
-      padding: 16px 18px;
-      overflow: hidden;
-      align-self: start;
-    }
-
-    .section.compact.contact-panel .section-heading {
-      margin: 0 0 10px;
-      font-size: 20px;
-      line-height: 1.1;
-    }
-
-    .section.compact.contact-panel .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 18px;
-      align-items: start;
-      align-content: start;
-    }
-
-    .section.compact.contact-panel .contact-form label {
+    .contact-info p {
       font-size: 13px;
-      line-height: 1.2;
-      margin: 0;
+      color: var(--text-dim);
     }
 
-    .section.compact.contact-panel .contact-form input,
-    .section.compact.contact-panel .contact-form textarea {
-      margin-top: 6px;
-      padding: 9px 12px;
-      border-radius: 14px;
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
     }
 
-    .section.compact.contact-panel .contact-form input {
-      height: 40px;
-    }
-
-    .section.compact.contact-panel .contact-form textarea {
-      min-height: 74px;
-      height: 74px;
-      resize: none;
-    }
-
-    .section.compact.contact-panel .contact-form button {
-      grid-column: 1 / -1;
-      justify-self: start;
-      margin-top: 4px;
-      padding: 10px 18px;
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .section.compact.contact-panel .contact-status {
-      grid-column: 1 / -1;
-      margin: 0;
+    .footer-text {
+      font-family: "JetBrains Mono", monospace;
       font-size: 12px;
-      line-height: 1.3;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
     }
 
-    @media (max-width: 900px) {
-      .section.compact.contact-panel .contact-form {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
+    .footer-text span {
+      color: var(--pink);
     }
-
-    /* Contact panel bottom-border visibility fix */
-    @media (min-width: 1024px) {
-      .wrap {
-        overflow: visible !important;
-        padding-bottom: 14px !important;
-      }
-
-      .dashboard-grid {
-        height: auto !important;
-        min-height: 0 !important;
-      }
-
-      .section.compact.contact-panel {
-        margin-bottom: 4px;
-      }
-    }
-
-    /* One-page fit fix: keep natural growth on laptop */
-    @media (min-width: 1024px) {
-      html, body {
-        height: auto !important;
-        min-height: 100% !important;
-        overflow: visible !important;
-      }
-
-      .wrap {
-        height: auto !important;
-        padding: 12px 16px 8px !important;
-        grid-template-rows: auto auto;
-        gap: 8px;
-        overflow: visible !important;
-      }
-
-      .dashboard-grid {
-        height: auto !important;
-        min-height: 0;
-        grid-template-rows: auto auto auto auto !important;
-        gap: 10px;
-      }
-
-      .section.compact.contact-panel {
-        padding: 12px 16px;
-        margin: 0;
-      }
-
-      .section.compact.contact-panel .section-heading {
-        margin-bottom: 8px;
-        font-size: 18px;
-      }
-
-      .section.compact.contact-panel .contact-form {
-        gap: 8px 14px;
-      }
-
-      .section.compact.contact-panel .contact-form label {
-        font-size: 12px;
-      }
-
-      .section.compact.contact-panel .contact-form input {
-        height: 36px;
-        padding: 8px 10px;
-      }
-
-      .section.compact.contact-panel .contact-form textarea {
-        height: 64px;
-        min-height: 64px;
-        padding: 8px 10px;
-      }
-
-      .section.compact.contact-panel .contact-form button {
-        margin-top: 2px;
-        padding: 9px 16px;
-        font-size: 14px;
-      }
-
-      .footer {
-        margin: 0;
-        padding: 2px 0 4px;
-        font-size: 11px;
-        line-height: 1;
-        align-self: end;
-      }
-    }
-
-    /* Hero text tune + typewriter */
-    .hero h1 {
-      font-size: clamp(26px, 3.1vw, 38px);
-      font-weight: 700;
-      margin-left: 14px;
-    }
-
-    .hero .subtitle {
-      font-size: clamp(14px, 1.3vw, 17px);
-      margin-top: 12px;
-      margin-left: 14px;
-    }
-
-    .pitch-text.typing-active::after {
-      content: "▋";
-      margin-left: 4px;
-      color: var(--cyan);
-      animation: caret-blink 0.9s steps(1, end) infinite;
-    }
-
-    @keyframes caret-blink {
-      50% {
-        opacity: 0;
-      }
-    }
-
-    /* Restore old GitHub preview design */
-    .github-panel .github-window {
-      min-height: 0;
-      height: 100%;
-      display: grid;
-      grid-template-rows: auto auto 1fr !important;
-      border: 1px solid rgba(86, 246, 255, 0.25);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(8, 14, 28, 0.92);
-      box-shadow: inset 0 0 0 1px rgba(122, 142, 174, 0.12);
-    }
-
-    .github-panel .github-top {
-      display: block;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: var(--green);
-      font: 500 15px "Share Tech Mono", monospace;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.15);
-    }
-
-    .github-panel .github-preview {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 220px;
-      object-fit: cover;
-    }
-
-    .github-panel .github-titlebar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0;
-      min-height: 44px;
-      padding: 10px 14px;
-      border: 0;
-      border-bottom: 1px solid rgba(122, 142, 174, 0.28);
-      border-radius: 0;
-      background: linear-gradient(90deg, rgba(7, 11, 24, 0.98) 0%, rgba(9, 14, 30, 0.98) 55%, rgba(7, 11, 24, 0.98) 100%);
-      box-shadow: inset 0 -1px 0 rgba(122, 142, 174, 0.18);
-    }
-
-    .github-panel .github-titlebar .mac-dots {
-      display: inline-flex;
-      gap: 7px;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-
-    .github-panel .github-titlebar .mac-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
-    }
-
-    .github-panel .github-titlebar .mac-dot.red { background: #ff5f56; }
-    .github-panel .github-titlebar .mac-dot.yellow { background: #ffbd2e; }
-    .github-panel .github-titlebar .mac-dot.green { background: #27c93f; }
-
-    .github-panel .github-titlebar .github-title {
-      margin: 0;
-      font-size: 0.95rem !important;
-      letter-spacing: 0.03em;
-      color: #8f9bb7;
-      text-transform: none;
-      line-height: 1;
-    }
-
-    /* Expand GitHub preview vertically (desktop) */
-    @media (min-width: 1024px) {
-      .bottom-grid {
-        align-self: stretch;
-      }
-
-      .github-panel {
-        height: 100%;
-        min-height: 0;
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-      }
-
-      .github-panel .github-window {
-        height: 100%;
-        min-height: 520px;
-        align-self: stretch;
-      }
-
-      .github-panel .github-preview {
-        min-height: 0;
-        height: 100%;
-      }
-    }
-
-    /* Right column redesign: skills nodes -> metrics -> expanded github */
-    .skills-panel {
-      display: none;
-    }
-
-    .skills-panel .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 12px;
-    }
-
-    .skills-panel .skill-node {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 40px;
-      border-radius: 999px;
-      padding: 8px 14px;
-      border: 1px solid rgba(88, 255, 178, 0.44);
-      background:
-        linear-gradient(180deg, rgba(15, 45, 56, 0.2), rgba(8, 18, 38, 0.9)),
-        rgba(8, 18, 38, 0.92);
-      box-shadow:
-        inset 0 0 0 1px rgba(76, 255, 176, 0.14),
-        0 0 18px rgba(64, 255, 165, 0.2);
-      color: #9cf6c2;
-      font: 600 14px "Space Grotesk", sans-serif;
-      letter-spacing: 0.01em;
-      line-height: 1;
-      white-space: nowrap;
-      text-align: left;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .skills-panel .skill-node:nth-child(3n + 2) {
-      color: #ffd38e;
-      border-color: rgba(255, 188, 98, 0.5);
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 184, 90, 0.18),
-        0 0 18px rgba(255, 156, 74, 0.2);
-    }
-
-    .skills-panel .skill-node:nth-child(3n) {
-      color: #c9a7ff;
-      border-color: rgba(188, 142, 255, 0.5);
-      box-shadow:
-        inset 0 0 0 1px rgba(187, 140, 255, 0.18),
-        0 0 18px rgba(187, 140, 255, 0.2);
-    }
-
-    .skills-panel .skill-node:hover {
-      transform: translateY(-1px);
-      border-color: rgba(128, 255, 199, 0.78);
-      box-shadow:
-        inset 0 0 0 1px rgba(124, 255, 197, 0.25),
-        0 0 24px rgba(64, 255, 165, 0.35);
-    }
-
-    .skills-panel .skill-node:nth-child(3n + 2):hover {
-      border-color: rgba(255, 196, 110, 0.82);
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 194, 107, 0.25),
-        0 0 24px rgba(255, 164, 85, 0.35);
-    }
-
-    .skills-panel .skill-node:nth-child(3n):hover {
-      border-color: rgba(196, 156, 255, 0.84);
-      box-shadow:
-        inset 0 0 0 1px rgba(198, 160, 255, 0.25),
-        0 0 24px rgba(191, 146, 255, 0.35);
-    }
-
-    @media (min-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 2fr 1fr !important;
-        grid-template-rows: auto auto auto auto !important;
-        gap: 10px;
-      }
-
-      .hero { grid-column: 1; grid-row: 1; }
-      .quick-grid { grid-column: 1; grid-row: 2; }
-      .badge-stack-panel { grid-column: 1; grid-row: 3; }
-      .contact-panel { grid-column: 1; grid-row: 4; }
-
-      .skills-panel {
-        display: block;
-        grid-column: 2;
-        grid-row: 1;
-        padding: 10px;
-      }
-
-      .metrics-panel {
-        grid-column: 2;
-        grid-row: 2;
-        padding: 12px;
-      }
-
-      .metrics-bars {
-        gap: 10px;
-      }
-
-      .metric-wrap {
-        height: 16px;
-        border-radius: 999px;
-      }
-
-      .metric-bar {
-        border-radius: 999px;
-      }
-
-      .bottom-grid {
-        grid-column: 2;
-        grid-row: 3 / 5;
-        min-height: 0;
-      }
-
-      .github-panel {
-        height: 100%;
-        min-height: 0;
-        padding: 10px;
-      }
-
-      .github-panel .github-window {
-        min-height: 640px;
-        height: 100%;
-      }
-
-      .github-panel .github-preview {
-        object-fit: contain;
-        object-position: top center;
-        background: #0a1226;
-      }
-    }
-
-    /* GitHub preview crop fix */
-    .github-panel .github-window {
-      overflow: hidden;
-    }
-
-    .github-panel .github-window > a:last-child {
-      display: block;
-      min-height: 0;
-      height: 100%;
-      background: #0a1226;
-    }
-
-    .github-panel .github-preview {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: top center;
-      background: #0a1226;
-    }
-
-    /* Certification badges mac-window title bar */
-    .badge-stack-panel {
-      display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 10px;
-    }
-
-    .badge-titlebar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-height: 44px;
-      padding: 10px 14px;
-      border: 1px solid rgba(122, 142, 174, 0.25);
-      border-radius: 12px;
-      background: linear-gradient(90deg, rgba(7, 11, 24, 0.98) 0%, rgba(9, 14, 30, 0.98) 55%, rgba(7, 11, 24, 0.98) 100%);
-      box-shadow: inset 0 -1px 0 rgba(122, 142, 174, 0.18);
-    }
-
-    .badge-titlebar .mac-dots {
-      display: inline-flex;
-      gap: 7px;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-
-    .badge-titlebar .mac-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
-    }
-
-    .badge-titlebar .mac-dot.red { background: #ff5f56; }
-    .badge-titlebar .mac-dot.yellow { background: #ffbd2e; }
-    .badge-titlebar .mac-dot.green { background: #27c93f; }
-
-    .badge-title {
-      margin: 0;
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: 0.95rem;
-      letter-spacing: 0.03em;
-      color: #8f9bb7;
-      text-transform: none;
-      line-height: 1;
-    }
-
-    /* GitHub frame integrity fix: keep full outer border visible */
-    @media (min-width: 1024px) {
-      .bottom-grid {
-        min-height: 0;
-        overflow: hidden;
-      }
-
-      .github-panel {
-        min-height: 0;
-        height: 100%;
-        overflow: hidden;
-        padding: 10px;
-      }
-
-      .github-panel .github-window {
-        min-height: 0 !important;
-        height: 100%;
-        display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr) !important;
-        overflow: hidden;
-        border-radius: 14px;
-      }
-
-      .github-panel .github-window > a:last-child {
-        min-height: 0;
-        height: 100%;
-        overflow: auto;
-        background: #0a1226;
-      }
-
-      .github-panel .github-preview {
-        width: 100%;
-        height: auto;
-        min-height: 100%;
-        object-fit: cover;
-        object-position: top center;
-      }
-    }
-
-    /* Final GitHub preview fit: fill window area with clean border spacing */
-    @media (min-width: 1024px) {
-      .github-panel {
-        padding: 12px !important;
-        display: grid;
-        grid-template-rows: minmax(0, 1fr);
-        align-content: stretch;
-      }
-
-      .github-panel .github-window {
-        height: 100% !important;
-        min-height: 0 !important;
-        max-height: none !important;
-        display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr) !important;
-        border-radius: 14px;
-        overflow: hidden;
-      }
-
-      .github-panel .github-window > a:last-child {
-        display: block;
-        height: 100%;
-        min-height: 0;
-        overflow: hidden;
-      }
-
-      .github-panel .github-preview {
-        display: block;
-        width: 100%;
-        height: 100% !important;
-        min-height: 0 !important;
-        object-fit: cover;
-        object-position: top center;
-      }
-    }
-
-    /* Final responsive contact box fix */
-    .section.compact.contact-panel {
-      display: grid !important;
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 10px;
-      height: auto !important;
-      min-height: 0 !important;
-      align-self: stretch;
-      overflow: hidden;
-    }
-
-    .section.compact.contact-panel .section-heading {
-      margin: 0 !important;
-      font-size: clamp(16px, 1.35vw, 20px) !important;
-      line-height: 1.15;
-    }
-
-    .section.compact.contact-panel .contact-form {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 14px !important;
-      align-items: start;
-      align-content: start;
-    }
-
-    .section.compact.contact-panel .contact-form label {
-      grid-column: auto !important;
-      grid-row: auto !important;
-      margin: 0 !important;
-      font-size: 12px !important;
-      line-height: 1.2;
-    }
-
-    .section.compact.contact-panel .contact-form input,
-    .section.compact.contact-panel .contact-form textarea {
-      width: 100%;
-      margin-top: 6px;
-      padding: 8px 10px;
-      border-radius: 12px;
-    }
-
-    .section.compact.contact-panel .contact-form input {
-      height: 38px;
-    }
-
-    .section.compact.contact-panel .contact-form textarea {
-      height: 82px;
-      min-height: 82px;
-      resize: vertical;
-    }
-
-    .section.compact.contact-panel .contact-form button {
-      grid-column: 1 / -1 !important;
-      justify-self: start;
-      margin-top: 2px !important;
-      padding: 9px 16px !important;
-      font-size: 14px !important;
-      line-height: 1;
-    }
-
-    .section.compact.contact-panel .contact-status {
-      grid-column: 1 / -1 !important;
-      margin: 0 !important;
-      font-size: 12px !important;
-      line-height: 1.3;
-    }
-
-    @media (max-width: 1100px) {
-      .section.compact.contact-panel .contact-form {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-
-      .section.compact.contact-panel .contact-form button,
-      .section.compact.contact-panel .contact-status {
-        grid-column: 1 !important;
-      }
-    }
-
-    /* Final dashboard row lock: prevent contact overlap */
-    .section.compact.contact-panel {
-      position: relative !important;
-      z-index: 2;
-      isolation: isolate;
-      margin: 0 !important;
-      transform: none !important;
-    }
-
-    @media (min-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 2fr 1fr !important;
-        grid-template-rows: auto auto auto auto !important;
-        align-items: start !important;
-        gap: 10px !important;
-      }
-
-      .hero { grid-column: 1 !important; grid-row: 1 !important; }
-      .skills-panel { grid-column: 2 !important; grid-row: 1 !important; }
-      .quick-grid { grid-column: 1 !important; grid-row: 2 !important; }
-      .metrics-panel { grid-column: 2 !important; grid-row: 2 !important; }
-      .badge-stack-panel { grid-column: 1 !important; grid-row: 3 !important; }
-      .bottom-grid {
-        grid-column: 2 !important;
-        grid-row: 3 / 5 !important;
-        min-height: 0 !important;
-        align-self: stretch !important;
-        display: grid !important;
-        grid-template-rows: minmax(0, 1fr) !important;
-      }
-      .contact-panel {
-        grid-column: 1 !important;
-        grid-row: 4 !important;
-        align-self: start !important;
-        width: 100% !important;
-      }
-
-      .bottom-grid .github-panel {
-        height: 100% !important;
-        min-height: 0 !important;
-      }
-
-      .bottom-grid .github-panel .github-window {
-        height: 100% !important;
-        min-height: 0 !important;
-      }
-
-      /* Intro indentation: keep pitch aligned with subtitle/title line */
-      .hero .pitch-block {
-        margin-left: 14px !important;
-      }
-
-      /* Keep border visible on zoom: panel stays in row, content scrolls inside */
-      .section.compact.contact-panel {
-        min-height: 0 !important;
-        height: auto !important;
-        display: grid !important;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        overflow: visible !important;
-        margin-top: -14px !important;
-        margin-bottom: 8px !important;
-      }
-
-      .section.compact.contact-panel .contact-form {
-        min-height: 0;
-        overflow: visible !important;
-        max-height: none !important;
-        padding-right: 0;
-      }
-    }
-
-    /* Final spacing balance: no gap above contact and no contact scrolling */
-    @media (min-width: 1024px) {
-      .badge-stack-panel,
-      .contact-panel {
-        margin: 0 !important;
-      }
-
-      .section.compact.contact-panel {
-        height: auto !important;
-        min-height: 0 !important;
-        overflow: visible !important;
-      }
-
-      .section.compact.contact-panel .contact-form textarea {
-        height: 68px !important;
-        min-height: 68px !important;
-      }
-
-      .github-panel .github-window {
-        height: 100% !important;
-        min-height: 0 !important;
-        max-height: none !important;
-      }
-    }
-
-    /* Desktop visual tune requested: badges lower + larger quick cards/text */
-    @media (min-width: 1024px) {
-      .badge-stack-panel {
-        margin-top: 8px !important;
-        margin-bottom: -8px !important;
-      }
-
-      .quick-grid {
-        gap: 12px !important;
-      }
-
-      .quick-grid .mini-card {
-        min-height: 152px !important;
-        padding: 14px !important;
-        gap: 8px !important;
-      }
-
-      .quick-grid .mini-code {
-        width: 44px !important;
-        height: 44px !important;
-        font-size: 0.94rem !important;
-      }
-
-      .quick-grid .mini-title {
-        font-size: 1.14rem !important;
-      }
-
-      .quick-grid .mini-desc {
-        font-size: 0.98rem !important;
-        line-height: 1.38 !important;
-      }
-    }
-
-    /* Mobile-first final order + alignment lock */
-    @media (max-width: 900px) {
-      html,
-      body {
-        height: auto !important;
-        overflow: auto !important;
-      }
-
-      .wrap {
-        height: auto !important;
-        min-height: unset !important;
-        overflow: visible !important;
-        padding: 10px !important;
-        display: block !important;
-      }
-
-      .dashboard-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        height: auto !important;
-        min-height: unset !important;
-      }
-
-      .hero { order: 1 !important; }
-      .quick-grid { order: 2 !important; }
-      .skills-panel { order: 3 !important; display: block !important; }
-      .badge-stack-panel { order: 4 !important; }
-      .bottom-grid { order: 5 !important; }
-      .contact-panel { order: 6 !important; }
-      .metrics-panel { order: 7 !important; }
-
-      .hero-layout {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-
-      .hero-social {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 10px !important;
-        margin-top: 4px !important;
-      }
-
-      .hero-social a {
-        width: 44px !important;
-        height: 44px !important;
-      }
-
-      .hero h1 {
-        font-size: clamp(22px, 7.4vw, 30px) !important;
-        margin-left: 0 !important;
-      }
-
-      .hero .subtitle {
-        font-size: clamp(12px, 3.9vw, 16px) !important;
-        margin-top: 6px !important;
-        margin-left: 0 !important;
-      }
-
-      .hero .pitch-text {
-        font-size: clamp(12px, 3.7vw, 15px) !important;
-        line-height: 1.45 !important;
-      }
-
-      .hero,
-      .skills-panel,
-      .quick-grid,
-      .badge-stack-panel,
-      .bottom-grid,
-      .contact-panel,
-      .metrics-panel {
-        grid-column: auto !important;
-        grid-row: auto !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        margin: 0 !important;
-      }
-
-      .quick-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-
-      .mini-card {
-        min-height: 96px !important;
-      }
-
-      .skills-panel .skills-grid {
-        grid-template-columns: 1fr !important;
-        gap: 8px !important;
-      }
-
-      .badge-stack-panel {
-        padding: 10px !important;
-      }
-
-      .badge-carousel {
-        grid-template-columns: 32px minmax(0, 1fr) 32px !important;
-        gap: 8px !important;
-        align-items: center !important;
-      }
-
-      .badge-carousel-track {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 10px !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        scroll-behavior: smooth;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        padding: 4px 0 !important;
-      }
-
-      .badge-carousel-track::-webkit-scrollbar {
-        height: 6px;
-      }
-
-      .badge-carousel-track::-webkit-scrollbar-thumb {
-        background: rgba(86, 246, 255, 0.3);
-        border-radius: 999px;
-      }
-
-      .badge-carousel-track .badge-item,
-      .badge-carousel-track .badge {
-        width: 130px !important;
-        flex: 0 0 auto !important;
-        margin: 0 !important;
-        scroll-snap-align: start;
-      }
-
-      .bottom-grid {
-        display: block !important;
-        min-height: unset !important;
-      }
-
-      .github-panel {
-        padding: 10px !important;
-        height: auto !important;
-        min-height: unset !important;
-      }
-
-      .github-panel .github-window {
-        height: auto !important;
-        min-height: 280px !important;
-        max-height: none !important;
-      }
-
-      .github-panel .github-window > a:last-child {
-        height: auto !important;
-        min-height: 200px !important;
-      }
-
-      .contact-panel {
-        padding: 10px !important;
-      }
-
-      .section.compact.contact-panel .contact-form {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-
-      .section.compact.contact-panel .contact-form button,
-      .section.compact.contact-panel .contact-status {
-        grid-column: 1 !important;
-      }
-
-      .metrics-panel {
-        padding: 10px !important;
-      }
-
-      .footer {
-        margin-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-    }
-
-    /* Footer size + bottom breathing space */
-    .footer {
-      font-size: 15px !important;
-      margin-top: 12px !important;
-      padding-bottom: 8px !important;
-    }
-
-    .wrap {
-      padding-bottom: 4px !important;
-    }
-
-    /* Contact-only final fix: move up and keep bottom border visible */
-    @media (min-width: 1024px) {
-      .contact-panel {
-        margin-top: -20px !important;
-        margin-bottom: 16px !important;
-      }
-
-      .section.compact.contact-panel {
-        overflow: visible !important;
-        clip-path: none !important;
-        z-index: 4 !important;
-        position: relative !important;
-        box-sizing: border-box;
-      }
-
-      .section.compact.contact-panel .contact-form {
-        overflow: visible !important;
-      }
-    }
-
-    /* Contact border visibility fix (desktop): compact form so full box fits */
-    @media (min-width: 1024px) {
-      .contact-panel {
-        margin-top: -18px !important;
-        margin-bottom: 4px !important;
-      }
-
-      .section.compact.contact-panel {
-        padding: 10px 14px !important;
-        height: auto !important;
-        min-height: 0 !important;
-        overflow: visible !important;
-      }
-
-      .section.compact.contact-panel .section-heading {
-        margin-bottom: 6px !important;
-        font-size: 16px !important;
-      }
-
-      .section.compact.contact-panel .contact-form {
-        gap: 8px 12px !important;
-      }
-
-      .section.compact.contact-panel .contact-form label {
-        font-size: 11px !important;
-      }
-
-      .section.compact.contact-panel .contact-form input {
-        height: 34px !important;
-        padding: 7px 10px !important;
-      }
-
-      .section.compact.contact-panel .contact-form textarea {
-        height: 54px !important;
-        min-height: 54px !important;
-        padding: 7px 10px !important;
-      }
-
-      .section.compact.contact-panel .contact-form button {
-        margin-top: 0 !important;
-        padding: 8px 14px !important;
-        font-size: 12px !important;
-      }
-
-      .footer {
-        margin-top: 4px !important;
-        padding-bottom: 2px !important;
-      }
-    }
-
-    /* Zoom-in fallback: allow vertical growth when viewport height shrinks */
-    @media (min-width: 1024px) and (max-height: 900px) {
-      html,
-      body {
-        height: auto !important;
-        min-height: 100%;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-      }
-
-      .wrap {
-        height: auto !important;
-        min-height: calc(100vh - 8px) !important;
-        overflow: visible !important;
-      }
-
-      .dashboard-grid {
-        height: auto !important;
-        min-height: 0 !important;
-        overflow: visible !important;
-      }
-
-      .section.compact.contact-panel {
-        margin-bottom: 10px !important;
-      }
-    }
-
-    /* Quick-card subtitle size tune (-3) */
-    .quick-grid .mini-desc {
-      font-size: 0.79rem !important;
-      line-height: 1.25 !important;
-    }
-
-    /* Final gap tune: keep clean badge -> contact separation */
-    @media (min-width: 1024px) {
-      .dashboard-grid {
-        gap: 10px !important;
-      }
-
-      .contact-panel {
-        margin-top: 4px !important;
-        margin-bottom: 8px !important;
-      }
-    }
-
-    /* Unclip layout globally: remove fixed viewport locking and let sections grow */
-    html,
-    body {
-      height: auto !important;
-      min-height: 100% !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-    }
-
-    .wrap,
-    .dashboard-grid,
-    .bottom-grid,
-    .panel,
-    .contact-panel,
-    .section.compact.contact-panel,
-    .section.compact.contact-panel .contact-form {
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-    }
-
-    .wrap,
-    .dashboard-grid,
-    .bottom-grid,
-    .contact-panel,
-    .section.compact.contact-panel,
-    .section.compact.contact-panel .contact-form {
-      overflow: visible !important;
-    }
-
-    /* Keep only badge section internally scrollable */
-    .badge-carousel-track {
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
-      scroll-behavior: smooth;
-    }
-
-    /* Final grid row fix: remove flexible row stretching on desktop */
-    @media (min-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 2fr 1fr !important;
-        grid-template-rows: auto auto auto auto !important;
-        gap: 10px !important;
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
-        overflow: visible !important;
-        align-content: start !important;
-      }
-
-      .badge-stack-panel {
-        grid-row: 3 !important;
-        align-self: start !important;
-        margin-bottom: 0 !important;
-      }
-
-      .contact-panel {
-        grid-row: 4 !important;
-        align-self: start !important;
-        margin-top: 10px !important;
-      }
-
-      .bottom-grid {
-        grid-row: 3 / 5 !important;
-        grid-template-rows: auto !important;
-        align-self: start !important;
-        height: auto !important;
-        min-height: 0 !important;
-      }
-
-      .bottom-grid .github-panel,
-      .bottom-grid .github-panel .github-window {
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
-      }
-    }
-
   </style>
 </head>
 <body>
-  <canvas id="binary-canvas" class="binary-canvas" aria-hidden="true"></canvas>
-  <main class="wrap">
-    <section class="dashboard-grid">
-      <section class="panel hero">
-        <div class="hero-layout">
-          <div>
-            <div class="signal-row">
-              <div class="signal">
-                <span class="signal-dot"></span>
-                Live Portfolio Node
-              </div>
-              <div class="codetag">
-                <span class="codetag-dot"></span>
-                root0zaki
-              </div>
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">harshitaa<span>.</span></div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#research">Research</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="portrait-frame">
+          <span class="portrait-label">// portrait</span>
+          <pre id="ascii-canvas"></pre>
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-heading">&gt;_ Hey! I'm <span class="accent">harshitaa</span></h1>
+          <p class="hero-subtitle">cybersecurity engineer · Certified Ethical Hacker</p>
+          <p class="hero-intro">
+            I spend my time exploring how systems break — then building ways to prevent it. 
+            From backend architecture to AI security, I'm drawn to the layers most people never see. 
+            Currently breaking things at <strong>LEVO.AI</strong> as a Security Research Engineer.
+          </p>
+          <div class="hero-links">
+            <a href="https://github.com/imharshitaa" target="_blank" rel="noopener" class="link-btn primary">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener" class="link-btn">
+              LinkedIn
+            </a>
+            <a href="mailto:harshitaa729@gmail.com" class="link-btn">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">/ about</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I'm a cybersecurity engineer focused on application security, API security, and AI security testing. 
+            My work involves finding vulnerabilities before the bad guys do — and building tools that make security 
+            testing more systematic and repeatable.
+          </p>
+          <p>
+            With a background in computer science engineering specializing in cybersecurity and digital forensics, 
+            I've worked across offensive security, security research, and product security. I believe the best 
+            security comes from understanding how things actually work under the hood.
+          </p>
+          <p>
+            When I'm not breaking applications, I'm building frameworks like BugPilot, APIvector, and AIvector 
+            — open-source tools that help engineers automate security testing workflows.
+          </p>
+        </div>
+        <div class="cert-mini">
+          <h4>// certifications</h4>
+          <div class="cert-item">
+            <div>
+              <div class="cert-name">Certified Ethical Hacker</div>
+              <div class="cert-org">EC-Council</div>
             </div>
-            <h1>&gt;_ Hi, I'm Harshitaa</h1>
-            <p class="subtitle">Cybersecurity Research Engineer | Certified Ethical Hacker (CEH)</p>
-            <div class="pitch-block">
-              <p
-                class="pitch-text"
-                id="hero-pitch"
-                data-full-text="Building and breaking modern applications through security product research, testing and automated pipelines. Specializing in vulnerability discovery, exploit development and scalable security management workflows."
-              >Building and breaking modern applications through security product research, testing and automated pipelines. Specializing in vulnerability discovery, exploit development and scalable security management workflows.</p>
+          </div>
+          <div class="cert-item">
+            <div>
+              <div class="cert-name">BTech, CSE (Cybersecurity)</div>
+              <div class="cert-org">VIT University</div>
             </div>
           </div>
-          <div class="hero-social" aria-label="social links">
-            <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn logo" />
-            </a>
-            <a href="https://medium.com/@imharshitaa" target="_blank" rel="noopener noreferrer" aria-label="Medium">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Medium_logo_Monogram.svg" alt="Medium logo" />
-            </a>
-            <a href="https://bugcrowd.com/h/root0zaki" target="_blank" rel="noopener noreferrer" aria-label="Bugcrowd">
-              <img src="https://cdn.simpleicons.org/bugcrowd/F26822" alt="Bugcrowd logo" />
-            </a>
-            <a href="https://www.credly.com/users/harshitaa-ashish/badges#credly" target="_blank" rel="noopener noreferrer" aria-label="Credly">
-              <img src="https://cdn.simpleicons.org/credly/FF6B35" alt="Credly logo" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel skills-panel" aria-label="security skills nodes">
-        <div class="skills-grid">
-          <div class="skill-node">Vulnerability Management</div>
-          <div class="skill-node">Security Automation</div>
-          <div class="skill-node">Product Security</div>
-          <div class="skill-node">CI/CD Pipeline</div>
-          <div class="skill-node">Secure Architecture</div>
-          <div class="skill-node">DevSecOps</div>
-          <div class="skill-node">Solution Implementation</div>
-          <div class="skill-node">Threat Modeling</div>
-          <div class="skill-node">Risk Metrics</div>
-          <div class="skill-node">Competitive Analysis</div>
-        </div>
-      </section>
-
-      <section class="panel metrics-panel" aria-label="security metrics graph">
-        <div class="metrics-bars">
-          <div class="metric-item"><div class="metric-label">P2</div><div class="metric-wrap"><div class="metric-bar" style="width: 40%;"></div></div></div>
-          <div class="metric-item"><div class="metric-label">R3</div><div class="metric-wrap"><div class="metric-bar" style="width: 60%;"></div></div></div>
-          <div class="metric-item"><div class="metric-label">X4</div><div class="metric-wrap"><div class="metric-bar" style="width: 80%;"></div></div></div>
-          <div class="metric-item"><div class="metric-label">B5</div><div class="metric-wrap"><div class="metric-bar" style="width: 100%;"></div></div></div>
-        </div>
-      </section>
-
-      <section class="quick-grid section-grid">
-        <a class="mini-card" href="about/index.html"><div class="mini-head inline"><span class="mini-code">A1</span><span class="mini-title">ABOUT</span></div><p class="mini-desc">Know more about my work.</p></a>
-        <a class="mini-card" href="projects/index.html"><div class="mini-head inline"><span class="mini-code">P2</span><span class="mini-title">PROJECTS</span></div><p class="mini-desc">Github, demo, and source code.</p></a>
-        <a class="mini-card" href="research/index.html"><div class="mini-head inline"><span class="mini-code">R3</span><span class="mini-title">RESEARCH</span></div><p class="mini-desc">Docs, blogs, and writeups.</p></a>
-        <a class="mini-card" href="case-studies/index.html"><div class="mini-head inline"><span class="mini-code">X4</span><span class="mini-title">CASE STUDIES</span></div><p class="mini-desc">Real solutions and workflows.</p></a>
-      </section>
-
-      <section class="panel badge-stack-panel" aria-label="Certification badges">
-        <div class="badge-titlebar">
-          <div class="mac-dots" aria-hidden="true">
-            <span class="mac-dot red"></span>
-            <span class="mac-dot yellow"></span>
-            <span class="mac-dot green"></span>
-          </div>
-          <h2 class="badge-title">Certification badges</h2>
-        </div>
-        <div class="badge-carousel">
-          <button class="badge-carousel-btn" type="button" id="badge-left" aria-label="Scroll badges left">
-            <span class="triangle left"></span>
-          </button>
-          <div class="badge-carousel-track" id="badge-track">
-            <a class="badge-item badge" href="https://www.credly.com/badges/e963865d-abdb-4ef7-b856-c4645af56c2a" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-1.png" alt="Credly badge 1" /></a>
-            <a class="badge-item badge" href="https://aspen.eccouncil.org/VerifyBadge?type=certification&a=FxpakOo7ywuC1HgboOhujMXgpvC+pMo4CnfWbaJ0NEQ=" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-ceh.png" alt="CEH badge" /></a>
-            <a class="badge-item badge" href="https://www.credly.com/badges/b018467c-5eb2-4b4a-81c5-9f37c38f3ba7" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-3.png" alt="Credly badge 3" /></a>
-            <a class="badge-item badge" href="https://www.credly.com/badges/e8f91f97-54e1-406b-bf56-5033f06c0955" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-4.png" alt="Credly badge 4" /></a>
-            <a class="badge-item badge" href="https://www.credly.com/badges/bd1e5b26-92b5-41ec-b4f0-90781532b919" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-5.png" alt="Credly badge 5" /></a>
-            <a class="badge-item badge" href="https://www.credly.com/badges/384a3d78-8425-45b4-9608-533ad0b6f358" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-6.png" alt="Credly badge 6" /></a>
-            <a class="badge-item badge" href="https://www.credly.com/badges/663a4e52-3771-4d35-ba40-eb23c7a4cff3" target="_blank" rel="noopener noreferrer"><img src="assets/badges/badge-7.png" alt="Credly badge 7" /></a>
-          </div>
-          <button class="badge-carousel-btn" type="button" id="badge-right" aria-label="Scroll badges right">
-            <span class="triangle right"></span>
-          </button>
-        </div>
-      </section>
-
-      <section class="bottom-grid">
-        <section class="panel section compact github-panel">
-          <div class="github-window">
-            <div class="github-titlebar">
-              <div class="mac-dots" aria-hidden="true">
-                <span class="mac-dot red"></span>
-                <span class="mac-dot yellow"></span>
-                <span class="mac-dot green"></span>
-              </div>
-              <h2 class="section-heading github-title">GitHub Live Preview</h2>
+          <div class="cert-item">
+            <div>
+              <div class="cert-name">IBM AI Engineering Professional</div>
+              <div class="cert-org">IBM</div>
             </div>
-            <a class="github-top" href="https://github.com/imharshitaa" target="_blank" rel="noopener noreferrer">github.com/imharshitaa</a>
-            <a href="https://github.com/imharshitaa" target="_blank" rel="noopener noreferrer">
-              <img class="github-preview" src="https://image.thum.io/get/width/1200/https://github.com/imharshitaa?refresh=1" alt="GitHub Live Preview" />
-            </a>
           </div>
-        </section>
-      </section>
-      <section class="panel section compact contact-panel">
-        <h2 class="section-heading">Contact Me</h2>
-        <form class="contact-form" id="contact-form" novalidate>
-          <label>Name<input type="text" name="name" required /></label>
-          <label>Phone<input type="text" name="phone" /></label>
-          <label>Email<input type="email" name="email" required /></label>
-          <label>Message<textarea name="message" rows="1" required></textarea></label>
-          <button type="submit">Send Message</button>
-          <p class="contact-status" id="contact-status"></p>
-        </form>
-      </section>
-    </section>
-    <p class="footer">imharshitaa © owner</p>
-  </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">/ projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[01]</span>
+          </div>
+          <h3 class="project-title">BUGPILOT</h3>
+          <p class="project-desc">
+            Offensive security orchestration platform for automated application testing and vulnerability validation.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">CLI</span>
+            <span class="project-tag">Security</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://imharshitaa.github.io/bugpilot/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[02]</span>
+          </div>
+          <h3 class="project-title">APIvector</h3>
+          <p class="project-desc">
+            API security testing toolkit for structured vulnerability discovery and exploit validation.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">API Security</span>
+            <span class="project-tag">Pentesting</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://imharshitaa.github.io/APIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[03]</span>
+          </div>
+          <h3 class="project-title">AIvector</h3>
+          <p class="project-desc">
+            Security testing framework for automated pentesting of LLMs, AI agents, and AI APIs.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">AI Security</span>
+            <span class="project-tag">LLM Testing</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://imharshitaa.github.io/AIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[04]</span>
+          </div>
+          <h3 class="project-title">DevSecKit</h3>
+          <p class="project-desc">
+            DevSecOps security scanner orchestrator for automated multi-category security testing.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">DevSecOps</span>
+            <span class="project-tag">SAST/DAST</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener" class="project-link">Source →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[05]</span>
+          </div>
+          <h3 class="project-title">ToolKit</h3>
+          <p class="project-desc">
+            Cloud-native cybersecurity tool deployment and orchestration framework.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Docker</span>
+            <span class="project-tag">Cloud Security</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener" class="project-link">Source →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <span class="project-index">[06]</span>
+          </div>
+          <h3 class="project-title">Playbox</h3>
+          <p class="project-desc">
+            Vulnerable lab environment for security testing and attack simulation across multiple domains.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Docker</span>
+            <span class="project-tag">Lab Environment</span>
+            <span class="project-tag">OWASP</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener" class="project-link">Source →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">/ skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h4>Security Testing</h4>
+          <div class="skill-list">
+            <span class="skill-item">Penetration Testing</span>
+            <span class="skill-item">Vulnerability Assessment</span>
+            <span class="skill-item">API Security</span>
+            <span class="skill-item">AI Security</span>
+            <span class="skill-item">AppSec</span>
+            <span class="skill-item">Red Teaming</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Development</h4>
+          <div class="skill-list">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Shell Scripting</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">CI/CD</span>
+            <span class="skill-item">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Tools & Frameworks</h4>
+          <div class="skill-list">
+            <span class="skill-item">Burp Suite</span>
+            <span class="skill-item">OWASP ZAP</span>
+            <span class="skill-item">Semgrep</span>
+            <span class="skill-item">Trivy</span>
+            <span class="skill-item">Nmap</span>
+            <span class="skill-item">Metasploit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="container">
+      <h2 class="section-title">/ research</h2>
+      <div class="research-list">
+        <a href="research/index.html" class="research-item">
+          <div class="research-info">
+            <h4>Documentation & Guides</h4>
+            <p>OSINT tools, reverse engineering, malware analysis, and threat detection documentation</p>
+          </div>
+          <span class="research-arrow">→</span>
+        </a>
+        <a href="case-studies/index.html" class="research-item">
+          <div class="research-info">
+            <h4>Case Studies</h4>
+            <p>Security architecture breakdowns and remediation strategies</p>
+          </div>
+          <span class="research-arrow">→</span>
+        </a>
+        <a href="docs/index.html" class="research-item">
+          <div class="research-info">
+            <h4>API Documentation</h4>
+            <p>Developer resources, frameworks, and API references</p>
+          </div>
+          <span class="research-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">/ contact</h2>
+      <div class="contact-grid">
+        <a href="https://github.com/imharshitaa" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">GH</div>
+          <div class="contact-info">
+            <h4>GitHub</h4>
+            <p>imharshitaa</p>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">in</div>
+          <div class="contact-info">
+            <h4>LinkedIn</h4>
+            <p>Harshitaa Ashish</p>
+          </div>
+        </a>
+        <a href="mailto:harshitaa729@gmail.com" class="contact-card">
+          <div class="contact-icon">@</div>
+          <div class="contact-info">
+            <h4>Email</h4>
+            <p>harshitaa729@gmail.com</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="footer-text">built by <span>harshitaa</span> · cybersecurity engineer</p>
+    </div>
+  </footer>
+
   <script>
-    const binaryCanvas = document.getElementById("binary-canvas");
-
-    if (binaryCanvas) {
-      const ctx = binaryCanvas.getContext("2d");
-      let dpr = Math.max(1, window.devicePixelRatio || 1);
-      let width = 0;
-      let height = 0;
-      let fontSize = 15;
-      let columns = 0;
-      let drops = [];
-      let lastTime = 0;
-
-      const resizeBinaryCanvas = () => {
-        dpr = Math.max(1, window.devicePixelRatio || 1);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        binaryCanvas.width = Math.floor(width * dpr);
-        binaryCanvas.height = Math.floor(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        fontSize = width < 700 ? 12 : 15;
-        columns = Math.ceil(width / fontSize);
-        drops = Array.from({ length: columns }, () => Math.random() * (height / fontSize));
-      };
-
-      const drawBinary = (time) => {
-        if (!lastTime) lastTime = time;
-        const delta = time - lastTime;
-        if (delta < 42) {
-          requestAnimationFrame(drawBinary);
-          return;
-        }
-        lastTime = time;
-
-        ctx.fillStyle = "rgba(2, 6, 18, 0.10)";
-        ctx.fillRect(0, 0, width, height);
-        ctx.font = `${fontSize}px "Share Tech Mono", monospace`;
-        ctx.textAlign = "center";
-
-        for (let i = 0; i < columns; i += 1) {
-          const char = Math.random() > 0.5 ? "1" : "0";
-          const x = i * fontSize + fontSize * 0.5;
-          const y = drops[i] * fontSize;
-          const glow = Math.random() > 0.86;
-
-          ctx.fillStyle = glow ? "rgba(73, 243, 255, 0.86)" : "rgba(64, 255, 165, 0.5)";
-          ctx.fillText(char, x, y);
-
-          if (y > height + fontSize && Math.random() > 0.975) {
-            drops[i] = Math.random() * -40;
-          } else {
-            drops[i] += 0.33 + Math.random() * 0.22;
+    // Generate ASCII art portrait from image
+    async function generateAsciiPortrait() {
+      const canvas = document.getElementById('ascii-canvas');
+      
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = 'assets/harshitaa-ashish-photo.png';
+      
+      img.onload = () => {
+        const width = 45;
+        const scale = img.height / img.width;
+        const height = Math.floor(width * scale * 0.5);
+        
+        // Create offscreen canvas
+        const offscreen = document.createElement('canvas');
+        offscreen.width = width;
+        offscreen.height = height;
+        const ctx = offscreen.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const pixels = imageData.data;
+        
+        // ASCII characters for brightness (dark to light)
+        const chars = ['@', '#', '8', '&', 'o', ':', '.', ' '];
+        // Accent colors: purple to pink gradient
+        const colors = ['#8B5CF6', '#9F7AEA', '#B18CFF', '#C4A8FF', '#D6BFFF', '#E8D6FF', '#FF4FA3', '#FF6FB3'];
+        
+        let ascii = '';
+        
+        for (let y = 0; y < height; y++) {
+          let row = '';
+          for (let x = 0; x < width; x++) {
+            const i = (y * width + x) * 4;
+            const r = pixels[i];
+            const g = pixels[i + 1];
+            const b = pixels[i + 2];
+            
+            // Calculate brightness
+            const brightness = (r + g + b) / 3;
+            const charIndex = Math.floor((brightness / 255) * (chars.length - 1));
+            const char = chars[charIndex];
+            
+            // Calculate color index based on brightness
+            const colorIndex = Math.floor((brightness / 255) * (colors.length - 1));
+            const color = colors[colorIndex];
+            
+            // Add character with color
+            row += `<span style="color:${color}">${char}</span>`;
           }
+          ascii += row + '\n';
         }
-        requestAnimationFrame(drawBinary);
+        
+        canvas.innerHTML = ascii;
       };
-
-      resizeBinaryCanvas();
-      window.addEventListener("resize", resizeBinaryCanvas);
-      requestAnimationFrame(drawBinary);
-    }
-
-    const badgeTrack = document.getElementById("badge-track");
-    const badgeLeft = document.getElementById("badge-left");
-    const badgeRight = document.getElementById("badge-right");
-    const heroPitch = document.getElementById("hero-pitch");
-
-    if (heroPitch) {
-      const fullText = (heroPitch.dataset.fullText || heroPitch.textContent || "")
-        .replace(/\s+/g, " ")
-        .trim();
-      let index = 0;
-      heroPitch.textContent = "";
-      heroPitch.classList.add("typing-active");
-
-      const typeNext = () => {
-        if (index <= fullText.length) {
-          heroPitch.textContent = fullText.slice(0, index);
-          index += 1;
-          setTimeout(typeNext, 20);
-        } else {
-          heroPitch.classList.remove("typing-active");
-        }
+      
+      img.onerror = () => {
+        // Fallback if image fails to load
+        canvas.textContent = '// image not found at assets/harshitaa-ashish-photo.png';
+        canvas.style.color = '#8B8299';
       };
-
-      typeNext();
     }
-
-    if (badgeTrack) {
-      badgeTrack.querySelectorAll("img").forEach((img) => {
-        img.addEventListener("error", () => {
-          img.style.display = "none";
-          img.closest(".badge-item")?.classList.add("badge-fallback");
-        });
-      });
-      if (badgeLeft && badgeRight) {
-        const getStep = () => {
-          const firstBadge = badgeTrack.querySelector(".badge-item");
-          if (!firstBadge) return 110;
-          const gap = 10;
-          return firstBadge.getBoundingClientRect().width + gap;
-        };
-        badgeLeft.addEventListener("click", () => {
-          badgeTrack.scrollBy({ left: -getStep(), behavior: "smooth" });
-        });
-        badgeRight.addEventListener("click", () => {
-          badgeTrack.scrollBy({ left: getStep(), behavior: "smooth" });
-        });
-      }
-    }
-
-    const contactForm = document.getElementById("contact-form");
-    const contactStatus = document.getElementById("contact-status");
-
-    contactForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(contactForm);
-      const name = (formData.get("name") || "").toString().trim();
-      const phone = (formData.get("phone") || "").toString().trim();
-      const email = (formData.get("email") || "").toString().trim();
-      const message = (formData.get("message") || "").toString().trim();
-
-      if (!name || !email || !message) {
-        contactStatus.textContent = "Please fill name, email, and message.";
-        return;
-      }
-
-      contactStatus.textContent = "Sending...";
-
-      try {
-        const response = await fetch("https://formsubmit.co/ajax/harshitaa729@gmail.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            _captcha: "false",
-            _template: "table",
-            _subject: "New message from root0zaki portfolio",
-            name,
-            phone: phone || "-",
-            email,
-            message
-          })
-        });
-
-        let data = {};
-        try {
-          data = await response.json();
-        } catch (parseError) {
-          data = {};
-        }
-
-        if (!response.ok || data.success === false || data.success === "false") {
-          const reason = data.message || "Request failed";
-          throw new Error(reason);
-        }
-
-        contactStatus.textContent = "Message sent successfully. If this is the first FormSubmit message, verify the confirmation email once.";
-        contactForm.reset();
-      } catch (error) {
-        contactStatus.textContent = `Sending failed: ${error.message}. Check mailbox/spam for FormSubmit activation mail, then retry.`;
-      }
-    });
+    
+    generateAsciiPortrait();
   </script>
 </body>
 </html>

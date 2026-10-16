@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Zero-Day Security Architecture",
+    "href": "zero-day-security-architecture.html",
+    "tag": "interactive",
+    "description": "Production-style zero-day incident simulation showing exploit replay, containment trade-offs, blast-radius analysis, and automated response flows.",
+    "bullets": [
+      "Incident replay with step-by-step breach progression",
+      "MITRE ATT&CK mapping and threat scenario toggles",
+      "Containment decision view with zero-trust failure mode",
+      "Post-incident hardening and reproducibility guidance"
+    ]
+  },
+  {
+    "title": "AI-Powered Vulnerability Remediation Orchestrator",
+    "href": "ai-remediation-orchestrator.html",
+    "tag": "interactive",
+    "description": "Product-focused remediation case study showing how AI can triage vulnerabilities, generate secure patches, validate fixes, and create developer-ready pull requests.",
+    "bullets": [
+      "Enterprise-style product narrative with problem, solution, and impact framing",
+      "Interactive architecture and workflow views for triage-to-PR automation",
+      "Concrete secure-fix example with PR output and portfolio positioning",
+      "Full build prompt for a FastAPI, React, LLM, and GitHub integration stack"
+    ]
+  }
+]

@@ -147,6 +147,6 @@
     <div><span>Email</span> - <a href="mailto:harshitaa729@gmail.com">harshitaa729@gmail.com</a></div>
     <div><span>LinkedIn</span> - <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/harshitaa-ashish-85767621a/</a></div>
     <div><span>GitHub</span> - <a href="https://github.com/imharshitaa" target="_blank" rel="noopener noreferrer">https://github.com/imharshitaa</a></div>
-    <div><span>Portfolio</span> - <a href="https://imharshitaa.github.io/root0zaki/" target="_blank" rel="noopener noreferrer">https://imharshitaa.github.io/root0zaki/</a></div>
+    <div><span>Portfolio</span> - <a href="https://imharshitaa.github.io/harshitaa/" target="_blank" rel="noopener noreferrer">https://imharshitaa.github.io/harshitaa/</a></div>
   </div>
 </section>

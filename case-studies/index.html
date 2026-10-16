@@ -3,371 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Studies - Root0zaki</title>
+  <title>case studies — harshitaa</title>
+  <meta name="description" content="Security engineering case studies and deep-dives by Harshitaa Ashish." />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    @font-face {
-      font-family: "DepartureMono-Regular";
-      src: url("https://cdn.jsdelivr.net/gh/woffz/a3@main/DepartureMono-Regular/DepartureMono-Regular.woff2") format("woff2");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-
     :root {
-      --bg-main: #03060c;
-      --bg-panel: rgba(7, 11, 22, 0.72);
-      --cyan: #56f6ff;
-      --green: #55ff9d;
-      --text: #dff5ff;
-      --text-dim: #8bb6cf;
-      --line: rgba(86, 246, 255, 0.28);
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
     }
-
-    * { box-sizing: border-box; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 20px 0 28px;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-      background-color: #020612;
-      background:
-        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
-        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
-        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
-        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
-      position: relative;
-      overflow-x: hidden;
+      font-family: var(--sans); background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
     }
-
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(86, 246, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(86, 246, 255, 0.05) 1px, transparent 1px);
-      background-size: 34px 34px, 34px 34px;
-      opacity: 0.22;
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.35;
+    }
+    .site-wrap {
+      position: relative; z-index: 1;
+      width: min(1100px, 94vw); margin: 0 auto; padding-bottom: 80px;
     }
 
-    .wrap {
-      width: min(1180px, 92vw);
-      margin: 0 auto;
-      padding: 0;
-      margin-top: clamp(30px, 5vh, 74px);
-      text-align: center;
-      position: relative;
-      z-index: 1;
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0; gap: 24px;
     }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.3);
-      font: 14px "Share Tech Mono", monospace;
-      color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(5, 12, 24, 0.65);
+    .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .nav-id span { color: var(--purple); }
+    .nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
     }
+    .nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
 
-    h1.page-title {
-      margin: 0 0 26px;
-      color: var(--cyan);
-      font-family: "DepartureMono-Regular", "Share Tech Mono", monospace;
-      font-size: clamp(34px, 5vw, 50px);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      text-shadow:
-        0 0 8px rgba(86, 246, 255, 0.5),
-        0 0 20px rgba(86, 246, 255, 0.3);
+    /* PAGE HEADER */
+    .page-header {
+      padding: 64px 0 52px; border-bottom: 1px solid var(--border); margin-bottom: 64px;
     }
-
-    .page-title.typing::after {
-      content: "_";
-      margin-left: 3px;
-      color: var(--green);
-      animation: title-caret 1s steps(1, end) infinite;
+    .ph-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
     }
-
-    @keyframes title-caret {
-      50% { opacity: 0; }
+    .ph-eyebrow::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-hi), transparent);
     }
-
-    .subtitle {
-      margin: 0 auto 28px;
-      max-width: 720px;
-      color: var(--text-dim);
-      font-size: 17px;
-      line-height: 1.6;
+    .page-title {
+      font-family: var(--mono); font-size: clamp(36px, 6vw, 64px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px;
     }
+    .page-title .acc { color: var(--purple); }
+    .page-sub { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 520px; }
 
-    .case-grid {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      align-items: stretch;
+    /* CASES */
+    .cases-list { list-style: none; }
+    .case-item {
+      border-top: 1px solid var(--border); padding: 40px 0;
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 32px; align-items: start;
+      transition: background 0.15s;
     }
+    .case-item:last-child { border-bottom: 1px solid var(--border); }
+    .case-item:hover { background: rgba(139,92,246,0.03); }
+    @media (max-width: 600px) { .case-item { grid-template-columns: 1fr; gap: 16px; } }
 
-    .case-card {
-      width: 100%;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid rgba(86, 246, 255, 0.16);
-      border-radius: 18px;
-      background: rgba(8, 12, 22, 0.86);
-      padding: 20px;
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
-      display: grid;
-      gap: 16px;
-      min-height: 380px;
-      text-align: left;
-      position: relative;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    .case-num {
+      font-family: var(--mono); font-size: 11px; color: var(--border-hi);
+      letter-spacing: 0.06em; padding-top: 4px;
     }
-
-    .case-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--cyan);
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
+    .case-body {}
+    .case-type {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--lavender); margin-bottom: 10px;
     }
-
-    .case-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .case-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      color: var(--cyan);
-      border: 1px solid rgba(86, 246, 255, 0.4);
-      background: rgba(10, 20, 35, 0.7);
-      font-size: 22px;
-      font-family: "Share Tech Mono", monospace;
-    }
-
-    .case-pill {
-      font: 600 13px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #7fd4ff;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.25);
-      background: rgba(10, 18, 30, 0.7);
-    }
-
     .case-title {
-      font-size: 22px;
-      color: #f1f7ff;
-      font-family: "Share Tech Mono", monospace;
-      margin: 0;
-      line-height: 1.35;
+      font-size: 22px; font-weight: 600; color: var(--text);
+      margin-bottom: 14px; line-height: 1.35;
     }
-
     .case-desc {
-      color: rgba(190, 210, 226, 0.8);
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 0;
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      max-width: 620px; margin-bottom: 20px;
+    }
+    .case-bullets {
+      list-style: none; margin-bottom: 24px;
+    }
+    .case-bullets li {
+      font-size: 13px; color: var(--muted); padding: 5px 0;
+      padding-left: 16px; position: relative; line-height: 1.5;
+      border-bottom: 1px solid rgba(139,92,246,0.06);
+    }
+    .case-bullets li:last-child { border-bottom: none; }
+    .case-bullets li::before {
+      content: "–"; position: absolute; left: 0;
+      color: var(--purple); font-family: var(--mono);
+    }
+    .case-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--text);
+      border: 1px solid var(--border-hi); padding: 10px 20px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .case-cta:hover {
+      background: rgba(139,92,246,0.1); color: var(--lavender); border-color: var(--lavender);
     }
 
-    .case-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-      color: rgba(190, 210, 226, 0.8);
-      font-size: 16px;
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
     }
+    .footer-id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .footer-id .acc { color: var(--purple); }
 
-    .case-list li::before {
-      content: "➜";
-      color: var(--cyan);
-      margin-right: 8px;
-    }
-
-    .case-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--cyan);
-      font: 14px "Share Tech Mono", monospace;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .case-link svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 18px;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      text-decoration: none;
-      font: 500 17px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .back-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
-    }
-
-    .footer {
-      margin-top: 20px;
-      color: var(--text-dim);
-      font: 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      padding-bottom: 10px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <h1 class="page-title" data-title="Security Solutions">Security Solutions</h1>
+<div class="site-wrap">
 
-    <div class="case-grid" id="case-grid"></div>
+  <nav aria-label="Main navigation">
+    <div class="nav-id"><span>harshitaa</span>@security:~/case-studies$</div>
+    <a href="../index.html" class="nav-back">← Home</a>
+  </nav>
 
-    <a class="back-link" href="../index.html">⬅ Back to Home</a>
-    <div class="footer">imharshitaa @ owner</div>
-  </main>
+  <header class="page-header">
+    <div class="ph-eyebrow">// engineering cases</div>
+    <h1 class="page-title">case studies<span class="acc">_</span></h1>
+    <p class="page-sub">Deep-dives into specific security engineering problems, architectures, and workflows.</p>
+  </header>
 
-  <script id="case-studies-fallback" type="application/json">
-  [
-    {
-      "title": "Zero-Day Security Architecture",
-      "href": "zero-day-security-architecture.html",
-      "tag": "interactive",
-      "description": "Production-style zero-day incident simulation showing exploit replay, containment trade-offs, blast-radius analysis, and automated response flows.",
-      "bullets": [
-        "Incident replay with step-by-step breach progression",
-        "MITRE ATT&CK mapping and threat scenario toggles",
-        "Containment decision view with zero-trust failure mode",
-        "Post-incident hardening and reproducibility guidance"
-      ]
-    },
-    {
-      "title": "AI-Powered Vulnerability Remediation Orchestrator",
-      "href": "ai-remediation-orchestrator.html",
-      "tag": "interactive",
-      "description": "Security remediation orchestration layer that triages findings, generates secure patches, validates fixes, and opens review-ready pull requests.",
-      "bullets": [
-        "Interactive architecture and workflow views (triage -> validate -> PR)",
-        "Concrete evidence: SARIF-derived finding, patch, validation, and PR payload",
-        "Clickable controls with glow only on interactive elements",
-        "Operational outcomes and control gates"
-      ]
-    }
-  ]
-  </script>
+  <ul class="cases-list" role="list">
 
-  <script>
-    const titleEl = document.querySelector(".page-title");
-    if (titleEl) {
-      const fullText = titleEl.dataset.title || titleEl.textContent.trim();
-      titleEl.textContent = "";
-      titleEl.classList.add("typing");
-      let i = 0;
-      const typeNext = () => {
-        if (i < fullText.length) {
-          titleEl.textContent += fullText.charAt(i);
-          i += 1;
-          setTimeout(typeNext, 55);
-        } else {
-          titleEl.classList.remove("typing");
-        }
-      };
-      typeNext();
-    }
+    <li class="case-item">
+      <span class="case-num">case · 001</span>
+      <div class="case-body">
+        <div class="case-type">// incident simulation</div>
+        <h2 class="case-title">Zero-Day Security Architecture</h2>
+        <p class="case-desc">Production-style zero-day incident simulation showing exploit replay, containment trade-offs, blast-radius analysis, and automated response flows.</p>
+        <ul class="case-bullets">
+          <li>Incident replay with step-by-step breach progression</li>
+          <li>MITRE ATT&amp;CK mapping and threat scenario toggles</li>
+          <li>Containment decision view with zero-trust failure mode</li>
+          <li>Post-incident hardening and reproducibility guidance</li>
+        </ul>
+        <a class="case-cta" href="zero-day-security-architecture.html">Read Case Study →</a>
+      </div>
+    </li>
 
-    function parseFallbackCases() {
-      const el = document.getElementById("case-studies-fallback");
-      if (!el) return null;
-      try {
-        return JSON.parse(el.textContent || "null");
-      } catch {
-        return null;
-      }
-    }
+    <li class="case-item">
+      <span class="case-num">case · 002</span>
+      <div class="case-body">
+        <div class="case-type">// product engineering</div>
+        <h2 class="case-title">AI-Powered Vulnerability Remediation Orchestrator</h2>
+        <p class="case-desc">Product-focused remediation case study showing how AI can triage vulnerabilities, generate secure patches, validate fixes, and create developer-ready pull requests.</p>
+        <ul class="case-bullets">
+          <li>Enterprise-style product narrative with problem, solution, and impact framing</li>
+          <li>Interactive architecture and workflow views for triage-to-PR automation</li>
+          <li>Concrete secure-fix example with PR output and portfolio positioning</li>
+          <li>Full build prompt for a FastAPI, React, LLM, and GitHub integration stack</li>
+        </ul>
+        <a class="case-cta" href="ai-remediation-orchestrator.html">Read Case Study →</a>
+      </div>
+    </li>
 
-    function renderCases(cases) {
-      const grid = document.getElementById("case-grid");
-      if (!grid) return;
-      grid.innerHTML = "";
+  </ul>
 
-      cases.forEach((item, idx) => {
-        const a = document.createElement("a");
-        a.className = "case-card";
-        a.href = item.href || `case_template.html?file=${item.file}`;
+  <footer role="contentinfo">
+    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/case-studies$</div>
+    <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
+  </footer>
 
-        const list = (item.bullets || []).map(b => `<li>${b}</li>`).join("");
-
-        a.innerHTML = `
-          <div class="case-header">
-            <div class="case-icon">${idx + 1}</div>
-            <span class="case-pill">${item.tag || ""}</span>
-          </div>
-          <h2 class="case-title">${item.title || ""}</h2>
-          <p class="case-desc">${item.description || ""}</p>
-          <ul class="case-list">${list}</ul>
-          <div class="case-link">Explore Demo
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"/></svg>
-          </div>
-        `;
-
-        grid.appendChild(a);
-      });
-    }
-
-    async function loadCases() {
-      try {
-        const response = await fetch("case_studies.json");
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const cases = await response.json();
-        renderCases(cases);
-      } catch (err) {
-        const fallback = parseFallbackCases();
-        if (Array.isArray(fallback) && fallback.length) {
-          renderCases(fallback);
-          return;
-        }
-
-        console.error("Error loading case_studies.json", err);
-        const grid = document.getElementById("case-grid");
-        if (grid) {
-          grid.innerHTML = "<p style='color:#ff8c8c;'>Failed to load case studies. If you opened this page via file://, run a local server (e.g. `python3 -m http.server`) and reload.</p>";
-        }
-      }
-    }
-
-    loadCases();
-  </script>
+</div>
 </body>
 </html>

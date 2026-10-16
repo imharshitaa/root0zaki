@@ -3,827 +3,554 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Root0zaki</title>
+  <title>about — harshitaa</title>
+  <meta name="description" content="Harshitaa Ashish — Security Research Engineer. Background, experience, certifications, and technical profile." />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-main: #03060c;
-      --bg-panel: rgba(7, 11, 22, 0.72);
-      --cyan: #56f6ff;
-      --blue: #62a4ff;
-      --green: #55ff9d;
-      --text: #dff5ff;
-      --text-dim: #8bb6cf;
-      --line: rgba(86, 246, 255, 0.28);
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
     }
-
-    * { box-sizing: border-box; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 20px 0 28px;
+      font-family: var(--sans);
+      background: var(--bg);
       color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-      background-color: #020612;
-      background:
-        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
-        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
-        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
-        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
-      position: relative;
       overflow-x: hidden;
+      min-height: 100vh;
     }
-
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(86, 246, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(86, 246, 255, 0.05) 1px, transparent 1px);
-      background-size: 34px 34px, 34px 34px;
-      opacity: 0.22;
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+    }
+    .site-wrap {
+      position: relative; z-index: 1;
+      width: min(1100px, 94vw);
+      margin: 0 auto;
+      padding-bottom: 80px;
     }
 
-    .wrap {
-      width: min(1180px, 94vw);
-      margin: 0 auto;
-      padding: 0;
-      margin-top: clamp(46px, 8vh, 112px);
-      position: relative;
-      z-index: 1;
+    /* ── NAV ── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0; gap: 24px;
+    }
+    .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .nav-id span { color: var(--purple); }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lavender); }
+    .nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 64px 0 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+    .ph-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ph-eyebrow::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-hi), transparent);
     }
     .page-title {
+      font-family: var(--mono); font-size: clamp(36px, 6vw, 64px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em;
       margin-bottom: 12px;
-      font: 600 clamp(24px, 3.6vw, 38px) "Share Tech Mono", monospace;
-      letter-spacing: 0.1em;
-      color: var(--cyan);
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    }
+    .page-title .acc { color: var(--purple); }
+    .page-sub {
+      font-size: 16px; color: var(--muted); line-height: 1.6; max-width: 480px;
     }
 
-    .typing {
-      display: inline-block;
-      border-right: 2px solid var(--green);
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 1.8s steps(5, end) forwards, blink 0.8s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 5ch; }
-    }
-
-    @keyframes blink {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: var(--green); }
-    }
-
-    .layout {
+    /* ── LAYOUT ── */
+    .about-grid {
       display: grid;
-      gap: 24px;
-      grid-template-columns: minmax(0, 1fr) 270px;
+      grid-template-columns: 1fr 300px;
+      gap: 56px;
       align-items: start;
     }
+    @media (max-width: 880px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
 
-    @media (max-width: 980px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(3px);
-      box-shadow: 0 0 0 1px rgba(86, 246, 255, 0.08) inset, 0 18px 42px rgba(0, 0, 0, 0.45);
-      padding: 20px 24px 24px;
-      position: relative;
-    }
-
-    .window-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      margin: -8px -10px 10px;
-      border-radius: 12px;
-      background: rgba(5, 12, 24, 0.9);
-      border: 1px solid rgba(86, 246, 255, 0.18);
-    }
-
-    .window-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .dot-red { background: #ff5f56; box-shadow: 0 0 6px rgba(255, 95, 86, 0.6); }
-    .dot-yellow { background: #ffbd2e; box-shadow: 0 0 6px rgba(255, 189, 46, 0.6); }
-    .dot-green { background: #27c93f; box-shadow: 0 0 6px rgba(39, 201, 63, 0.6); }
-
-    .prompt {
-      font: 600 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.08em;
-      color: #bfe9ff;
-      margin-left: 6px;
-    }
-
-    .chevrons {
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .chevrons span {
-      font: 700 22px "Share Tech Mono", monospace;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
-    }
-
-    .chevrons .c1 { color: #ff5f56; }
-    .chevrons .c2 { color: #ffbd2e; }
-    .chevrons .c3 { color: #27c93f; }
-
-    .hacker-title {
-      position: relative;
-      font: 700 clamp(26px, 4.6vw, 44px) "Share Tech Mono", monospace;
-      letter-spacing: 0.18em;
-      color: #7ff7ff;
-      text-shadow: 0 0 10px rgba(127, 247, 255, 0.35);
-      animation: hackerGlow 2.6s infinite ease-in-out, hackerFlicker 6s infinite steps(1);
-    }
-
-    .hacker-title::after {
-      content: "";
-      position: absolute;
-      right: -8px;
-      top: 10%;
-      width: 2px;
-      height: 80%;
-      background: #7bffb2;
-      box-shadow: 0 0 10px rgba(123, 255, 178, 0.6);
-      animation: caretBlink 1s step-end infinite;
-    }
-
-    @keyframes hackerGlow {
-      0%, 100% { text-shadow: 0 0 8px rgba(127, 247, 255, 0.35); }
-      50% { text-shadow: 0 0 16px rgba(127, 247, 255, 0.6); }
-    }
-
-    @keyframes hackerFlicker {
-      0%, 100% { opacity: 1; }
-      92% { opacity: 1; }
-      93% { opacity: 0.7; }
-      94% { opacity: 1; }
-      97% { opacity: 0.8; }
-      98% { opacity: 1; }
-    }
-
-    @keyframes caretBlink {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    #content h1, #content h2, #content h3 {
-      color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      letter-spacing: 0.03em;
-    }
-
-    #content h2 {
-      font-size: 22px;
-    }
-
-    #content p, #content li { font-size: 18px; line-height: 1.7; }
-
-    #content a { color: var(--green); }
-
-    .section-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.3);
-      font: 17px "Share Tech Mono", monospace;
-      color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(5, 12, 24, 0.65);
-      margin: 0 auto 16px;
-      width: fit-content;
-    }
-
-    .section-title {
-      text-align: center;
-    }
-
-    .contact-card {
-      margin-top: 18px;
-      border: 1px solid rgba(86, 246, 255, 0.2);
-      border-radius: 16px;
-      background: rgba(5, 10, 20, 0.78);
-      padding: 16px 18px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-    }
-
-    .contact-card:hover {
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .contact-title {
-      font: 600 16px "Share Tech Mono", monospace;
-      color: var(--cyan);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .contact-card p {
-      margin: 0 0 12px;
-      color: var(--text-dim);
-      font-size: 14px;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--text-dim);
-    }
-
-    .contact-list span {
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    .contact-list a {
-      color: var(--green);
-      text-decoration: none;
-    }
-
-    .contact-list a:hover {
-      text-shadow: 0 0 8px rgba(86, 246, 255, 0.4);
-    }
-
-    .contact-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      color: var(--green);
-      text-decoration: none;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 10px 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      text-decoration: none;
-      font: 500 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .back-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
-    }
-
-    .footer {
-      margin-top: 20px;
-      text-align: center;
-      color: var(--text-dim);
-      font: 14px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      padding-bottom: 8px;
-    }
-
-    .cert-section {
-      margin-top: 22px;
-      text-align: center;
-    }
-
-    .cert-grid {
-      display: grid;
-      gap: 18px;
-      margin-top: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      text-align: left;
-    }
-
-    .cert-card {
-      border: 1px solid rgba(86, 246, 255, 0.2);
-      border-radius: 16px;
-      background: rgba(4, 10, 20, 0.75);
-      padding: 18px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-    }
-
-    .cert-card:hover {
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .cert-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .cert-org {
-      color: var(--cyan);
-      font-weight: 500;
-      font-size: 15px;
-    }
-
-    .cert-meta {
-      color: var(--text-dim);
-      font-size: 14px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .cert-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .badge-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      color: var(--green);
-      text-decoration: none;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .badge-btn:hover {
-      box-shadow: 0 0 12px rgba(86, 246, 255, 0.2), 0 0 28px rgba(86, 246, 255, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .badge-btn span {
-      color: var(--text-dim);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-    }
-
-    .skill-list {
-      margin-top: auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    .skill-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(139, 182, 207, 0.12);
-      color: rgba(210, 230, 244, 0.75);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .skill-chip:hover {
-      box-shadow: 0 0 10px rgba(210, 230, 244, 0.18), 0 0 24px rgba(210, 230, 244, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .skill-icon {
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .skill-chip:hover .skill-icon {
-      box-shadow: 0 0 8px rgba(210, 230, 244, 0.4);
-      transform: scale(1.1);
-    }
-
-    .skill-icon {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(210, 230, 244, 0.6);
-      display: inline-block;
-    }
-
-    .tools-grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: 1fr;
-      margin-top: 6px;
-    }
-
-    .tools-side {
-      position: sticky;
-      top: 16px;
-      margin-top: -12px;
-    }
-
-    @media (max-width: 980px) {
-      .tools-side {
-        position: static;
-      }
-    }
-
-    .tool-block {
-      border: 1px solid rgba(86, 246, 255, 0.18);
-      border-radius: 16px;
-      background: rgba(5, 10, 20, 0.72);
-      padding: 16px 18px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-    }
-
-    .tool-block:hover {
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .tool-title {
-      font: 600 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      color: var(--cyan);
-      margin: 0 0 10px;
-      text-transform: uppercase;
-    }
-
-    .tool-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tool-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: #9fffbf;
-      background: rgba(159, 255, 191, 0.08);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .tool-pill:hover {
-      box-shadow: 0 0 12px rgba(159, 255, 191, 0.18), 0 0 28px rgba(159, 255, 191, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      display: inline-block;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .tool-pill:hover .dot {
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-      transform: scale(1.1);
-    }
-
-    .dot-green { background: #54ffa2; box-shadow: 0 0 6px rgba(84, 255, 162, 0.6); }
-    .dot-orange { background: #ffb560; box-shadow: 0 0 6px rgba(255, 181, 96, 0.5); }
-    .dot-purple { background: #b88bff; box-shadow: 0 0 6px rgba(184, 139, 255, 0.55); }
-
-    .exp-title {
-      margin: 8px 0 0;
-      font: 600 clamp(16px, 2.6vw, 24px) "Share Tech Mono", monospace;
-      color: var(--cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
+    .main-col {}
+    .side-col { position: sticky; top: 32px; }
+    @media (max-width: 880px) { .side-col { position: static; } }
 
-    .exp-section {
-      margin-top: 28px;
+    /* ── SECTION LABEL ── */
+    .sec-label {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 12px;
     }
-
-    .exp-header {
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    .exp-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(86, 246, 255, 0.3);
-      font: 12px "Share Tech Mono", monospace;
-      color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .exp-header h2 {
-      margin: 12px 0 8px;
-      font-size: clamp(26px, 4vw, 36px);
-    }
-
-    .exp-header p {
-      margin: 0 auto;
-      max-width: 620px;
-      color: var(--text-dim);
-      font-size: 15px;
-    }
-
-    .timeline {
-      position: relative;
-      display: grid;
-      gap: 26px;
-      padding-left: 0;
+    .sec-label::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-hi), transparent);
     }
 
-    .timeline::before {
-      display: none;
+    /* ── INTRO TEXT ── */
+    .intro-block { margin-bottom: 56px; }
+    .intro-block p {
+      font-size: 16px; line-height: 1.8; color: #C4BBD4; margin-bottom: 18px;
     }
+    .intro-block p:last-child { margin-bottom: 0; }
 
+    /* ── EXPERIENCE ── */
+    .exp-block { margin-bottom: 64px; }
+    .tl-list { list-style: none; }
     .tl-item {
-      position: relative;
-      padding-left: 0;
-      padding-top: 2px;
-    }
-
-    .tl-marker {
-      display: none;
-    }
-
-    .tl-card {
-      border: 1px solid rgba(86, 246, 255, 0.18);
-      border-radius: 18px;
-      background: rgba(5, 10, 20, 0.78);
-      padding: 18px 20px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
       display: grid;
-      gap: 10px;
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-      width: 100%;
-      max-width: none;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      align-items: start;
     }
-
-    .tl-card:hover {
-      box-shadow: 0 0 18px rgba(86, 246, 255, 0.18), 0 0 40px rgba(86, 246, 255, 0.12);
-      transform: translateY(-2px);
+    .tl-item:last-child { border-bottom: 1px solid var(--border); }
+    @media (max-width: 600px) {
+      .tl-item { grid-template-columns: 1fr; gap: 12px; }
     }
-
+    .tl-date {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      padding-top: 4px; line-height: 1.6; letter-spacing: 0.04em;
+    }
+    .tl-date .range { display: block; color: var(--border-hi); margin-top: 4px; }
+    .tl-body {}
     .tl-role {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0;
+      font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px;
     }
-
-    .tl-company {
-      color: var(--cyan);
-      font-weight: 500;
+    .tl-org {
+      font-family: var(--mono); font-size: 12px; color: var(--lavender);
+      letter-spacing: 0.06em; margin-bottom: 12px;
     }
-
-    .tl-meta {
-      color: var(--text-dim);
-      font-size: 13px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
     .tl-bullets {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text-dim);
-      display: grid;
-      gap: 6px;
-      font-size: 14px;
+      list-style: none; margin-bottom: 14px;
+    }
+    .tl-bullets li {
+      font-size: 14px; color: var(--muted); line-height: 1.65;
+      padding: 3px 0; padding-left: 14px; position: relative;
+    }
+    .tl-bullets li::before {
+      content: "–"; position: absolute; left: 0; color: var(--border-hi);
+      font-family: var(--mono);
+    }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tl-tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--purple);
+      border: 1px solid rgba(139,92,246,0.25); padding: 2px 8px;
     }
 
-    .tl-skills {
-      display: flex;
-      flex-wrap: wrap;
+    /* ── CERTIFICATIONS / EDUCATION ── */
+    .cert-block { margin-bottom: 64px; }
+    .cert-list { list-style: none; }
+    .cert-item {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .cert-item:last-child { border-bottom: 1px solid var(--border); }
+    @media (max-width: 600px) { .cert-item { grid-template-columns: 1fr; gap: 10px; } }
+    .cert-year {
+      font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 4px;
+    }
+    .cert-body {}
+    .cert-name {
+      font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px;
+    }
+    .cert-org {
+      font-family: var(--mono); font-size: 11px; color: var(--lavender);
+      letter-spacing: 0.06em; margin-bottom: 8px;
+    }
+    .cert-meta {
+      font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.55;
+    }
+    .cert-verify {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 4px 10px;
+      transition: color 0.2s, border-color 0.2s;
+      display: inline-block;
+    }
+    .cert-verify:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    /* ── SIDE PANEL ── */
+    .side-profile {
+      background: var(--bg2); border: 1px solid var(--border);
+      font-family: var(--mono); font-size: 12px; margin-bottom: 20px;
+    }
+    .sp-bar {
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      color: var(--muted); font-size: 11px;
+    }
+    .sp-bar span { color: var(--purple); }
+    .sp-body { padding: 14px; }
+    .sp-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid rgba(139,92,246,0.07);
       gap: 8px;
-      font-size: 12px;
-      color: rgba(210, 230, 244, 0.7);
+    }
+    .sp-row:last-child { border-bottom: none; }
+    .sp-key { color: var(--muted); flex-shrink: 0; }
+    .sp-val { color: var(--text); text-align: right; }
+    .sp-val.pink { color: var(--softpink); }
+    .sp-val.purple { color: var(--lavender); }
+
+    .side-tools { background: var(--bg2); border: 1px solid var(--border); }
+    .side-tools-bar {
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+    }
+    .side-tools-bar span { color: var(--purple); }
+    .tools-section { padding: 14px; border-bottom: 1px solid var(--border); }
+    .tools-section:last-child { border-bottom: none; }
+    .tools-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 10px;
+    }
+    .tools-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tool-badge {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+      color: var(--lavender); border: 1px solid rgba(177,140,255,0.2);
+      padding: 3px 8px; background: rgba(139,92,246,0.06);
+    }
+
+    /* ── CONTACT BLOCK ── */
+    .contact-block {
+      background: var(--bg2); border: 1px solid var(--border); padding: 22px;
+      margin-bottom: 20px;
+    }
+    .cb-title {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 14px;
+    }
+    .cb-links { list-style: none; }
+    .cb-links li { padding: 8px 0; border-bottom: 1px solid rgba(139,92,246,0.1); }
+    .cb-links li:last-child { border-bottom: none; }
+    .cb-links a {
+      text-decoration: none; display: flex; align-items: baseline; gap: 8px;
+      font-family: var(--mono); font-size: 11px;
+    }
+    .cb-svc { color: var(--purple); width: 56px; flex-shrink: 0; }
+    .cb-handle { color: var(--muted); transition: color 0.2s; word-break: break-all; }
+    .cb-links a:hover .cb-handle { color: var(--lavender); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; margin-top: 40px;
+    }
+    .footer-id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .footer-id .acc { color: var(--purple); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="page-title">
-      <span class="chevrons"><span class="c1">&gt;</span><span class="c2">&gt;</span><span class="c3">&gt;</span></span>
-      <span class="hacker-title">ABOUT</span>
-    </div>
+<div class="site-wrap">
 
-    <div class="layout">
-      <section class="panel">
-        <div class="window-bar">
-          <span class="window-dot dot-red"></span>
-          <span class="window-dot dot-yellow"></span>
-          <span class="window-dot dot-green"></span>
-          <span class="prompt">root0zaki://about</span>
-        </div>
-        <div id="content">Loading About...</div>
-        <a class="back-link" href="../index.html">⬅ Back to Home</a>
+  <!-- NAV -->
+  <nav aria-label="Main navigation">
+    <div class="nav-id"><span>harshitaa</span>@security:~/about$</div>
+    <ul class="nav-links" role="list">
+      <li><a href="../index.html#skills-section">Skills</a></li>
+      <li><a href="../projects/index.html">Projects</a></li>
+      <li><a href="../index.html#contact-section">Contact</a></li>
+      <li><a href="../index.html" class="nav-back">← Home</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="ph-eyebrow">// profile</div>
+    <h1 class="page-title">about<span class="acc">_</span></h1>
+    <p class="page-sub">Security research engineer, builder of offensive tooling, student of how systems fail.</p>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div class="about-grid">
+    <main class="main-col">
+
+      <!-- INTRO -->
+      <div class="intro-block">
+        <div class="sec-label">// who</div>
+        <p>
+          I'm Harshitaa Ashish — a security research engineer at LEVO.AI, working on
+          product security testing, API security research, and AI attack surface analysis.
+          My background sits at the overlap between offensive security and engineering:
+          I test systems, write exploit code, and build tooling that makes security
+          testing more reproducible and systematic.
+        </p>
+        <p>
+          I hold a Certified Ethical Hacker (CEH) certification from EC-Council and
+          a BTech in Computer Science Engineering with a specialization in Cybersecurity
+          and Digital Forensics from Vellore Institute of Technology (2021–2025, 8.01 GPA).
+          I also completed IBM's AI Engineering Professional Certificate in early 2023.
+        </p>
+        <p>
+          What draws me to security is the engineering depth it requires. Understanding
+          why authentication protocols break, how AI systems can be manipulated through
+          their interfaces, and how to automate the repetitive parts of security testing
+          so the interesting parts get the attention they deserve.
+        </p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <section class="exp-block" aria-label="Professional experience">
+        <div class="sec-label">// experience</div>
+        <ul class="tl-list" role="list">
+
+          <li class="tl-item">
+            <div class="tl-date">
+              Jan 2025<span class="range">– Present</span>
+            </div>
+            <div class="tl-body">
+              <div class="tl-role">Security Research Engineer</div>
+              <div class="tl-org">LEVO.AI · Hyderabad, On-site</div>
+              <ul class="tl-bullets">
+                <li>Product security testing, vulnerability validation, and tool integration into workflow.</li>
+                <li>API &amp; AI security research: analyzed, tracked, and documented vulnerabilities across APIs and AI applications.</li>
+                <li>Client-required security tests and insights for improvement (customer success testing).</li>
+                <li>Designed advanced security test cases for improved test run coverage.</li>
+                <li>Validated threats and bugs detected from product test results (vulnerability triage &amp; QA).</li>
+                <li>Provided inputs for test run logic and created exploit code for testing.</li>
+              </ul>
+              <div class="tl-tags">
+                <span class="tl-tag">AppSec</span>
+                <span class="tl-tag">AI Security</span>
+                <span class="tl-tag">API Security</span>
+                <span class="tl-tag">DevSecOps</span>
+                <span class="tl-tag">Vulnerability Analysis</span>
+                <span class="tl-tag">Exploit Code</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-item">
+            <div class="tl-date">
+              Nov 2024<span class="range">– Dec 2024</span>
+            </div>
+            <div class="tl-body">
+              <div class="tl-role">Technical Customer Success Intern</div>
+              <div class="tl-org">LEVO.AI · Hyderabad, On-site</div>
+              <div class="tl-tags">
+                <span class="tl-tag">Customer Support</span>
+                <span class="tl-tag">Pentesting</span>
+                <span class="tl-tag">Product Security</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-item">
+            <div class="tl-date">
+              Jul 2024<span class="range">– Oct 2024</span>
+            </div>
+            <div class="tl-body">
+              <div class="tl-role">VAPT Intern</div>
+              <div class="tl-org">HAZERCLOUD™ · Kerala, India</div>
+              <div class="tl-tags">
+                <span class="tl-tag">Pentesting</span>
+                <span class="tl-tag">Vulnerability Analysis</span>
+                <span class="tl-tag">VAPT</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="tl-item">
+            <div class="tl-date">
+              Apr 2024<span class="range">– Jul 2024</span>
+            </div>
+            <div class="tl-body">
+              <div class="tl-role">Cybersecurity Intern</div>
+              <div class="tl-org">DarkRelay Security Labs</div>
+              <div class="tl-tags">
+                <span class="tl-tag">Python</span>
+                <span class="tl-tag">PowerShell</span>
+                <span class="tl-tag">Docker</span>
+                <span class="tl-tag">Bug Reporting</span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
       </section>
 
-      <aside class="tools-side">
-        <div class="tools-grid">
-          <article class="tool-block">
-            <h3 class="tool-title">AI Tools</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>ChatGPT</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>GitHub Copilot</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Cursor</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Claude</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Gemini</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Perplexity</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Phind</span>
-            </div>
-          </article>
+      <!-- CERTIFICATIONS & EDUCATION -->
+      <section class="cert-block" aria-label="Certifications and education">
+        <div class="sec-label">// credentials</div>
+        <ul class="cert-list" role="list">
 
-          <article class="tool-block">
-            <h3 class="tool-title">Security Tools</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Burp Suite</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>OWASP ZAP</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Nmap</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Metasploit</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Wireshark</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>sqlmap</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>ffuf</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Nuclei</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Amass</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Subfinder</span>
+          <li class="cert-item">
+            <div class="cert-year">Dec 2023</div>
+            <div class="cert-body">
+              <div class="cert-name">Certified Ethical Hacker (CEH)</div>
+              <div class="cert-org">EC-Council</div>
+              <div class="cert-meta">Credential ID: ECC1850769342</div>
+              <a class="cert-verify" href="https://aspen.eccouncil.org/VerifyBadge?type=certification&a=FxpakOo7ywuC1HgboOhujMXgpvC+pMo4CnfWbaJ0NEQ=" target="_blank" rel="noopener noreferrer">verify badge ↗</a>
             </div>
-          </article>
+          </li>
 
-          <article class="tool-block">
-            <h3 class="tool-title">Application Security</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>SAST</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>DAST</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>IAST</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>SCA</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Threat Modeling</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Secure Code Review</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Dependency Scanning</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>API Security Testing</span>
+          <li class="cert-item">
+            <div class="cert-year">2021–2025</div>
+            <div class="cert-body">
+              <div class="cert-name">BTech — Computer Science Engineering</div>
+              <div class="cert-org">Vellore Institute of Technology</div>
+              <div class="cert-meta">Specialization: Cybersecurity &amp; Digital Forensics · GPA: 8.01</div>
             </div>
-          </article>
+          </li>
 
-          <article class="tool-block">
-            <h3 class="tool-title">DevSecOps</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Docker</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Kubernetes</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>GitHub Actions</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>GitLab CI</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Jenkins</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Trivy</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Snyk</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Checkov</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>HashiCorp Vault</span>
+          <li class="cert-item">
+            <div class="cert-year">Feb 2023</div>
+            <div class="cert-body">
+              <div class="cert-name">IBM AI Engineering Professional Certificate</div>
+              <div class="cert-org">IBM</div>
+              <div class="cert-meta">Credential ID: Y83V97R9CYBK · Machine Learning, Python, Deep Learning</div>
             </div>
-          </article>
+          </li>
 
-          <article class="tool-block">
-            <h3 class="tool-title">Automation & Scripting</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Python</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Bash</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Go</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>REST APIs</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Security Automation Frameworks</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>CLI Tooling</span>
-            </div>
-          </article>
+        </ul>
+      </section>
 
-          <article class="tool-block">
-            <h3 class="tool-title">Vulnerability Research</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Exploit Development</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Fuzzing</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Memory Corruption</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Binary Analysis</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Reverse Engineering</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>CVE Research</span>
-            </div>
-          </article>
+    </main>
 
-          <article class="tool-block">
-            <h3 class="tool-title">AI Security</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Prompt Injection</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>LLM Jailbreak Testing</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Model Poisoning</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Adversarial ML</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Data Leakage Testing</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>AI Red Teaming</span>
-            </div>
-          </article>
+    <aside class="side-col" aria-label="Profile sidebar">
 
-          <article class="tool-block">
-            <h3 class="tool-title">Web Security</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>OWASP Top 10</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Authentication Security</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Authorization Testing</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Session Management</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>API Security</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>JWT Security</span>
-            </div>
-          </article>
-
-          <article class="tool-block">
-            <h3 class="tool-title">Monitoring & Detection</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>SIEM</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Log Analysis</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Threat Intelligence</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Detection Engineering</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Incident Response</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Security Telemetry</span>
-            </div>
-          </article>
-
-          <article class="tool-block">
-            <h3 class="tool-title">Operating Systems & Platforms</h3>
-            <div class="tool-list">
-              <span class="tool-pill"><span class="dot dot-green"></span>Linux Security</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Windows Internals</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>macOS Security</span>
-              <span class="tool-pill"><span class="dot dot-green"></span>Embedded Systems</span>
-              <span class="tool-pill"><span class="dot dot-orange"></span>Virtualization</span>
-              <span class="tool-pill"><span class="dot dot-purple"></span>Container Security</span>
-            </div>
-          </article>
+      <!-- SYSTEM PROFILE -->
+      <div class="side-profile">
+        <div class="sp-bar"><span>$</span> cat harshitaa.profile</div>
+        <div class="sp-body">
+          <div class="sp-row"><span class="sp-key">name</span><span class="sp-val pink">Harshitaa Ashish</span></div>
+          <div class="sp-row"><span class="sp-key">role</span><span class="sp-val">Security Research Eng.</span></div>
+          <div class="sp-row"><span class="sp-key">org</span><span class="sp-val purple">LEVO.AI</span></div>
+          <div class="sp-row"><span class="sp-key">loc</span><span class="sp-val">Hyderabad, IN</span></div>
+          <div class="sp-row"><span class="sp-key">ceh</span><span class="sp-val">EC-Council</span></div>
+          <div class="sp-row"><span class="sp-key">edu</span><span class="sp-val">VIT BTech 2025</span></div>
+          <div class="sp-row"><span class="sp-key">focus</span><span class="sp-val purple">appsec · ai · apis</span></div>
+          <div class="sp-row"><span class="sp-key">status</span><span class="sp-val pink">active</span></div>
         </div>
-      </aside>
-    </div>
+      </div>
 
-    <div class="footer">imharshitaa @ owner</div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-  <script>
-    fetch("about.md")
-      .then(res => res.text())
-      .then(md => {
-        const converter = new showdown.Converter();
-        document.getElementById("content").innerHTML = converter.makeHtml(md);
-      })
-      .catch(() => {
-        document.getElementById("content").innerHTML =
-          "<p style='color:#ff8c8c'>Error loading About content.</p>";
-      });
-  </script>
+      <!-- CONTACT -->
+      <div class="contact-block">
+        <div class="cb-title">contact</div>
+        <ul class="cb-links" role="list">
+          <li>
+            <a href="mailto:harshitaa729@gmail.com">
+              <span class="cb-svc">email</span>
+              <span class="cb-handle">harshitaa729@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/imharshitaa" target="_blank" rel="noopener noreferrer">
+              <span class="cb-svc">github</span>
+              <span class="cb-handle">imharshitaa</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/harshitaa-ashish-85767621a/" target="_blank" rel="noopener noreferrer">
+              <span class="cb-svc">linkedin</span>
+              <span class="cb-handle">harshitaa-ashish</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- TOOLS SIDEBAR -->
+      <div class="side-tools">
+        <div class="side-tools-bar"><span>$</span> ls tools/</div>
+        <div class="tools-section">
+          <div class="tools-label">Security</div>
+          <div class="tools-list">
+            <span class="tool-badge">Burp Suite</span>
+            <span class="tool-badge">Nmap</span>
+            <span class="tool-badge">Metasploit</span>
+            <span class="tool-badge">OWASP ZAP</span>
+            <span class="tool-badge">sqlmap</span>
+            <span class="tool-badge">ffuf</span>
+            <span class="tool-badge">Nuclei</span>
+            <span class="tool-badge">Amass</span>
+            <span class="tool-badge">Wireshark</span>
+          </div>
+        </div>
+        <div class="tools-section">
+          <div class="tools-label">DevSecOps</div>
+          <div class="tools-list">
+            <span class="tool-badge">Docker</span>
+            <span class="tool-badge">Kubernetes</span>
+            <span class="tool-badge">GitHub Actions</span>
+            <span class="tool-badge">Trivy</span>
+            <span class="tool-badge">Snyk</span>
+            <span class="tool-badge">Checkov</span>
+            <span class="tool-badge">HashiCorp Vault</span>
+          </div>
+        </div>
+        <div class="tools-section">
+          <div class="tools-label">Languages</div>
+          <div class="tools-list">
+            <span class="tool-badge">Python</span>
+            <span class="tool-badge">Go</span>
+            <span class="tool-badge">Bash</span>
+            <span class="tool-badge">Shell</span>
+          </div>
+        </div>
+        <div class="tools-section">
+          <div class="tools-label">AI Tools</div>
+          <div class="tools-list">
+            <span class="tool-badge">ChatGPT</span>
+            <span class="tool-badge">Claude</span>
+            <span class="tool-badge">Copilot</span>
+            <span class="tool-badge">Cursor</span>
+            <span class="tool-badge">Perplexity</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer role="contentinfo">
+    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/about$</div>
+    <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
+  </footer>
+
+</div>
 </body>
 </html>

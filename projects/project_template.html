@@ -3,286 +3,238 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Viewer - Root0zaki</title>
+  <title>Project — harshitaa</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-main: #020612;
-      --bg-panel: rgba(4, 11, 25, 0.84);
-      --cyan: #49f3ff;
-      --green: #40ffa5;
-      --text: #dbf6ff;
-      --text-dim: #8eb8d2;
-      --line: rgba(73, 243, 255, 0.26);
-      --warn: #ff8c8c;
+      --bg:        #09070D;
+      --bg2:       #160D20;
+      --surface:   #1C1425;
+      --border:    rgba(139,92,246,0.18);
+      --border-hi: rgba(139,92,246,0.45);
+      --purple:    #8B5CF6;
+      --lavender:  #B18CFF;
+      --pink:      #FF4FA3;
+      --softpink:  #F5B8D2;
+      --text:      #EDE7F6;
+      --muted:     #93889F;
+      --mono:      "Share Tech Mono", monospace;
+      --sans:      "Space Grotesk", sans-serif;
     }
-
-    * { box-sizing: border-box; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 16px 0 24px;
+      font-family: var(--sans);
+      background: var(--bg);
       color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-      background-color: #020612;
-      background:
-        radial-gradient(circle at 9% 24%, rgba(64, 255, 165, 0.14), transparent 42%),
-        radial-gradient(circle at 94% 12%, rgba(77, 126, 255, 0.18), transparent 38%),
-        linear-gradient(90deg, rgba(64, 255, 165, 0.04) 0%, transparent 40%, transparent 60%, rgba(77, 126, 255, 0.05) 100%),
-        linear-gradient(180deg, #020612 0%, #031024 52%, #020612 100%);
-      position: relative;
       overflow-x: hidden;
+      min-height: 100vh;
     }
-
-    .wrap {
-      width: min(1040px, 92vw);
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+    }
+    .site-wrap {
+      position: relative; z-index: 1;
+      width: min(860px, 94vw);
       margin: 0 auto;
-      padding: 6px 0 14px;
+      padding-bottom: 80px;
     }
 
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(3px);
-      box-shadow: 0 0 0 1px rgba(73, 243, 255, 0.1) inset, 0 16px 36px rgba(0, 0, 0, 0.48);
-      padding: 18px;
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0 0; gap: 24px;
+    }
+    .nav-id { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .nav-id span { color: var(--purple); }
+    .nav-back {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; color: var(--muted);
+      border: 1px solid var(--border); padding: 6px 14px; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-back:hover { color: var(--lavender); border-color: var(--lavender); }
+
+    /* HEADER */
+    .doc-header {
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .doc-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 14px;
+    }
+    #doc-title {
+      font-family: var(--mono); font-size: clamp(26px, 5vw, 44px);
+      font-weight: 400; color: var(--text); letter-spacing: -0.02em;
+    }
+    #doc-title .acc { color: var(--purple); }
+
+    /* CONTENT AREA */
+    .doc-body {
+      font-size: 15px; line-height: 1.8; color: #C4BBD4;
+    }
+    .doc-body h1, .doc-body h2, .doc-body h3, .doc-body h4 {
+      font-family: var(--mono); color: var(--lavender); letter-spacing: 0.02em;
+      margin: 36px 0 14px;
+    }
+    .doc-body h1 { font-size: 28px; }
+    .doc-body h2 { font-size: 22px; }
+    .doc-body h3 { font-size: 18px; color: var(--softpink); }
+    .doc-body h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .doc-body p { margin-bottom: 16px; }
+    .doc-body ul, .doc-body ol { padding-left: 20px; margin-bottom: 16px; color: var(--muted); }
+    .doc-body li { padding: 3px 0; line-height: 1.7; }
+    .doc-body strong { color: var(--text); font-weight: 600; }
+    .doc-body em { color: var(--softpink); font-style: normal; }
+    .doc-body a { color: var(--lavender); }
+    .doc-body a:hover { text-decoration: underline; }
+    .doc-body hr {
+      border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-hi), transparent);
+      margin: 36px 0;
+    }
+    .doc-body blockquote {
+      border-left: 2px solid var(--purple); padding-left: 18px;
+      color: var(--muted); margin: 20px 0;
+    }
+    .doc-body code {
+      font-family: var(--mono); font-size: 13px;
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 1px 6px; color: var(--softpink);
+    }
+    .doc-body pre {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 18px 20px; overflow-x: auto; margin: 20px 0;
+    }
+    .doc-body pre code {
+      background: none; border: none; padding: 0;
+      color: var(--muted); font-size: 12px; line-height: 1.6;
+    }
+    .doc-body table {
+      width: 100%; border-collapse: collapse; margin: 20px 0;
+      font-size: 13px;
+    }
+    .doc-body th {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--purple);
+      border-bottom: 1px solid var(--border-hi); padding: 8px 12px; text-align: left;
+    }
+    .doc-body td {
+      padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted);
+    }
+    .doc-body img {
+      max-width: 100%; display: block; margin: 24px 0;
+      border: 1px solid var(--border);
     }
 
-    .mac-window {
-      border: 1px solid rgba(86, 246, 255, 0.24);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(5, 10, 22, 0.88);
+    /* mermaid diagrams */
+    .doc-body .mermaid {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 20px; margin: 20px 0; overflow-x: auto;
     }
 
-    .mac-titlebar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(86, 246, 255, 0.2);
-      background: linear-gradient(180deg, rgba(11, 18, 34, 0.92), rgba(6, 12, 24, 0.9));
+    /* DOC FOOTER */
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
     }
+    .footer-id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .footer-id .acc { color: var(--purple); }
 
-    .mac-dots {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .mac-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.24) inset;
-    }
-
-    .mac-dot.red { background: #ff5f57; }
-    .mac-dot.yellow { background: #ffbd2e; }
-    .mac-dot.green { background: #28c840; }
-
-    .mac-title {
-      color: var(--text-dim);
-      font: 600 18px "Share Tech Mono", monospace;
-      letter-spacing: 0.03em;
-    }
-
-    .mac-body {
-      padding: 20px 22px 18px;
-    }
-
-    #content {
-      width: 100%;
-      text-align: left;
-    }
-
-    #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
-      color: var(--cyan);
-      font-family: "Share Tech Mono", monospace;
-      letter-spacing: 0.03em;
-    }
-
-    #content h1 { font-size: 34px; }
-    #content h2 { font-size: 28px; }
-    #content h3 { font-size: 24px; }
-
-    #content p, #content li {
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    #content a {
-      color: var(--green);
-      font-size: 18px;
-    }
-
-    #content img {
-      display: block;
-      margin: 22px auto;
-      max-width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-    }
-
-    #content pre {
-      overflow-x: auto;
-      border-radius: 10px;
-      padding: 14px;
-      background: rgba(6, 11, 22, 0.9);
-      border: 1px solid rgba(86, 246, 255, 0.2);
-    }
-
-    #content code {
-      color: #ffc97a;
-      font-family: "Share Tech Mono", monospace;
-      font-size: 16px;
-    }
-
-    #content strong { color: #f7fbff; }
-
-    #content .mermaid {
-      margin: 22px 0;
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(86, 246, 255, 0.2);
-      background: rgba(6, 11, 22, 0.9);
-      overflow-x: auto;
-    }
-
-    .controls {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .back-link {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 10px;
-      border: 1px solid rgba(86, 246, 255, 0.45);
-      background: rgba(6, 11, 22, 0.92);
-      color: var(--cyan);
-      text-decoration: none;
-      font: 500 16px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .back-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-      transform: translateY(-2px);
-    }
-
-    .footer {
-      color: var(--text-dim);
-      font: 15px "Share Tech Mono", monospace;
-      letter-spacing: 0.04em;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="panel">
-      <div class="mac-window">
-        <div class="mac-titlebar">
-          <div class="mac-dots">
-            <span class="mac-dot red"></span>
-            <span class="mac-dot yellow"></span>
-            <span class="mac-dot green"></span>
-          </div>
-          <div class="mac-title" id="mac-title">Project Template</div>
-        </div>
-        <div class="mac-body">
-          <div id="content">Loading...</div>
-          <div class="controls">
-            <a class="back-link" id="back-to-index" href="index.html">⬅ Back to Projects</a>
-            <div class="footer">imharshitaa @ owner</div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="site-wrap">
+
+  <nav aria-label="Main navigation">
+    <div class="nav-id"><span>harshitaa</span>@security:~/projects$</div>
+    <a href="index.html" class="nav-back">← Projects</a>
+  </nav>
+
+  <header class="doc-header">
+    <div class="doc-eyebrow">// project</div>
+    <h1 id="doc-title">Loading<span class="acc">_</span></h1>
+  </header>
+
+  <main class="doc-body" id="content" aria-label="Project content">
+    <p style="font-family:var(--mono);font-size:13px;color:var(--muted);">loading…</p>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  <footer class="doc-footer" role="contentinfo">
+    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/projects$</div>
+    <a href="index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--border);padding:6px 14px;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--lavender)';this.style.borderColor='var(--lavender)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">← back to projects</a>
+  </footer>
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: "dark",
-      securityLevel: "loose"
-    });
+</div>
 
-    window.renderMermaid = async () => {
-      await mermaid.run({
-        querySelector: ".mermaid"
-      });
-    };
-  </script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, theme: "dark", securityLevel: "loose" });
+  window.__renderMermaid = async () => {
+    await mermaid.run({ querySelector: ".mermaid" });
+  };
+</script>
+<script>
+  (function() {
     const params = new URLSearchParams(window.location.search);
-    const file = params.get("file");
-    const macTitle = document.getElementById("mac-title");
-    const backToIndex = document.getElementById("back-to-index");
+    const file   = params.get("file");
+    const titleEl = document.getElementById("doc-title");
 
-    if (backToIndex) {
-      backToIndex.addEventListener("click", (event) => {
-        event.preventDefault();
-        window.location.replace("index.html");
-      });
-    }
-
-    const toLabel = (value, fallback) => {
-      if (!value) return fallback;
-      const base = value.split("/").pop().replace(/\.[^/.]+$/, "");
-      return base
+    function toLabel(val) {
+      if (!val) return "Project";
+      return val.split("/").pop().replace(/\.[^/.]+$/, "")
         .replace(/[-_]+/g, " ")
-        .replace(/\b\w/g, (m) => m.toUpperCase());
-    };
-
-    if (file) {
-      macTitle.textContent = `${toLabel(file, "Project")} • Project`;
-      fetch(file)
-        .then(res => res.text())
-        .then(md => {
-          const converter = new showdown.Converter({
-            ghCodeBlocks: true,
-            tables: true,
-            strikethrough: true,
-            simpleLineBreaks: true,
-            openLinksInNewWindow: true
-          });
-          const html = converter.makeHtml(md).replace(
-            /<pre><code class="mermaid(?: language-mermaid)?">([\s\S]*?)<\/code><\/pre>/g,
-            (_, code) => `<div class="mermaid">${code
-              .replace(/&amp;/g, "&")
-              .replace(/&lt;/g, "<")
-              .replace(/&gt;/g, ">")}</div>`
-          );
-
-          document.getElementById("content").innerHTML = html;
-          if (window.renderMermaid) {
-            window.renderMermaid();
-          }
-        })
-        .catch(() => {
-          document.getElementById("content").innerHTML =
-            "<p style='color:#ff8c8c'>Error loading file.</p>";
-        });
-    } else {
-      document.getElementById("content").innerHTML =
-        "<p style='color:#ff8c8c'>No project selected.</p>";
+        .replace(/\b\w/g, m => m.toUpperCase());
     }
-  </script>
+
+    if (!file) {
+      titleEl.textContent = "Project not found";
+      document.getElementById("content").innerHTML =
+        '<p style="font-family:var(--mono);font-size:13px;color:#FF6B6B;">No project selected.</p>';
+      return;
+    }
+
+    titleEl.innerHTML = toLabel(file) + '<span class="acc">_</span>';
+    document.title = toLabel(file) + " — harshitaa";
+
+    fetch(file)
+      .then(r => r.text())
+      .then(md => {
+        const converter = new showdown.Converter({
+          ghCodeBlocks: true, tables: true,
+          strikethrough: true, openLinksInNewWindow: true
+        });
+        const html = converter.makeHtml(md).replace(
+          /<pre><code class="(?:language-)?mermaid">([\s\S]*?)<\/code><\/pre>/g,
+          (_, code) => `<div class="mermaid">${code
+            .replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">")}</div>`
+        );
+        document.getElementById("content").innerHTML = html;
+        if (window.__renderMermaid) window.__renderMermaid();
+      })
+      .catch(() => {
+        document.getElementById("content").innerHTML =
+          '<p style="font-family:var(--mono);font-size:13px;color:#FF6B6B;">Error loading project file.</p>';
+      });
+  })();
+</script>
 </body>
 </html>
