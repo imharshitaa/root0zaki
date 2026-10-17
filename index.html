@@ -388,11 +388,17 @@
     /* Skills Section */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1100px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
       .skills-grid {
         grid-template-columns: 1fr;
       }
@@ -754,36 +760,50 @@
       <h2 class="section-title">/ skills</h2>
       <div class="skills-grid">
         <div class="skill-category">
-          <h4>Security Testing</h4>
+          <h4>AI & LLM Security</h4>
           <div class="skill-list">
+            <span class="skill-item">LLM Security Testing</span>
+            <span class="skill-item">AI Agent Security</span>
+            <span class="skill-item">Prompt Injection</span>
+            <span class="skill-item">MCP Security</span>
+            <span class="skill-item">AI Attack Vectors</span>
+            <span class="skill-item">AI Security Evaluation</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Application & Product Security</h4>
+          <div class="skill-list">
+            <span class="skill-item">API Security</span>
             <span class="skill-item">Penetration Testing</span>
             <span class="skill-item">Vulnerability Assessment</span>
-            <span class="skill-item">API Security</span>
-            <span class="skill-item">AI Security</span>
-            <span class="skill-item">AppSec</span>
-            <span class="skill-item">Red Teaming</span>
+            <span class="skill-item">API Authorization</span>
+            <span class="skill-item">SAST / DAST / SCA</span>
+            <span class="skill-item">Threat Modeling</span>
           </div>
         </div>
         <div class="skill-category">
-          <h4>Development</h4>
+          <h4>Backend & Systems Engineering</h4>
           <div class="skill-list">
+            <span class="skill-item">Go</span>
             <span class="skill-item">Python</span>
-            <span class="skill-item">JavaScript</span>
-            <span class="skill-item">Shell Scripting</span>
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">CI/CD</span>
             <span class="skill-item">REST APIs</span>
+            <span class="skill-item">Authentication & Authorization</span>
+            <span class="skill-item">Policy Enforcement</span>
+            <span class="skill-item">Detection Pipelines</span>
+            <span class="skill-item">Shell Scripting</span>
           </div>
         </div>
         <div class="skill-category">
-          <h4>Tools & Frameworks</h4>
+          <h4>DevSecOps & Security Tooling</h4>
           <div class="skill-list">
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Kubernetes</span>
+            <span class="skill-item">GitHub Actions</span>
             <span class="skill-item">Burp Suite</span>
             <span class="skill-item">OWASP ZAP</span>
             <span class="skill-item">Semgrep</span>
             <span class="skill-item">Trivy</span>
-            <span class="skill-item">Nmap</span>
-            <span class="skill-item">Metasploit</span>
+            <span class="skill-item">CI/CD Security</span>
           </div>
         </div>
       </div>
