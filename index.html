@@ -31,6 +31,11 @@
       scroll-behavior: smooth;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
     body {
       font-family: "Space Grotesk", sans-serif;
       background: var(--bg);
@@ -85,7 +90,9 @@
 
     nav {
       display: flex;
-      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 16px 28px;
     }
 
     nav a {
@@ -122,29 +129,21 @@
     /* ASCII Portrait */
     .portrait-frame {
       position: relative;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-elevated);
-      padding: 16px;
+      background: transparent;
     }
 
     .portrait-label {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 0.5px;
+      display: none;
     }
 
     #ascii-canvas {
       display: block;
       width: 100%;
+      max-width: 520px;
       height: auto;
       font-family: "JetBrains Mono", monospace;
-      font-size: 6px;
-      line-height: 1.1;
+      font-size: 8px;
+      line-height: 1.05;
       white-space: pre;
       color: var(--text);
       overflow-x: hidden;
@@ -164,6 +163,23 @@
 
     .hero-heading .accent {
       color: var(--purple);
+    }
+
+    .hero-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--pink);
+      font-weight: 400;
+      animation: blink-cursor 1s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-cursor { animation: none; opacity: 1; }
     }
 
     .hero-subtitle {
@@ -313,6 +329,7 @@
     }
 
     .project-card {
+      position: relative;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 24px;
@@ -322,6 +339,13 @@
 
     .project-card:hover {
       border-color: var(--border-hover);
+    }
+
+    .project-card-hit {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 8px;
     }
 
     .project-header {
@@ -371,6 +395,8 @@
     }
 
     .project-links {
+      position: relative;
+      z-index: 2;
       display: flex;
       gap: 16px;
     }
@@ -382,6 +408,10 @@
     }
 
     .project-link:hover {
+      color: var(--pink);
+    }
+
+    .project-link .arrow {
       color: var(--pink);
     }
 
@@ -435,6 +465,130 @@
       border-radius: 4px;
     }
 
+    /* Experience Section */
+    .exp-wrap {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .exp-wrap {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .exp-tabs {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .exp-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        border-left: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .exp-tab {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      text-align: left;
+      color: var(--text-dim);
+      background: transparent;
+      border: none;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      padding: 12px 18px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .exp-tab:hover {
+      color: var(--pink);
+      background: rgba(255, 79, 163, 0.06);
+    }
+
+    .exp-tab.active {
+      color: var(--pink);
+      background: rgba(255, 79, 163, 0.1);
+      border-left-color: var(--pink);
+    }
+
+    @media (max-width: 768px) {
+      .exp-tab {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        margin-left: 0;
+        margin-bottom: -1px;
+      }
+      .exp-tab.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--pink);
+      }
+    }
+
+    .exp-panel[hidden] {
+      display: none;
+    }
+
+    .exp-role {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .exp-role .at {
+      color: var(--purple);
+    }
+
+    .exp-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    .exp-bullets li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+
+    .exp-subrole {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     /* Research Section */
     .research-list {
       display: flex;
@@ -445,7 +599,7 @@
     .research-item {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       padding: 16px 20px;
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -455,6 +609,10 @@
 
     .research-item:hover {
       border-color: var(--border-hover);
+    }
+
+    .research-info {
+      flex: 1;
     }
 
     .research-info h4 {
@@ -471,6 +629,27 @@
     .research-arrow {
       color: var(--pink);
       font-size: 18px;
+    }
+
+    .doc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .doc-links a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: var(--lavender);
+    }
+
+    .doc-links a:hover {
+      color: var(--pink);
+    }
+
+    .doc-links .arrow {
+      color: var(--pink);
     }
 
     /* Contact Section */
@@ -552,6 +731,7 @@
         <div class="logo">harshitaa<span>.</span></div>
         <nav>
           <a href="#about">About</a>
+          <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#research">Research</a>
@@ -569,12 +749,10 @@
           <pre id="ascii-canvas"></pre>
         </div>
         <div class="hero-content">
-          <h1 class="hero-heading">&gt;_ Hey! I'm <span class="accent">harshitaa</span></h1>
+          <h1 class="hero-heading" aria-label=">_ Hey! I'm harshitaa"><span id="typed-heading">&gt;_ Hey! I'm <span class="accent">harshitaa</span></span><span class="hero-cursor" aria-hidden="true">|</span></h1>
           <p class="hero-subtitle">cybersecurity engineer · Certified Ethical Hacker</p>
           <p class="hero-intro">
-            I spend my time exploring how systems break — then building ways to prevent it. 
-            From backend architecture to AI security, I'm drawn to the layers most people never see. 
-            Currently breaking things at <strong>LEVO.AI</strong> as a Security Research Engineer.
+            Cybersecurity engineer exploring, learning and building products and tools that make technology safer. Outside of work, I like to adventure places, make art, show up for events, be part of communities, record and picture things that seem interesting and inspire me.
           </p>
           <div class="hero-links">
             <a href="https://github.com/imharshitaa" target="_blank" rel="noopener" class="link-btn primary">
@@ -637,11 +815,77 @@
     </div>
   </section>
 
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">/ experience</h2>
+      <div class="exp-wrap">
+        <div class="exp-tabs" role="tablist" aria-label="Companies">
+          <button class="exp-tab active" type="button" role="tab" id="tab-levo" aria-selected="true" aria-controls="exp-levo">LEVO.AI</button>
+          <button class="exp-tab" type="button" role="tab" id="tab-hazercloud" aria-selected="false" aria-controls="exp-hazercloud">Hazercloud</button>
+          <button class="exp-tab" type="button" role="tab" id="tab-darkrelay" aria-selected="false" aria-controls="exp-darkrelay">DarkRelay</button>
+        </div>
+
+        <div class="exp-panels">
+          <div class="exp-panel" id="exp-levo" role="tabpanel" aria-labelledby="tab-levo">
+            <h3 class="exp-role">Security Research Engineer <span class="at">@ LEVO.AI</span></h3>
+            <p class="exp-meta">Jan 2025 – Present · Hyderabad, On-site</p>
+            <ul class="exp-bullets">
+              <li>Product security testing, vulnerability validation, and tool integration into workflow.</li>
+              <li>API &amp; AI security research: analyzed, tracked, and documented vulnerabilities across APIs and AI applications.</li>
+              <li>Client-required security tests and insights for improvement (customer success testing).</li>
+              <li>Designed advanced security test cases for improved test run coverage.</li>
+              <li>Validated threats and bugs detected from product test results (vulnerability triage &amp; QA).</li>
+              <li>Provided inputs for test run logic and created exploit code for testing.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="project-tag">AppSec</span>
+              <span class="project-tag">AI Security</span>
+              <span class="project-tag">API Security</span>
+              <span class="project-tag">DevSecOps</span>
+              <span class="project-tag">Vulnerability Analysis</span>
+            </div>
+            <div class="exp-subrole">
+              <h3 class="exp-role">Technical Customer Success Intern <span class="at">@ LEVO.AI</span></h3>
+              <p class="exp-meta">Nov 2024 – Dec 2024 · Hyderabad, On-site</p>
+              <div class="exp-tags">
+                <span class="project-tag">Customer Support</span>
+                <span class="project-tag">Pentesting</span>
+                <span class="project-tag">Product Security</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-panel" id="exp-hazercloud" role="tabpanel" aria-labelledby="tab-hazercloud" hidden>
+            <h3 class="exp-role">VAPT Intern <span class="at">@ HAZERCLOUD™</span></h3>
+            <p class="exp-meta">Jul 2024 – Oct 2024 · Kerala, India</p>
+            <div class="exp-tags">
+              <span class="project-tag">Pentesting</span>
+              <span class="project-tag">Vulnerability Analysis</span>
+              <span class="project-tag">VAPT</span>
+            </div>
+          </div>
+
+          <div class="exp-panel" id="exp-darkrelay" role="tabpanel" aria-labelledby="tab-darkrelay" hidden>
+            <h3 class="exp-role">Cybersecurity Intern <span class="at">@ DarkRelay Security Labs</span></h3>
+            <p class="exp-meta">Apr 2024 – Jul 2024</p>
+            <div class="exp-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">PowerShell</span>
+              <span class="project-tag">Docker</span>
+              <span class="project-tag">Bug Reporting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="projects">
     <div class="container">
       <h2 class="section-title">/ projects</h2>
       <div class="projects-grid">
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener" aria-label="BUGPILOT on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[01]</span>
           </div>
@@ -655,12 +899,13 @@
             <span class="project-tag">Security</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener" class="project-link">Source →</a>
-            <a href="https://imharshitaa.github.io/bugpilot/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+            <a href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
+            <a href="https://imharshitaa.github.io/bugpilot/demo/" target="_blank" rel="noopener" class="project-link">Demo <span class="arrow">→</span></a>
           </div>
         </article>
 
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener" aria-label="APIvector on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[02]</span>
           </div>
@@ -674,12 +919,13 @@
             <span class="project-tag">Pentesting</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener" class="project-link">Source →</a>
-            <a href="https://imharshitaa.github.io/APIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+            <a href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
+            <a href="https://imharshitaa.github.io/APIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo <span class="arrow">→</span></a>
           </div>
         </article>
 
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener" aria-label="AIvector on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[03]</span>
           </div>
@@ -693,12 +939,13 @@
             <span class="project-tag">LLM Testing</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener" class="project-link">Source →</a>
-            <a href="https://imharshitaa.github.io/AIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo →</a>
+            <a href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
+            <a href="https://imharshitaa.github.io/AIvector/demo/" target="_blank" rel="noopener" class="project-link">Demo <span class="arrow">→</span></a>
           </div>
         </article>
 
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener" aria-label="DevSecKit on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[04]</span>
           </div>
@@ -712,11 +959,12 @@
             <span class="project-tag">SAST/DAST</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
           </div>
         </article>
 
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener" aria-label="ToolKit on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[05]</span>
           </div>
@@ -730,11 +978,12 @@
             <span class="project-tag">Cloud Security</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
           </div>
         </article>
 
         <article class="project-card">
+          <a class="project-card-hit" href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener" aria-label="Playbox on GitHub"></a>
           <div class="project-header">
             <span class="project-index">[06]</span>
           </div>
@@ -748,7 +997,7 @@
             <span class="project-tag">OWASP</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener" class="project-link">Source →</a>
+            <a href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener" class="project-link">Source <span class="arrow">→</span></a>
           </div>
         </article>
       </div>
@@ -814,24 +1063,22 @@
     <div class="container">
       <h2 class="section-title">/ research</h2>
       <div class="research-list">
-        <a href="research/index.html" class="research-item">
+        <div class="research-item">
           <div class="research-info">
-            <h4>Documentation & Guides</h4>
-            <p>OSINT tools, reverse engineering, malware analysis, and threat detection documentation</p>
+            <h4>Documentation</h4>
+            <p>Playbooks, API references, and research notes</p>
+            <div class="doc-links">
+              <a href="docs/doc_template.html?file=1_devsecops_workflow.md">Build DevSecOps Workflow <span class="arrow">→</span></a>
+              <a href="docs/doc_template.html?file=2_frameworks.md">Frameworks for Hacking <span class="arrow">→</span></a>
+              <a href="docs/doc_template.html?file=3_apis.md">API Playbook <span class="arrow">→</span></a>
+              <a href="research/index.html">Research notes &amp; papers <span class="arrow">→</span></a>
+            </div>
           </div>
-          <span class="research-arrow">→</span>
-        </a>
+        </div>
         <a href="case-studies/index.html" class="research-item">
           <div class="research-info">
             <h4>Case Studies</h4>
             <p>Security architecture breakdowns and remediation strategies</p>
-          </div>
-          <span class="research-arrow">→</span>
-        </a>
-        <a href="docs/index.html" class="research-item">
-          <div class="research-info">
-            <h4>API Documentation</h4>
-            <p>Developer resources, frameworks, and API references</p>
           </div>
           <span class="research-arrow">→</span>
         </a>
@@ -870,11 +1117,53 @@
 
   <footer>
     <div class="container">
-      <p class="footer-text">built by <span>harshitaa</span> · cybersecurity engineer</p>
+      <p class="footer-text">Built and designed by <span>@imharshitaa</span>. All rights reserved. ©</p>
     </div>
   </footer>
 
   <script>
+    (function typeHeading() {
+      const el = document.getElementById('typed-heading');
+      const full = ">_ Hey! I'm harshitaa";
+      const accentStart = full.indexOf("harshitaa");
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduced) return;
+
+      function render(n) {
+        const typed = full.slice(0, n);
+        if (n <= accentStart) {
+          el.textContent = typed;
+          return;
+        }
+        el.innerHTML = full.slice(0, accentStart) + '<span class="accent">' + full.slice(accentStart, n) + '</span>';
+      }
+
+      el.textContent = "";
+      let i = 0;
+      function tick() {
+        i += 1;
+        render(i);
+        if (i < full.length) {
+          window.setTimeout(tick, 55);
+        }
+      }
+      tick();
+    })();
+
+    document.querySelectorAll(".exp-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.getAttribute("aria-controls");
+        document.querySelectorAll(".exp-tab").forEach((t) => {
+          t.classList.toggle("active", t === tab);
+          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        });
+        document.querySelectorAll(".exp-panel").forEach((panel) => {
+          panel.hidden = panel.id !== target;
+        });
+      });
+    });
+
     // Generate ASCII art portrait from image
     async function generateAsciiPortrait() {
       const canvas = document.getElementById('ascii-canvas');
@@ -884,7 +1173,7 @@
       img.src = 'assets/harshitaa-ashish-photo.png';
       
       img.onload = () => {
-        const width = 45;
+        const width = 72;
         const scale = img.height / img.width;
         const height = Math.floor(width * scale * 0.5);
         

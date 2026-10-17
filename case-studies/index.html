@@ -8,34 +8,28 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #09070D;
-      --bg2:       #160D20;
-      --surface:   #1C1425;
-      --border:    rgba(139,92,246,0.18);
-      --border-hi: rgba(139,92,246,0.45);
+      --bg2:       #110D18;
+      --bg-elevated: #110D18;
+      --surface:   #110D18;
+      --border:    rgba(139, 92, 246, 0.2);
+      --border-hi: rgba(139, 92, 246, 0.45);
       --purple:    #8B5CF6;
       --lavender:  #B18CFF;
       --pink:      #FF4FA3;
       --softpink:  #F5B8D2;
-      --text:      #EDE7F6;
-      --muted:     #93889F;
-      --mono:      "Share Tech Mono", monospace;
+      --text:      #F0EBF8;
+      --muted:     #8B8299;
+      --mono:      "JetBrains Mono", monospace;
       --sans:      "Space Grotesk", sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: var(--sans); background: var(--bg); color: var(--text);
       overflow-x: hidden; min-height: 100vh;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px; opacity: 0.35;
     }
     .site-wrap {
       position: relative; z-index: 1;
@@ -80,13 +74,15 @@
     /* CASES */
     .cases-list { list-style: none; }
     .case-item {
-      border-top: 1px solid var(--border); padding: 40px 0;
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 32px 28px; margin-bottom: 24px;
+      background: var(--bg-elevated);
       display: grid; grid-template-columns: 80px 1fr;
       gap: 32px; align-items: start;
-      transition: background 0.15s;
+      transition: border-color 0.2s ease;
     }
-    .case-item:last-child { border-bottom: 1px solid var(--border); }
-    .case-item:hover { background: rgba(139,92,246,0.03); }
+    .case-item:last-child { margin-bottom: 0; }
+    .case-item:hover { border-color: var(--border-hi); }
     @media (max-width: 600px) { .case-item { grid-template-columns: 1fr; gap: 16px; } }
 
     .case-num {
@@ -194,7 +190,7 @@
   </ul>
 
   <footer role="contentinfo">
-    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/case-studies$</div>
+    <div class="footer-id">Built and designed by <span class="acc">@imharshitaa</span>. All rights reserved. ©</div>
     <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
   </footer>
 

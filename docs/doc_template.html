@@ -7,21 +7,21 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:        #09070D;
-      --bg2:       #160D20;
-      --surface:   #1C1425;
-      --border:    rgba(139,92,246,0.18);
-      --border-hi: rgba(139,92,246,0.45);
+      --bg2:       #110D18;
+      --surface:   #110D18;
+      --border:    rgba(139, 92, 246, 0.2);
+      --border-hi: rgba(139, 92, 246, 0.45);
       --purple:    #8B5CF6;
       --lavender:  #B18CFF;
       --pink:      #FF4FA3;
       --softpink:  #F5B8D2;
-      --text:      #EDE7F6;
-      --muted:     #93889F;
-      --mono:      "Share Tech Mono", monospace;
+      --text:      #F0EBF8;
+      --muted:     #8B8299;
+      --mono:      "JetBrains Mono", monospace;
       --sans:      "Space Grotesk", sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,15 +33,6 @@
       overflow-x: hidden;
       min-height: 100vh;
     }
-    body::before {
-      content: "";
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px; opacity: 0.35;
-    }
-
     /* LAYOUT: sidebar + main */
     .page-layout {
       display: grid;

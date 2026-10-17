@@ -1,5 +1,10 @@
 [
   {
+    "title": "Offensive Security & OSINT Tools",
+    "file": "https://medium.com/@imharshitaa/open-source-tools-for-hacking-8ab99f05bae5?sharedUserId=imharshitaa",
+    "description": "Open source tools for hacking"
+  },
+  {
     "title": "Darkweb Black Market Research Paper",
     "file": "5_darkweb.pdf",
     "description": "Impact of Darkweb activities to society"
@@ -18,21 +23,6 @@
     "title": "Open source tools for hacking",
     "file": "1_os_tools.md",
     "description": "Open source tools for hacking"
-  },
-  {
-    "title": "Cyberdeck",
-    "file": "2_cyberdeck.md",
-    "description": "Building cyberdeck"
-  },
-  {
-    "title": "Reverse Engineering",
-    "file": "3_reverse.md",
-    "description": "Notes and methodologies for reverse engineering binaries"
-  },
-  {
-    "title": "Malware Analysis",
-    "file": "4_malware.md",
-    "description": "Malware exploiting analysis"
   }
 ]
 

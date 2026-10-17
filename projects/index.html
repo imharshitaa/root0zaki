@@ -168,19 +168,11 @@
       margin-bottom: 16px;
     }
 
-    /* expandable details */
-    .archive-details {
-      display: none;
-      border-top: 1px solid rgba(139,92,246,0.1);
-      padding-top: 16px;
-      margin-bottom: 16px;
+    .archive-item { position: relative; }
+    .archive-card-hit {
+      position: absolute; inset: 0; z-index: 1;
     }
-    .archive-item.expanded .archive-details { display: block; }
-    .details-inner {
-      font-family: var(--mono); font-size: 12px; color: var(--muted);
-      white-space: pre; overflow-x: auto; line-height: 1.55;
-      border: 1px solid var(--border); padding: 14px 16px; background: var(--bg2);
-    }
+    .archive-actions { position: relative; z-index: 2; }
 
     .archive-footer {
       display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
@@ -254,6 +246,7 @@
   <ul class="archive-list" role="list" id="archive-list">
 
     <li class="archive-item" data-tags="active cli ai">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener noreferrer" aria-label="AIvector on GitHub"></a>
       <span class="archive-num">001</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -262,21 +255,6 @@
         </div>
         <div class="archive-tagline">ai security testing framework</div>
         <p class="archive-desc">Terminal-first framework for automated pentesting of LLMs, AI agents, and AI APIs. Structured test lifecycle: discovery → test → exploit. Each test case runs independently, enabling reproducible security validation against AI attack surfaces.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · CLI framework · JSON · Shell scripts · GitHub Pages
-
-tests:   prompt injection · system prompt override · unsafe outputs
-         agent instruction manipulation · tool misuse · context poisoning
-         insecure endpoints · authentication gaps · rate abuse
-
-layout:
-  ai/                    # launcher
-  main.py                # command parser + orchestration
-  demo/                  # terminal simulation
-  common/                # shared case utilities
-  &lt;test_case&gt;/           # discovery.py · test.py · exploit.py
-  reports/               # latest_report.json · target_history.json</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -285,7 +263,6 @@ layout:
             <span class="tag">LLM</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/AIvector" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a class="arch-btn" href="https://imharshitaa.github.io/AIvector/demo/" target="_blank" rel="noopener noreferrer">Demo ↗</a>
           </div>
@@ -294,6 +271,7 @@ layout:
     </li>
 
     <li class="archive-item" data-tags="wip cli">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener noreferrer" aria-label="APIvector on GitHub"></a>
       <span class="archive-num">002</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -302,17 +280,6 @@ layout:
         </div>
         <div class="archive-tagline">api security testing toolkit</div>
         <p class="archive-desc">Command-driven toolkit for structured vulnerability discovery across REST and web APIs. Modular scripts covering BOLA, BFLA, broken authorization, SQL/NoSQL injection, JWT issues, SSRF, XXE, deserialization, and API misconfigurations.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · CLI · Requests library · Modular architecture
-
-phases:  *_discovery.py  → endpoint and behavior analysis
-         *_test.py       → vulnerability validation
-         *_exploit.py    → exploit execution + evidence generation
-
-coverage: BOLA · BFLA · SQLi · NoSQLi · SSRF · XXE
-          JWT security · weak auth · CORS · rate limiting
-          mass assignment · path traversal · deserialization</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -321,7 +288,6 @@ coverage: BOLA · BFLA · SQLi · NoSQLi · SSRF · XXE
             <span class="tag">REST</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/APIvector" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a class="arch-btn" href="https://imharshitaa.github.io/APIvector/demo/" target="_blank" rel="noopener noreferrer">Demo ↗</a>
           </div>
@@ -330,6 +296,7 @@ coverage: BOLA · BFLA · SQLi · NoSQLi · SSRF · XXE
     </li>
 
     <li class="archive-item" data-tags="wip cli">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener noreferrer" aria-label="BugPilot on GitHub"></a>
       <span class="archive-num">003</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -338,17 +305,6 @@ coverage: BOLA · BFLA · SQLi · NoSQLi · SSRF · XXE
         </div>
         <div class="archive-tagline">offensive security orchestration platform</div>
         <p class="archive-desc">Modular CLI security orchestration platform that automates the full offensive testing lifecycle: recon → crawl → test → exploit → report. Covers vulnerability discovery, validation, and structured reporting across web applications and APIs.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · CLI · modular plugin architecture
-
-pipeline: recon      → host, headers, network intelligence
-          crawl      → endpoint and attack surface enumeration
-          test       → vulnerability category-based execution
-          exploit    → controlled exploitation + evidence capture
-          report     → structured output for engineers and CI
-
-integrations: GitHub Actions · Slack · Jira webhooks</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -357,7 +313,6 @@ integrations: GitHub Actions · Slack · Jira webhooks</div>
             <span class="tag">AppSec</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/bugpilot" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a class="arch-btn" href="https://imharshitaa.github.io/bugpilot/demo/" target="_blank" rel="noopener noreferrer">Demo ↗</a>
           </div>
@@ -366,6 +321,7 @@ integrations: GitHub Actions · Slack · Jira webhooks</div>
     </li>
 
     <li class="archive-item" data-tags="wip cli">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener noreferrer" aria-label="DevSecKit on GitHub"></a>
       <span class="archive-num">004</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -374,16 +330,6 @@ integrations: GitHub Actions · Slack · Jira webhooks</div>
         </div>
         <div class="archive-tagline">devsecops scanner orchestrator</div>
         <p class="archive-desc">Terminal-first orchestration tool that runs multiple security scanners from a single CLI workflow. Integrates SAST, SCA, secrets detection, IaC security, DAST, and IAST into a unified execution pipeline with normalized reporting.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · Shell scripts · Docker · open source tools · JSON
-
-scanners: SAST  → Semgrep (static code analysis)
-          SCA   → Dependency-Check · Trivy (dependency scanning)
-          secrets → Gitleaks · TruffleHog
-          IaC   → Checkov (infrastructure misconfigs)
-          DAST  → OWASP ZAP (dynamic testing)
-          IAST  → runtime header/cookie/behavior checks</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -393,7 +339,6 @@ scanners: SAST  → Semgrep (static code analysis)
             <span class="tag">DAST</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/DevSecKit" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
@@ -401,6 +346,7 @@ scanners: SAST  → Semgrep (static code analysis)
     </li>
 
     <li class="archive-item" data-tags="wip cli">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener noreferrer" aria-label="ToolKit on GitHub"></a>
       <span class="archive-num">005</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -409,16 +355,6 @@ scanners: SAST  → Semgrep (static code analysis)
         </div>
         <div class="archive-tagline">cloud-native cybersecurity tool deployment framework</div>
         <p class="archive-desc">CLI-based framework to deploy, configure, and manage cybersecurity tools across SOC, EDR, network, application, cloud, and vulnerability management domains. Includes MITRE ATT&amp;CK-based attack simulation and automated executive reporting.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · Docker · Kubernetes · Terraform · YAML · Shell
-
-domains:  SOC/SIEM · EDR/XDR · network · application
-          cloud (AWS · Azure · GCP) · vulnerability management
-
-workflow: deploy → configure → simulate → scan → report
-
-simulation: MITRE ATT&amp;CK-based scenarios for detection validation</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -427,7 +363,6 @@ simulation: MITRE ATT&amp;CK-based scenarios for detection validation</div>
             <span class="tag">MITRE</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/toolkit" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
@@ -435,6 +370,7 @@ simulation: MITRE ATT&amp;CK-based scenarios for detection validation</div>
     </li>
 
     <li class="archive-item" data-tags="wip">
+      <a class="archive-card-hit" href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener noreferrer" aria-label="Playbox on GitHub"></a>
       <span class="archive-num">006</span>
       <div class="archive-body">
         <div class="archive-head">
@@ -443,15 +379,6 @@ simulation: MITRE ATT&amp;CK-based scenarios for detection validation</div>
         </div>
         <div class="archive-tagline">vulnerable lab environment</div>
         <p class="archive-desc">Intentionally vulnerable multi-service lab environment. Covers web, API, AI, network, and cloud attack surfaces. Based on OWASP Top 10 (2021) and additional real-world scenarios for hands-on exploitation and tool validation.</p>
-        <div class="archive-details">
-          <div class="details-inner">stack:   Python · Docker · Nginx · TCP services · MinIO
-
-gateways: /labs/web/     → XSS · CSRF · file upload · path traversal
-          /labs/api/     → SQLi · IDOR · weak auth · CORS · SSRF
-          /labs/ai/      → prompt injection · unsafe tool execution
-          /labs/network/ → unsafe protocols · TCP flaws
-          /labs/cloud/   → metadata SSRF · insecure configs</div>
-        </div>
         <div class="archive-footer">
           <div class="archive-tags">
             <span class="tag">Python</span>
@@ -460,7 +387,6 @@ gateways: /labs/web/     → XSS · CSRF · file upload · path traversal
             <span class="tag">Lab</span>
           </div>
           <div class="archive-actions">
-            <button class="arch-btn-expand" onclick="toggleExpand(this)" aria-label="Toggle project details">details</button>
             <a class="arch-btn" href="https://github.com/imharshitaa/playbox" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
@@ -470,20 +396,13 @@ gateways: /labs/web/     → XSS · CSRF · file upload · path traversal
   </ul>
 
   <footer role="contentinfo">
-    <div class="footer-id"><span class="acc">harshitaa</span>@security:~/projects$</div>
+    <div class="footer-id">Built and designed by <span class="acc">@imharshitaa</span>. All rights reserved. ©</div>
     <a href="../index.html" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">← back to home</a>
   </footer>
 
 </div>
 
 <script>
-  // expand/collapse
-  function toggleExpand(btn) {
-    const item = btn.closest(".archive-item");
-    item.classList.toggle("expanded");
-    btn.textContent = item.classList.contains("expanded") ? "collapse" : "details";
-  }
-
   // filter
   const filterBtns = document.querySelectorAll(".filter-btn");
   const items = document.querySelectorAll(".archive-item");
