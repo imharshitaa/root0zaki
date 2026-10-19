@@ -1680,7 +1680,6 @@
 
       const particles = [];
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
       let cols = 0, rows = 0, cellW = 0, cellH = 0, raf = 0;
       let pointer = { x: -9999, y: -9999, active: false };
       let lastWidth = 0;
@@ -1763,7 +1762,7 @@
         let moving = false;
 
         for (const p of particles) {
-          if (animate && !reducedMotion && !coarsePointer) {
+          if (animate && !reducedMotion) {
             if (pointer.active) {
               const dx = p.x - pointer.x, dy = p.y - pointer.y;
               const dist = Math.sqrt(dx * dx + dy * dy) || 1;
@@ -1805,19 +1804,37 @@
         pointer.x = event.clientX - rect.left;
         pointer.y = event.clientY - rect.top;
         pointer.active = true;
-        if (!raf && !reducedMotion && !coarsePointer) raf = requestAnimationFrame(() => drawPortrait(true));
+        if (!raf && !reducedMotion) raf = requestAnimationFrame(() => drawPortrait(true));
       }
 
+      // Mouse users get hover scattering; touch users can tap/drag across the print.
+      // Touch input is handled explicitly because phones do not have hover pointers.
       canvas.addEventListener("pointermove", (event) => {
-        if (event.pointerType !== "touch") updatePointer(event);
+        if (event.pointerType === "touch" && event.buttons === 0) return;
+        updatePointer(event);
       });
-      canvas.addEventListener("pointerleave", () => {
+      canvas.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") {
+          updatePointer(event);
+          if (canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+        }
+      });
+      function releasePointer(event) {
+        if (event.pointerType === "touch") {
+          pointer.active = false;
+          if (!raf && !reducedMotion) raf = requestAnimationFrame(() => drawPortrait(true));
+        }
+      }
+      canvas.addEventListener("pointerup", releasePointer);
+      canvas.addEventListener("pointercancel", releasePointer);
+      canvas.addEventListener("pointerleave", (event) => {
+        if (event.pointerType === "touch") return;
         pointer.active = false;
-        if (!raf && !reducedMotion && !coarsePointer) raf = requestAnimationFrame(() => drawPortrait(true));
+        if (!raf && !reducedMotion) raf = requestAnimationFrame(() => drawPortrait(true));
       });
       window.addEventListener("blur", () => {
         pointer.active = false;
-        if (!raf && !reducedMotion && !coarsePointer) raf = requestAnimationFrame(() => drawPortrait(true));
+        if (!raf && !reducedMotion) raf = requestAnimationFrame(() => drawPortrait(true));
       });
 
       img.onload = buildPortrait;
