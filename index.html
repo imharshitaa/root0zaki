@@ -792,6 +792,34 @@
     }
 
 
+    /* Desktop/laptop layout: use available width intentionally. Tablet and phone rules below remain independent. */
+    @media (min-width: 901px) {
+      .container { width: min(100% - 72px, 1240px); max-width: 1240px; padding-left: 0; padding-right: 0; }
+      header { padding: 20px 0; }
+      .header-inner { gap: 36px; }
+      nav { gap: 14px 30px; }
+      nav a { font-size: 12px; letter-spacing: 1px; }
+      .hero { padding: clamp(76px, 8vw, 116px) 0 clamp(96px, 10vw, 140px); }
+      .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(48px, 6vw, 100px); align-items: center; }
+      .portrait-frame { width: 100%; max-width: 760px; justify-self: center; }
+      #ascii-canvas { width: 100%; max-width: 760px; }
+      .hero-content { max-width: 560px; justify-self: start; }
+      .hero-heading { font-size: clamp(30px, 2.6vw, 42px); line-height: 1.28; white-space: normal; margin-bottom: 16px; }
+      .hero-subtitle { font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+      .hero-intro { font-size: 15px; line-height: 1.9; max-width: 54ch; }
+      .hero-links { gap: 12px; margin-top: 24px; }
+      .link-btn, button.link-btn { padding: 12px 17px; font-size: 12px; }
+      section { padding: 76px 0; }
+      .section-title { margin-bottom: 30px; }
+      .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+      .project-card { padding: 24px; }
+      .project-title { font-size: 18px; }
+      .project-description { font-size: 14px; line-height: 1.8; }
+      .exp-wrap { grid-template-columns: 220px minmax(0, 1fr); gap: 34px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+      .contact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    }
+
     /* Responsive layout refinements: tablet and mobile */
     @media (max-width: 900px) {
       .container {
@@ -1108,6 +1136,25 @@
 
     .container, .hero-content, .project-card, .research-item, .contact-card {
       min-width: 0;
+    }
+
+
+    /* On phones, show the introduction and action links before the portrait. */
+    @media (max-width: 600px) {
+      .hero-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-content { order: 1; width: 100%; }
+      .portrait-frame {
+        order: 2;
+        width: min(100%, 360px);
+        max-width: 360px;
+        align-self: center;
+        margin-top: 28px;
+      }
+      #ascii-canvas { width: 100%; max-width: 100%; }
     }
 
   </style>
